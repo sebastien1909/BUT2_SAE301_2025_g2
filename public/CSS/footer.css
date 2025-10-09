@@ -1,0 +1,38 @@
+footer {
+    background-color: black;
+    padding: 5%;
+    color: white;
+    display: flex;
+    gap: 8rem;
+}
+.logofooter {
+    width: 17%;
+}
+.rs {
+    position: relative;
+    font-size: 1rem;
+    right: 0%;
+}
+.rs i {
+    width: 5%;
+}
+
+
+.colonne {
+    font-size: 1rem;
+    margin-left: 5%;
+}
+
+.colonne h4 {
+    text-transform: uppercase;
+    margin-bottom: 10%;
+}
+
+.colonne ul {
+    list-style-type: none;
+    margin-top: 15%;
+}
+
+.colonne ul li {
+  margin-bottom: 5%;
+}
