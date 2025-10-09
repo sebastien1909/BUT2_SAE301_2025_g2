@@ -1,0 +1,31 @@
+.background {
+  background-image: url("/img/fond.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-connexion {
+  background: #2E2E2E;
+  border: 1px solid #E3AE58;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  text-align: center;
+}
+
+h1 {
+    color: white;
+}
+
+p {
+    color: white;
+}
+
+a {
+    color: white;
+}
