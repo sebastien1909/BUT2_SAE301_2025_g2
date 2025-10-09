@@ -1,10 +1,11 @@
 import express from "express";
 
 const app = express();
+app.set("view engine", "ejs");
 
 
 app.get("/", function(req,res){
-    res.render("index")
+    res.render("index", {variable : "aled"});
 });
 
 app.use((req,res) =>{
