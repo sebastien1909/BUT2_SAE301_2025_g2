@@ -48,13 +48,30 @@ app.get("/connexion", function(req,res){
     res.render("connexion", {variable : "aled"});
 });
 
-app.get("inscription", function(req,res){
+app.get("/inscription", function(req,res){
     res.render("inscription", {variable : "aled"});
 });
 
 app.get("/catalogue_categorie", function(req,res){
     res.render("catalogue_categorie", {variable : "aled"});
 });
+
+app.get("/gerant/accueil", function(req,res){
+    res.render("gerant/accueil", {variable : "aled"});
+});
+
+app.get("/gerant/ajout_suppr", function(req,res){
+    res.render("gerant/ajout_suppr_produit", {variable : "aled"});
+});
+
+app.get("/gerant/check_resa", function(req,res){
+    res.render("gerant/check_reservation", {variable : "aled"});
+});
+
+app.get("/gerant/liste_resa", function(req,res){
+    res.render("gerant/liste_resa", {variable : "aled"});
+});
+
 
 
 
