@@ -1,8 +1,9 @@
 footer {
-    background-color: #FFD5D4;
-    column-count: 2;
-    padding: 3%;
-    text-align: center;
+    background-color: black;
+    padding: 5%;
+    color: white;
+    display: flex;
+    gap: 8rem;
 }
 .logofooter {
     width: 17%;
@@ -16,13 +17,6 @@ footer {
     width: 5%;
 }
 
-.politique {
-    background-color: black;
-    padding: 5%;
-    color: white;
-    display: flex;
-    gap: 8rem;
-}
 
 .colonne {
     font-size: 1rem;
