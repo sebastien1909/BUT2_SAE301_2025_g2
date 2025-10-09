@@ -4,11 +4,11 @@ const app = express();
 
 
 app.get("/", function(req,res){
-    res.sendFile("index.html", {root : import.meta.dirname})
+    res.render("index")
 });
 
 app.use((req,res) =>{
-    res.status(404).sendFile("./404.html", {root : import.meta.dirname});
+    res.status(404).render("404");
 })
 
 
