@@ -5,9 +5,7 @@ footer {
     display: flex;
     gap: 8rem;
 }
-.logofooter {
-    width: 17%;
-}
+
 .rs {
     position: relative;
     font-size: 1rem;
