@@ -1,0 +1,10 @@
+.logo {
+  width: 300px;
+  height: auto; /* garde les proportions */
+}
+.tothetop {
+  display: flex;
+  justify-content: space-between; /* espace entre les blocs */
+  align-items: center;            /* centre verticalement */
+  padding: 10px 20px;             /* marge intérieure */
+}
