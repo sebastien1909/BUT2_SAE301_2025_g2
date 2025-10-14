@@ -64,6 +64,7 @@ app.get("/catalogue_categorie", function(req,res){
 
 
 
+
 // partie pour le gerant
 
 app.get("/gerant/accueil", function(req,res){
@@ -90,7 +91,9 @@ app.get("/gerant/catalogue_produit", function(req,res){
     res.render("catalogue_produit", {variable : "aled"});
 });
 
-
+app.get("/gerant/catalogue_categorie", function(req,res){
+    res.render("catalogue_categorie", {variable : "aled"});
+});
 
 
 
