@@ -5,6 +5,8 @@ app.set("view engine", "ejs");
 
 app.use(express.static('public'));
 
+// partie pour le grand public
+
 app.get("/", function(req,res){
     res.render("index", {variable : "aled"});
 });
@@ -57,21 +59,40 @@ app.get("/catalogue_categorie", function(req,res){
     res.render("catalogue_categorie", {variable : "aled"});
 });
 
+
+
+
+
+
+// partie pour le gerant
+
 app.get("/gerant/accueil", function(req,res){
     res.render("gerant/accueil", {variable : "aled"});
 });
 
-app.get("/gerant/ajout_suppr", function(req,res){
-    res.render("gerant/ajout_suppr_produit", {variable : "aled"});
+app.get("/gerant/ajout_suppr_produit", function(req,res){
+    res.render("ajout_suppr_produit", {variable : "aled"});
 });
 
 app.get("/gerant/check_resa", function(req,res){
-    res.render("gerant/check_reservation", {variable : "aled"});
+    res.render("check_reservation", {variable : "aled"});
 });
 
 app.get("/gerant/liste_resa", function(req,res){
-    res.render("gerant/liste_resa", {variable : "aled"});
+    res.render("liste_resa", {variable : "aled"});
 });
+
+app.get("/gerant/nouveaute", function(req,res){
+    res.render("nouveaute", {variable : "aled"});
+});
+
+app.get("/gerant/catalogue_produit", function(req,res){
+    res.render("catalogue_produit", {variable : "aled"});
+});
+
+
+
+
 
 
 
