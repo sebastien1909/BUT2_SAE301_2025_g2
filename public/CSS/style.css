@@ -1,20 +1,22 @@
 body{
     font-family: "Jacques Francois", serif;
+    margin: 0px;
+    padding: 0px;
 }
 
 .Centered-title{
     color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 4rem;
 }
 
 .abonnement-background{
     display: flex;
     justify-content: row;
     justify-content: center;
-}
-
-.abonnement-card{
-    display: flex;
-    justify-content: center;
+    width: 100%;
 }
 
 .standard-background{
@@ -24,6 +26,7 @@ body{
     position:relative;
     bottom: -50px;
     z-index: -1;
+    width: 34%;
 }
 
 .standard-background button{
@@ -33,14 +36,21 @@ body{
     height: 30px;
 }
 
+.standard-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .VIP-background{
     background-color: #2E2E2E;
     color: white;
-    height:800px;
+    height:850px;
     border-radius: 1em;
     position:relative;
-    bottom: -20px;
+    bottom: -15px;
     z-index: -1;
+    width: 33%;
 }
 
 .VIP-background button{
@@ -50,6 +60,12 @@ body{
     height: 30px;
 }
 
+.VIP-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .premium-background{
     background-color: #454545;
     color: white;
@@ -57,6 +73,7 @@ body{
     position:relative;
     bottom: -50px;
     z-index: -1;
+    width: 34%;
 }
 
 .premium-background button{
@@ -64,4 +81,10 @@ body{
     border-radius: 25px;
     width: 150px;
     height: 30px;
+}
+
+.premium-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
