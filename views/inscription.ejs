@@ -1,37 +1,43 @@
 <%- include("header") %>
-<h1>Inscription</h1>
-<form>
-    <p>Nom</p>
-    <input type="text" placeholder="Nom">
-    <p>Prénom</p>
-    <input type="text" placeholder="Prénom">
-    <p>Âge</p>
-    <input type="age" placeholder="Âge">
-    <p>Numéro de téléphone</p>
-    <input type="number" placeholder="Numéro de téléphone">
-    <p>Email</p>
-    <input type="email" placeholder="Email">
-    <p>Mot de passe</p>
-    <input type="password" placeholder="Mot de passe">
-    <div class="conditions">
-        <p>**1 Majuscule obligatoire</p>
-        <p>**1 Caractère spécial obligatoire</p>
-        <p>**1 chiffre obligatoire</p>
+<div class="background-ins">
+    <div class="card-inscrip">
+        <h1>Inscription</h1>
+        <form>
+            <p>Nom</p>
+            <input type="text" placeholder="   Nom*">
+            <p>Prénom</p>
+            <input type="text" placeholder="   Prénom*">
+            <p>Âge</p>
+            <input type="age" placeholder="   Âge*">
+            <p>Numéro de téléphone</p>
+            <input type="number" placeholder="   Numéro de téléphone">
+            <p>Email</p>
+            <input type="email" placeholder="   Email*">
+            <p>Mot de passe</p>
+            <input type="password" placeholder="   Mot de passe*">
+            <div class="conditions">
+                <p>**1 Majuscule obligatoire</p>
+                <p>**1 Caractère spécial obligatoire</p>
+                <p>**1 chiffre obligatoire</p>
+            </div>
+            <p>Confirmer le mot de passe</p>
+            <input type="password" placeholder="   Confirmer le mot de passe*">
+            <div class="check">
+                <input type="checkbox" id="conditions générales" name="conditions générales" checked />
+                <label for="conditions générales">J'accepte les conditions générales d'utilisation</label>
+            </div>
+            <div class="check">
+                <input type="checkbox" id="mail" name="mail" />
+                <label for="mail">Je souhaite recevoir les mails de nouveautés</label>
+            </div>
+            <button type="submit">S'inscrire</button>
+            <h2>ou</h2>
+            <i class="fa-brands fa-google" style="color: #ffffff;"></i>
+            <i class="fa-brands fa-facebook" style="color: #ffffff;"></i>
+            <i class="fa-brands fa-apple" style="color: #ffffff;"></i>
+        </form>
     </div>
-    <p>Confirmer le mot de passe</p>
-    <input type="password" placeholder="Confirmer le mot de passe">
-    <div class="checkbox">
-        <input type="checkbox">
-        <p>J'accepte les conditions générales d'utilisation</p>
-        <input type="checkbox">
-        <p>Je m'inscris à la newsletter</p>
-    </div>
-    <button type="submit">S'inscrire</button>
-    <h2>ou</h2>
-    <i class="fa-brands fa-google" style="color: #ffffff;"></i>
-    <i class="fa-brands fa-facebook" style="color: #ffffff;"></i>
-    <i class="fa-brands fa-apple" style="color: #ffffff;"></i>
-</form>
+</div>
 <section class="droit">
     © Fonticons, Inc. All rights reserved.
 </section>
