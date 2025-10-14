@@ -1,3 +1,4 @@
+/* footer */
 footer {
     background-color: black;
     padding: 3%;
@@ -36,4 +37,50 @@ footer {
 .droit {
     background-color: gray;
     text-align: center;
+}
+
+/* inscription */
+
+.card-inscrip {
+  background: #2E2E2E;
+  border: 1px solid #E3AE58;
+  padding: 2em;
+  border-radius: 1em;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  width: 35%;
+}
+.card-inscrip h1 {
+    text-align: center;
+}
+.background-ins {
+  background-image: url("/img/fond.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* form p {
+    font-family: ;
+} */
+
+form input {
+    background-color: #5F5F5F;
+    border-radius: 0.5em; 
+    width: 90%;
+    padding: 1%;
+}
+.conditions {
+    display: flex;
+    gap: 9%;
+}
+
+.conditions p {
+    color:#E3AE58;
+    font-size: 0.65em;
+}
+
+.check label {
+    color: white;
+    font-size: 0.9em;
 }
