@@ -9,6 +9,7 @@ app.use(express.static('public'));
 // partie pour le grand public
 
 app.get("/", async function(req,res){
+    //récupération bdd (code à réutiliser pour les autres routes)
     let data = await pool.query("SELECT * FROM produit");
     console.log(data);
     res.render("index", {variable : data});
