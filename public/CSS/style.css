@@ -1,3 +1,67 @@
 body{
     font-family: "Jacques Francois", serif;
 }
+
+.Centered-title{
+    color: black;
+}
+
+.abonnement-background{
+    display: flex;
+    justify-content: row;
+    justify-content: center;
+}
+
+.abonnement-card{
+    display: flex;
+    justify-content: center;
+}
+
+.standard-background{
+    background-color: #5B5B5B;
+    color: white;
+    height: 800px;
+    position:relative;
+    bottom: -50px;
+    z-index: -1;
+}
+
+.standard-background button{
+    background-color: #C07134;
+    border-radius: 25px;
+    width: 150px;
+    height: 30px;
+}
+
+.VIP-background{
+    background-color: #2E2E2E;
+    color: white;
+    height:800px;
+    border-radius: 1em;
+    position:relative;
+    bottom: -20px;
+    z-index: -1;
+}
+
+.VIP-background button{
+    background-color: #B68C48;
+    border-radius: 25px;
+    width: 150px;
+    height: 30px;
+}
+
+.premium-background{
+    background-color: #454545;
+    color: white;
+    height: 800px;
+    position:relative;
+    bottom: -50px;
+    z-index: -1;
+}
+
+.premium-background button{
+    background-color: #969696;
+    border-radius: 25px;
+    width: 150px;
+    height: 30px;
+}
