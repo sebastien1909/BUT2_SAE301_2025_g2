@@ -3,6 +3,7 @@ import express from "express";
 const app = express();
 app.set("view engine", "ejs");
 
+app.use(express.static('public'));
 
 // partie pour le grand public
 
