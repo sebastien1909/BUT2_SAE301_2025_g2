@@ -1,4 +1,5 @@
 import express from "express";
+import pool from "./db.js";
 
 const app = express();
 app.set("view engine", "ejs");
@@ -7,8 +8,10 @@ app.use(express.static('public'));
 
 // partie pour le grand public
 
-app.get("/", function(req,res){
-    res.render("index", {variable : "aled"});
+app.get("/", async function(req,res){
+    let data = await pool.query("SELECT * FROM produit");
+    console.log(data);
+    res.render("index", {variable : data});
 });
 
 app.get("/nouveaute", function(req,res){
