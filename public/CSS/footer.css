@@ -1,18 +1,17 @@
 footer {
     background-color: black;
-    padding: 5%;
+    padding: 3%;
     color: white;
     display: flex;
-    gap: 8rem;
+    gap: 8%;
 }
 
 .rs {
-    position: relative;
-    font-size: 1rem;
-    right: 0%;
-}
-.rs i {
-    width: 5%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    gap:30%;
+    margin-left: 10%;
 }
 
 .colonne {
@@ -32,4 +31,9 @@ footer {
 
 .colonne ul li {
   margin-bottom: 5%;
+}
+
+.droit {
+    background-color: gray;
+    text-align: center;
 }
