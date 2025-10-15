@@ -96,12 +96,15 @@ form .box {
     right: 20%;
 }
 
-form button {
+form a {
     font-size: 1rem;
     padding: 2%;
     background-color: #E3AE58;
     border-radius: 5em;
     width: 40%;
+    text-align: center;
+    color:black;
+    text-decoration: none;
 }
 .submit {
     align-items: center;
@@ -115,7 +118,7 @@ form h2 {
 .autres-moyens {
     display: flex;
     flex-direction: row;
-    padding: 1em;
+    padding: 0.5em;
 }
 
 .autres-moyens i {
