@@ -11,7 +11,6 @@ app.use(express.static('public'));
 app.get("/", async function(req,res){
     //récupération bdd (code à réutiliser pour les autres routes)
     let data = await pool.query("SELECT * FROM produit");
-    console.log(data);
     res.render("index", {variable : data});
 });
 
@@ -71,8 +70,10 @@ app.get("/catalogue_categorie", function(req,res){
 
 // partie pour le gerant
 
-app.get("/gerant/accueil", function(req,res){
-    res.render("gerant/accueil", {variable : "aled"});
+app.get("/gerant/accueil", async function(req,res){
+    let produits_aime = await pool.query("SELECT * FROM produit ORDER BY note DESC LIMIT 5");
+    res.render("gerant/accueil", {liste_user : produits_aime[0]});
+
 });
 
 app.get("/gerant/ajout_suppr_produit", function(req,res){
@@ -97,6 +98,12 @@ app.get("/gerant/catalogue_produit", function(req,res){
 
 app.get("/gerant/catalogue_categorie", function(req,res){
     res.render("catalogue_categorie", {variable : "aled"});
+});
+
+app.get('/gerant/produit/:id', async (req, res) => {
+    const produitId = req.params.id;
+    const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
+    res.render('produit', { produit : row[0]})
 });
 
 

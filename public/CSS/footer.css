@@ -4,7 +4,7 @@ footer {
     padding: 3%;
     color: white;
     display: flex;
-    gap: 8%;
+    gap: 8%;color:white;
 }
 
 .rs {

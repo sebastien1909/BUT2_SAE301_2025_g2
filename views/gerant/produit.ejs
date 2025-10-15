@@ -1,0 +1,12 @@
+<%- include("header") %>
+
+<h1><%= produit.marque %> <%= produit.modele %></h1>
+<p><strong>Type :</strong> <%= produit.type %></p>
+<p><strong>Description :</strong> <%= produit.description %></p>
+<p><strong>Prix location :</strong> <%= produit.prix_location %> € / jour</p>
+<p><strong>État :</strong> <%= produit.etat %></p>
+<p><strong>Note :</strong> <%= produit.note %> / 5 ⭐</p>
+
+<a href="/">← Retour à l’accueil</a>
+
+<%- include("footer") %>

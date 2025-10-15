@@ -26,3 +26,34 @@ h1{
     flex-direction:column;
     color:black;
 }
+
+
+
+h1{
+    color:black;
+    text-align:center;
+}
+
+li{
+    color:black;
+}
+
+.liked-products-cont{
+    display:flex;
+    justify-content : space-evenly;
+}
+
+.liked-products{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+}
+
+.liked-img{
+    margin-bottom:15px;
+}
+
+a{
+    text-decoration:none;
+}
