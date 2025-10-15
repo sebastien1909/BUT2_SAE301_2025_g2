@@ -1,3 +1,4 @@
+/* header */
 .logo {
   width: 300px;
   height: auto; 
@@ -53,4 +54,59 @@ header {
   cursor: pointer;
   border-radius: 10px;
   padding: 1%;
+}
+
+/* paiement */
+.paiement {
+  display: flex;
+  flex-direction: row;
+  padding: 2%;
+  justify-content: space-around;
+  color:white;
+  gap: 5%;
+}
+
+.card-paiement, .recap {
+  background-color: #454545;
+  padding: 2%;
+  border-radius: 1em;
+}
+.card-paiement {
+  width: 50%;
+}
+.recap {
+  width: 30%;
+  height: fit-content;
+}
+
+.card-paiement input {
+  background-color: #5F5F5F;
+  width: 25%;
+  padding: 1%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.75em;
+  border:none;
+}
+
+#cp{
+  width: 10%;
+}
+#expmonth, #expyear, #cvv{
+  width: 5%;
+}
+#fname, #lname, #city{
+  width: 15%;
+}
+.numetdate {
+  display: flex;
+  flex-direction: row;
+  gap: 10%;
+}
+
+#expmonth {
+  margin-left: 10%;
+}
+#cvv {
+  margin-left: 12.5%;
 }
