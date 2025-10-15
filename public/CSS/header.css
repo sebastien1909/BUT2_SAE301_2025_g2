@@ -1,10 +1,56 @@
 .logo {
   width: 300px;
-  height: auto; /* garde les proportions */
+  height: auto; 
 }
-.tothetop {
+.top-header {
   display: flex;
-  justify-content: space-between; /* espace entre les blocs */
-  align-items: center;            /* centre verticalement */
-  padding: 10px 20px;             /* marge intérieure */
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;                  
+}
+header {
+  background-color: #2A2A2A;
+}
+.bottom-header {
+  background-color: #E3AE58;
+  text-align: center;
+  padding: 0.5em ;
+}
+.bottom-header a {
+  color: black;
+  text-decoration: none;
+  margin: 5%;
+}
+
+.bottom-header a:hover {
+  text-decoration: underline;
+}
+
+.logo {
+  margin-left: 2%;
+}
+.icons {
+  margin-right: 2%;
+}
+
+.icons i {
+  margin : 0 10px;
+}
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  margin-right: 10%;
+}
+.search-bar input {
+  border: none;
+  border-radius: 10px;
+  width: 40em;
+  padding: 1%;
+}
+.search-bar button {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 1%;
 }

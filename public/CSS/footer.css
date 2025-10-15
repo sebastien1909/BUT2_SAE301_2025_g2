@@ -106,6 +106,10 @@ form a {
     color:black;
     text-decoration: none;
 }
+form a:hover {
+    background-color: #9e6e27;
+    transition: 0.3s;
+}
 .submit {
     align-items: center;
     display: flex;
