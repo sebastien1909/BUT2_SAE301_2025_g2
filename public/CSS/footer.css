@@ -48,6 +48,8 @@ footer {
   border-radius: 1em;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   width: 35%;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 .card-inscrip h1 {
     text-align: center;
@@ -80,7 +82,49 @@ form input {
     font-size: 0.65em;
 }
 
+form .box {
+    padding: 4%;
+}
+
 .check label {
     color: white;
     font-size: 0.9em;
+    margin-left: 10%;
+}
+.check input {
+    position: absolute;
+    right: 20%;
+}
+
+form a {
+    font-size: 1rem;
+    padding: 2%;
+    background-color: #E3AE58;
+    border-radius: 5em;
+    width: 40%;
+    text-align: center;
+    color:black;
+    text-decoration: none;
+}
+form a:hover {
+    background-color: #9e6e27;
+    transition: 0.3s;
+}
+.submit {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+form h2 {
+    color: white;
+}
+
+.autres-moyens {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5em;
+}
+
+.autres-moyens i {
+    padding: 1em;
 }

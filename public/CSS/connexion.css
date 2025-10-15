@@ -26,3 +26,18 @@ p {
     color: white;
 }
 
+.pdc {
+  text-decoration: underline;
+}
+
+.aetm {
+    text-align: left;
+}
+
+.lieninscrip {
+  width: 30%;
+  font-size: 0.7em;
+}
+.lienconn {
+  width: 50%;
+}

@@ -6,17 +6,17 @@ body{
 
 .Centered-title{
     color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 4rem;
 }
 
 .abonnement-background{
     display: flex;
     justify-content: row;
     justify-content: center;
-}
-
-.abonnement-card{
-    display: flex;
-    justify-content: center;
+    width: 100%;
 }
 
 .standard-background{
@@ -26,6 +26,7 @@ body{
     position:relative;
     bottom: -50px;
     z-index: -1;
+    width: 34%;
 }
 
 .standard-background button{
@@ -35,14 +36,27 @@ body{
     height: 30px;
 }
 
+.standard-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    right: 20px;
+}
+
+.standard-card ul{
+    font-size: 1.2rem;
+}
+
 .VIP-background{
     background-color: #2E2E2E;
     color: white;
-    height:800px;
+    height:850px;
     border-radius: 1em;
     position:relative;
-    bottom: -20px;
+    bottom: -15px;
     z-index: -1;
+    width: 33%;
 }
 
 .VIP-background button{
@@ -52,6 +66,16 @@ body{
     height: 30px;
 }
 
+.VIP-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.VIP-card ul{
+    font-size: 1.2rem;
+}
+
 .premium-background{
     background-color: #454545;
     color: white;
@@ -59,6 +83,7 @@ body{
     position:relative;
     bottom: -50px;
     z-index: -1;
+    width: 34%;
 }
 
 .premium-background button{
@@ -66,4 +91,125 @@ body{
     border-radius: 25px;
     width: 150px;
     height: 30px;
+}
+
+.premium-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.VIP-card img{
+    position: relative;
+    right: 10px;
+}
+
+.premium-card ul{
+    font-size: 1.2rem;
+}
+
+.produit-background{
+    background-color: #454545;
+    color: white;
+    display: flex;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.card-produit{
+    width: 50%;
+}
+
+.elements-card-produit{
+    width: 50%;
+}
+
+.retour-card-produit{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    margin-right: 30px;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.retour-card-produit a{
+    text-decoration: none;
+    color: white;
+}
+
+.retour-card-produit a:hover{
+    text-decoration: underline;
+}
+
+.taille-produit{
+    display: flex;
+    flex-direction: row;
+    font-size: 1.5em;
+    position: relative;
+    top: -20px;
+    gap: 60px;
+}
+
+.taille-produit p{
+    position: relative;
+    top: -8px;
+}
+
+.taille-produit-border{
+    border: 3px solid black;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.taille-produit-border:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.elements-card-produit button{
+    width: 300px;
+    height: 50px;
+    font-size: 1.2em;
+    background-color: #E3AE58;
+    border-radius: 5px;
+    margin-bottom: 50px;
+    font-family: "Jacques Francois", serif;
+}
+
+.elements-card-produit button:hover{
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.elements-card-produit h3{
+    font-size: 2em;
+    font-weight: 100;
+    margin-bottom: 80px;
+}
+
+.voir-plus-produit-centre{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.voir-plus-produit{
+    width: 200px;
+    height: 40px;
+    font-size: 1.1em;
+    background-color: #E3AE58;
+    border-radius: 5px;
+    margin-bottom: 50px;
+    font-family: "Jacques Francois", serif;
+}
+
+.voir-plus-produit:hover{
+    cursor: pointer;
+    transform: scale(1.02);
 }
