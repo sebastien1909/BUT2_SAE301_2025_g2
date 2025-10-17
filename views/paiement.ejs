@@ -8,41 +8,42 @@
             <br>
             <input type="text" id="cardname" name="cardname" placeholder=" ">
             <br>
-            <div class="numetdate">
-                <label for="ccnum">Numéro de la carte de crédit</label>
-                <label for="exp">Date d'expiration</label>
-                <label for="cvv">Code de sécurité</label>
-            </div>
-            <br>
+            <label for="ccnum">Numéro de la carte de crédit</label>
+            <label for="exp" id="exp">Date d'expiration</label>
+            <label for="cvv" id="cds">Code de sécurité</label>
             <input type="text" id="ccnum" name="cardnumber" placeholder=" XXX-XXXX-XXXX-XXXX">
             <input type="text" id="expmonth" name="exp" placeholder="00">
             <input type="text" id="expyear" name="exp" placeholder="0000">
             <input type="text" id="cvv" name="cvv" placeholder="000">
-            
         </div>
         <h2>Informations de facturations</h2>
         <div class="infofacturation">
             <label for="lname" id="lname">Nom</label>
-            <label for="fname" id="fname">Prénom</label>
-            <label for="city" id="city">Ville</label>
-            <label for="cp">Code postal</label>
+            <label for="fname" id="labelfname">Prénom</label>
+            <label for="city" id="labelcity">Ville</label>
+            <label for="cp" id="code">Code postal</label>
             <br>
-            <input type="text" id="fname" name="nom" placeholder=" ">
+            <input type="text" id="lname" name="nom" placeholder=" ">
             <input type="text" id="fname" name="prenom" placeholder=" ">
             <input type="text" id="city" name="city" placeholder=" ">
             <input type="text" id="cp" name="codepostal" placeholder=" ">
             <br>
             <label for="adr">Adresse de facturation</label>
-            <label for="adr2">Adresse de facturation, ligne 2</label>
+            <label for="adr2" id="adressefacture">Adresse de facturation, ligne 2</label>
             <br>
             <input type="text" id="adr" name="address" placeholder=" ">
             <input type="text" id="adr2" name="address2" placeholder=" ">
         </div>
-        <a href="#"><input type="submit">Payer</a>
+        <br>
+        <a href="#" class="payer_button">Payer</a>
     </form>
     <div class="recap">
         <h2>Récapitulatif de l'achat</h2>
-        <p>..</p>
+        <div class="card_recap">
+            <img src="#">
+            <h3>Produit 1</h3>
+            <p>prix</p>
+        </div>
     </div>
 </div>
 

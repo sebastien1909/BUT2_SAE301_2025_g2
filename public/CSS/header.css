@@ -104,9 +104,36 @@ header {
   gap: 10%;
 }
 
-#expmonth {
-  margin-left: 10%;
+#expmonth, #adr2 {
+  margin-left: 20%;
+}
+#exp {
+  margin-left: 18%;
+}
+#cds, #cp {
+  margin-left: 5%;
 }
 #cvv {
+  margin-left: 8%;
+}
+#city {
   margin-left: 12.5%;
 }
+#labelfname{
+  margin-left: 13%;
+}
+#labelcity{
+  margin-left: 21%;
+}
+#code{
+  margin-left: 17%;
+}
+#adressefacture{
+  margin-left: 24%;
+}
+.payer_button {
+  display: block;
+  margin: 0 2% 0 auto;
+  padding: 0.5em;
+}
+
