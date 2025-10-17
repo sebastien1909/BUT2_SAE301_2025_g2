@@ -213,3 +213,106 @@ body{
     cursor: pointer;
     transform: scale(1.02);
 }
+
+.titre-profil{
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 3em;
+}
+
+.background-historique-profil{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.background-historique-profil img{
+    width: 450px;
+    height: 450px;
+}
+
+.background-favoris-profil{
+    background-color: #2E2E2E;
+    width: 100%;
+    height: 550px;
+}
+
+.background-favoris-profil h1{
+    padding-top: 30px;
+    font-size: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.background-favoris-profil-image{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.background-favoris-profil img{
+    width: 350px;
+    height: 350px;
+}
+
+.background-abonnement-profil{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 100px;
+}
+
+.background-abonnement-profil-droit{
+    width: 50%;
+    background-color: #E3AE58;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px 0% 0% 0%;
+}
+
+.background-abonnement-profil-droit p{
+    color: black;
+    font-size: 1.2em;
+}
+
+.background-abonnement-profil-droit button{
+    width: 450px;
+    height: 50px;
+    opacity: 70%;
+    color: black;
+    border-radius: 10px;
+    font-size: 1.2em;
+    margin-top: 20px;
+    font-family: "Jacques Francois", serif;
+}
+
+.background-abonnement-profil-droit button:hover{
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.background-abonnement-profil-gauche{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.background-abonnement-profil-gauche h2{
+    font-size: 3em;
+    margin-top: -50px;
+}
+
+.background-abonnement-profil-gauche img{
+    width: 220px;
+    height: 200px;
+}
