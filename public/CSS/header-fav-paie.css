@@ -78,10 +78,6 @@ header {
   width: 30%;
   height: fit-content;
 }
-.card_repap img {
-  width: 5%;
-  height: auto;
-}
 
 .card-paiement input {
   background-color: #5F5F5F;
