@@ -38,8 +38,9 @@ app.get("/reservation", function(req,res){
     res.render("reservation", {variable : "aled"});
 });
 
-app.get("/catalogue_produit", function(req,res){
-    res.render("catalogue_produit", {variable : "aled"});
+app.get("/catalogue_produit", async function(req,res){
+    let produits = await pool.query("SELECT * FROM produit");
+    res.render("catalogue_produit", {liste_produits : produits[0]});
 });
 
 app.get("/favoris", function(req,res){
@@ -72,7 +73,7 @@ app.get("/catalogue_categorie", function(req,res){
 
 app.get("/gerant/accueil", async function(req,res){
     let produits_aime = await pool.query("SELECT * FROM produit ORDER BY note DESC LIMIT 5");
-    res.render("gerant/accueil", {liste_user : produits_aime[0]});
+    res.render("gerant/accueil", {produits_aime : produits_aime[0]});
 
 });
 
@@ -92,8 +93,9 @@ app.get("/gerant/nouveaute", function(req,res){
     res.render("nouveaute", {variable : "aled"});
 });
 
-app.get("/gerant/catalogue_produit", function(req,res){
-    res.render("catalogue_produit", {variable : "aled"});
+app.get("/gerant/catalogue_produit", async function(req,res){
+    let produits = await pool.query("SELECT * FROM produit");
+    res.render("catalogue_produit", {liste_produits : produits[0]});
 });
 
 app.get("/gerant/catalogue_categorie", function(req,res){
