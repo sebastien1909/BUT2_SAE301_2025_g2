@@ -1,0 +1,74 @@
+.produit-cont{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:space-evenly;
+    gap:3%;
+}
+
+.catalogue-produit-card{
+    width:30%;
+    margin-bottom:5%;
+    transition:transform 0.2s ease-in-out;
+}
+
+.catalogue-produit-card:hover{
+    transform:scale(1.1);
+}
+
+.catalogue-produit-prix{
+    color:black;
+}
+
+.lien-menu{
+    font-weight:none;
+    text-decoration:none;
+    color:black;
+    transition:all 0.1s ease-in-out
+}
+
+
+.lien-menu:hover{
+    font-weight:bold;
+}
+
+.lien-produit{
+    text-decoration:none;
+    color:black;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.catalogue-produit-info{
+    display:flex;
+    justify-content:space-between;
+}
+
+h1{
+    margin-top:5%;
+    color:black;
+    margin-left:8%;
+}
+
+h5{
+    margin-left:5%;
+    margin-bottom:6%;
+}
+
+.trier-par{
+    color:black;
+    text-align:center;
+    font-weight:bold;
+}
+
+.sous-menu{
+    list-style-type: none;
+}
+
+.sous-menu-holder{
+    display:flex;
+    justify-content:space-around;
+    margin: 5% 0px;
+}

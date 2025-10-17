@@ -1,3 +1,52 @@
 <%- include("header") %>
+<link rel="stylesheet" href="/CSS/catalogue-produit.css">
+
+
+    <h1> Tout les produits</h1>
+    <h5> Ici, vous pouvez accéder à notre liste complète de produits disponibles</h5>
+    <tri>
+        <p class="trier-par"> Trier par </p>
+        <div class="tri-cont">
+            <ul class="sous-menu-holder">
+                <li class="sous-menu"> <a href="#" class="lien-menu">Prix &ensp;</a></li>
+                <li class="sous-menu"> <a href="#" class="lien-menu">Catégorie &ensp;</a></li>
+                <li class="sous-menu"> <a href="#" class="lien-menu">Marque &ensp;</a></li>
+                <li class="sous-menu"> <a href="#" class="lien-menu">État &ensp;</a></li>
+                <li class="sous-menu"> <a href="#" class="lien-menu">Note &ensp;</a></li>
+
+            </ul>
+        </div>
+    </tri>
+    
+    <div class="produit-cont">
+
+        <% for (element of liste_produits){ %>
+            <div class="catalogue-produit-card">
+                <a href="produit/<%= element.id %>" class="lien-produit">
+                    
+                        
+                        <% let marque = element.marque%>
+                        <% let modele =element.modele %>
+                        <% let prix = element.prix_location %>
+                        <% let image = element.img %>
+                        <img src="/img/<%= image %>.jpg" class="catalogue-produit-img">
+                        <div class="catalogue-produit-info">
+                            <strong>
+                                <%= marque %> 
+                            </strong>
+                            <%= modele %>
+
+                            <p class="catalogue-produit-prix">
+                                <%= prix %>
+                            </p>
+                        </div>
+                        
+
+                    
+                </a>
+            </div>
+            <% } %>
+
+        </div>
 
 <%- include("footer") %>
