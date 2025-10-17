@@ -1,0 +1,215 @@
+/* header */
+.logo {
+  width: 300px;
+  height: auto; 
+}
+.top-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;                  
+}
+header {
+  background-color: #2A2A2A;
+}
+.bottom-header {
+  background-color: #E3AE58;
+  text-align: center;
+  padding: 0.5em ;
+}
+.bottom-header a {
+  color: black;
+  text-decoration: none;
+  margin: 5%;
+}
+
+.bottom-header a:hover {
+  text-decoration: underline;
+}
+
+.logo {
+  margin-left: 2%;
+}
+.icons {
+  margin-right: 2%;
+}
+
+.icons i {
+  margin : 0 10px;
+}
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  margin-right: 10%;
+}
+.search-bar input {
+  border: none;
+  border-radius: 10px;
+  width: 40em;
+  padding: 1%;
+}
+.search-bar button {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 1%;
+}
+
+/* paiement */
+.paiement {
+  display: flex;
+  flex-direction: row;
+  padding: 2%;
+  justify-content: space-around;
+  color:white;
+  gap: 5%;
+}
+
+.card-paiement, .recap {
+  background-color: #454545;
+  padding: 2%;
+  border-radius: 1em;
+}
+.card-paiement {
+  width: 50%;
+}
+.recap {
+  width: 30%;
+  height: fit-content;
+}
+.card_repap img {
+  width: 5%;
+  height: auto;
+}
+
+.card-paiement input {
+  background-color: #5F5F5F;
+  width: 25%;
+  padding: 1%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.75em;
+  border:none;
+}
+
+#cp{
+  width: 10%;
+}
+#expmonth, #expyear, #cvv{
+  width: 5%;
+}
+#fname, #lname, #city{
+  width: 15%;
+}
+.numetdate {
+  display: flex;
+  flex-direction: row;
+  gap: 10%;
+}
+
+#expmonth, #adr2 {
+  margin-left: 20%;
+}
+#exp {
+  margin-left: 18%;
+}
+#cds, #cp {
+  margin-left: 5%;
+}
+#cvv {
+  margin-left: 8%;
+}
+#city {
+  margin-left: 12.5%;
+}
+#labelfname{
+  margin-left: 13%;
+}
+#labelcity{
+  margin-left: 21%;
+}
+#code{
+  margin-left: 17%;
+}
+#adressefacture{
+  margin-left: 24%;
+}
+.payer_button {
+  display: block;
+  margin: 0 2% 0 auto;
+  padding: 0.5em;
+}
+/* favoris */
+.favoris {
+  padding: 2%;
+  display: flex;
+  flex-direction: row;
+}
+
+.card_favoris_gris {
+  background-color: #454545;
+  padding: 1%;
+  color: white;
+  width: 70%;
+  height: fit-content;
+  margin: 1em;
+  display: flex;
+  gap: 2%;
+}
+.card_favoris_yellow {
+  background-color: #E3AE58;
+  padding: 1%;
+  color: white;
+  width: 70%;
+  height: fit-content;
+  margin: 1em;
+  display: flex;
+  gap: 2%;
+}
+.favoris img {
+  width: 20%;
+  height: auto;
+}
+
+.info_favoris {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.bas_favoris {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2%;
+}
+
+.dispo {
+  padding: 1em 1em;
+  font-size: 0.7em;
+}
+
+.bas_favoris button {
+    background-color: #f5c563;
+    border:none;
+    padding: 0.625em 1.25em;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.bas_favoris button:hover {
+    background-color: #f0b84a;
+}
+
+.favoris i {
+    position: absolute;
+    top: 34%;
+    right: 18%;
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+.favoris i:hover {
+    opacity: 0.7;
+  }
+
+       
