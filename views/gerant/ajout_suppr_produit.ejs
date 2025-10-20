@@ -1,3 +1,70 @@
 <%- include("header") %>
 
+<body>
+
+    <h1>Ajouter/supprimer un produit</h1>
+
+    <div class="ajout-produit-container">
+        <form action="/ajouter-produit" method="POST" enctype="multipart/form-data" class="form-ajout-produit">
+            <div class="form-group">
+                <label for="categorie">Catégorie</label>
+                <select name="categorie" id="categorie">
+                    <option value="">Sélectionner une catégorie</option>
+                    <option value="vetements">Vêtements</option>
+                    <option value="accessoires">Accessoires</option>
+                    <option value="chaussures">Chaussures</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="prix">Définir le prix</label>
+                <input type="number" name="prix" id="prix" step="0.01" placeholder="Prix">
+            </div>
+
+            <div class="form-group">
+                <label for="quantite">Quantité</label>
+                <input type="number" name="quantite" id="quantite" min="1" placeholder="Quantité">
+            </div>
+
+            <div class="form-group">
+                <label for="image">Importer une image</label>
+                <input type="file" name="image" id="image" accept="image/*">
+            </div>
+
+            <div class="form-group description">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" rows="4" placeholder="Décrivez le produit..."></textarea>
+            </div>
+
+            <button type="submit">Ajouter le produit</button>
+        </form>
+    </div>
+
+    <div class="recherche-produit">
+        <input type="text" name="search" id="search" placeholder="Rechercher un produit">
+        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
+    <div class="liste-produits">
+        <div class="produit">
+            <img src="/images/produit1.jpg" alt="Produit 1">
+            <p>Nom du produit</p>
+            <button type="button" class="supprimer-produit">Supprimer</button>
+        </div>
+
+        <div class="produit">
+            <img src="/images/produit2.jpg" alt="Produit 2">
+            <p>Nom du produit</p>
+            <button type="button" class="supprimer-produit">Supprimer</button>
+        </div>
+
+        <div class="produit">
+            <img src="/images/produit3.jpg" alt="Produit 3">
+            <p>Nom du produit</p>
+            <button type="button" class="supprimer-produit">Supprimer</button>
+        </div>
+    </div>
+
+</body>
+
 <%- include("footer") %>
