@@ -1,10 +1,20 @@
 import express from "express";
+import session from "express-session";
+import bodyParser from "body-parser";
 import pool from "./db.js";
 
 const app = express();
 app.set("view engine", "ejs");
 
 app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(session({
+    secret:'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}));
 
 // partie pour le grand public
 
@@ -54,6 +64,32 @@ app.get("/abonnement", function(req,res){
 app.get("/connexion", function(req,res){
     res.render("connexion", {variable : "aled"});
 });
+app.post("/connexion", async function(req,res){
+    // recup info de connexion
+    let username = req.body.login;
+    let password = req.body.mdp;
+
+    let result = await pool.query (
+        "SELECT * FROM utilisateur WHERE login = ? AND password = ?",
+        [username, password]
+    )
+
+    // verification info de l'utilisateur sont dans la bdd
+    if (result [0].length > 0){
+        req.session.userRole = result[0][0].role;
+        req.session.userID = result[0][0].id;
+
+        res.render("index");
+    }
+    //si c'est le cas : on recup le rôle + on initialise une session + redirection page accueil
+    else {
+        res.render("connexion", {message : "Nom d'utilisateur ou mot de passe incorrect"});
+    }
+    //sinon : message d'erreur + redirection page connexion
+
+    res.render("connexion", {variable : "aled"});
+});
+
 
 app.get("/inscription", function(req,res){
     res.render("inscription", {variable : "aled"});
@@ -99,6 +135,7 @@ app.get("/gerant/catalogue_produit", async function(req,res){
 });
 
 app.get("/gerant/catalogue_categorie", function(req,res){
+    
     res.render("catalogue_categorie", {variable : "aled"});
 });
 
