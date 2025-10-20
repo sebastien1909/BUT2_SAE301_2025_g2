@@ -17,3 +17,20 @@
 .form-group {
     padding: 1em;
 }
+.ajout-produit-container form textarea {
+    width: 97%;
+    background-color: #5F5F5F;
+    border-radius: 0.5em; 
+    padding: 1%;
+}
+#categorie {
+    font-size: 1rem;
+    padding: 1%;
+    background-color: #E3AE58;
+    border-radius: 5em;
+    width: 35%;
+    text-align: center;
+    color:black;
+    text-decoration: none;
+    border:none;
+}
