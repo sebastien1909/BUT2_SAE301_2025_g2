@@ -1,0 +1,19 @@
+/* ajout, supp produit */
+.ajout-produit-container {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.ajout-produit-container form {
+  background: #2E2E2E;
+  border: 2px solid #E3AE58;
+  padding: 2em;
+  border-radius: 1em;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  width: 50%;
+  color: white;
+}
+
+.form-group {
+    padding: 1em;
+}

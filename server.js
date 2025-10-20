@@ -114,7 +114,7 @@ app.get("/gerant/accueil", async function(req,res){
 });
 
 app.get("/gerant/ajout_suppr_produit", function(req,res){
-    res.render("ajout_suppr_produit", {variable : "aled"});
+    res.render("gerant/ajout_suppr_produit", {variable : "aled"});
 });
 
 app.get("/gerant/check_resa", function(req,res){

@@ -1,11 +1,11 @@
-<%- include("header") %>
+<%- include("../header") %>
 
 <body>
 
     <h1>Ajouter/supprimer un produit</h1>
 
     <div class="ajout-produit-container">
-        <form action="/ajouter-produit" method="POST" enctype="multipart/form-data" class="form-ajout-produit">
+        <form action="/ajouter-produit" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="categorie">Catégorie</label>
                 <select name="categorie" id="categorie">
@@ -67,4 +67,4 @@
 
 </body>
 
-<%- include("footer") %>
+<%- include("../footer") %>
