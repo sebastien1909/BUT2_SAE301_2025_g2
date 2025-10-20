@@ -1,3 +1,70 @@
+.panier {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2%;
+    color: white;
+}
 .card_panier {
     background-color: #454545;
+    width: 50%;
+    padding: 1%;
+    margin-left: 2%;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 2%;
+}
+.card_panier img {
+    width: 20%;
+    height: auto;
+    background: white;
+}
+.recap_panier {
+    background-color: #454545;
+    width: 30%;
+    padding: 1%;
+    margin-right: 2%;
+}
+.info_panier {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.quantite {
+    display: flex;
+    gap: 1%;
+    background-color: #E3AE58;
+    width: fit-content;
+ }
+.quantite button {
+    background-color: #E3AE58;
+    border: none;
+    color: white;
+}
+
+.card_panier i {
+    cursor: pointer;
+    padding: 0.1em;
+    margin-top: 0.2em;
+}
+.card_panier i:hover {
+    color:#E3AE58;
+}
+.total {
+    text-align: end;
+}
+.valide_panier {
+    text-align: center;
+    margin-top: 5%;
+}
+.valide_panier button {
+    background-color: #E3AE58;
+    border: none;
+    border-radius: 15px;
+    color: black;
+    padding: 1em 2em;
+    font-size: 1em;
+    cursor: pointer;
+}
+.valide_panier button:hover {
+    background-color: #cf9a4e;
 }
