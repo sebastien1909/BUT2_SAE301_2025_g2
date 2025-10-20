@@ -78,6 +78,16 @@ header {
   width: 30%;
   height: fit-content;
 }
+.recap img {
+    width: 20%;
+    height: auto;
+    background: white;
+}
+.card_recap {
+      display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2%;
+}
 
 .card-paiement input {
   background-color: #5F5F5F;
@@ -136,6 +146,10 @@ header {
   margin: 0 2% 0 auto;
   padding: 0.5em;
 }
+
+
+
+
 /* favoris */
 .favoris {
   padding: 2%;

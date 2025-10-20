@@ -6,12 +6,14 @@
 }
 .card_panier {
     background-color: #454545;
-    width: 50%;
+    width: 45%;
+    height: 13em;
     padding: 1%;
     margin-left: 2%;
     display: grid;
     grid-template-columns: auto 1fr auto auto;
     gap: 2%;
+    border-radius: 5px;
 }
 .card_panier img {
     width: 20%;
@@ -23,6 +25,7 @@
     width: 30%;
     padding: 1%;
     margin-right: 2%;
+    border-radius: 15px;
 }
 .info_panier {
     flex: 1;
