@@ -134,8 +134,9 @@ app.get("/gerant/catalogue_produit", async function(req,res){
     res.render("catalogue_produit", {liste_produits : produits[0]});
 });
 
-app.get("/gerant/catalogue_categorie", function(req,res){
-    
+app.get("/gerant/catalogue_categorie/:categorie", async function(req,res){
+    const categorie = req.params.categorie;
+    let produits_categorie = await pool.query("SELECT * from produit WHERE type LIKE '?'", [categorie])
     res.render("catalogue_categorie", {variable : "aled"});
 });
 
