@@ -135,6 +135,7 @@ app.get("/gerant/catalogue_produit", async function(req,res){
 });
 
 app.get("/gerant/catalogue_categorie", function(req,res){
+    
     res.render("catalogue_categorie", {variable : "aled"});
 });
 

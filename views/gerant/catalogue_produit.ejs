@@ -1,3 +1,34 @@
 <%- include("header") %>
 
+<link rel="stylesheet" href="/CSS/catalogue-produit">
+
+
+    <% for (element of liste_produits){ %>
+    <div class="catalogue-produit-card">
+        <a href="produit/<%= element.id %>" class="lien-produit">
+            
+                
+                <% let marque = element.marque%>
+                <% let modele =element.modele %>
+                <% let prix = element.prix_location %>
+                <% let image = element.img %>
+                <img src="/img/<%= image %>.jpg" class="catalogue-produit-img">
+                <div class="catalogue-produit-info">
+                    <strong>
+                        <%= marque %> 
+                    </strong>
+                    <%= modele %>
+
+                    <p class="catalogue-produit-prix">
+                        <%= prix %>
+                    </p>
+                </div>
+                
+
+            
+        </a>
+    </div>
+    <% } %>
+
+
 <%- include("footer") %>
