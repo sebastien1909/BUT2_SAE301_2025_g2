@@ -13,7 +13,6 @@ app.use(session({
     secret:'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
 }));
 
 //MIDDLEWARES MAISON
@@ -134,7 +133,7 @@ app.get("/catalogue_categorie", function(req,res){
 // partie pour le gerant
 
 app.get("/gerant/accueil", async function(req,res){
-    let produits_aime = await pool.query("SELECT * FROM produit ORDER BY note DESC LIMIT 5");
+    let produits_aime = await pool.query("SELECT * FROM produit LIMIT 5");
     res.render("gerant/accueil", {produits_aime : produits_aime[0]});
 
 });
