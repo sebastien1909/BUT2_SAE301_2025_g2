@@ -145,20 +145,20 @@ app.get("/gerant/ajout_suppr_produit", function(req,res){
 });
 
 app.get("/gerant/check_reservation", function(req,res){
-    res.render("check_reservation", {variable : "aled"});
+    res.render("gerant/check_reservation", {variable : "aled"});
 });
 
 app.get("/gerant/liste_reservation", function(req,res){
-    res.render("liste_resa", {variable : "aled"});
+    res.render("gerant/liste_resa", {variable : "aled"});
 });
 
 app.get("/gerant/nouveaute", function(req,res){
-    res.render("nouveaute", {variable : "aled"});
+    res.render("gerant/nouveaute", {variable : "aled"});
 });
 
 app.get("/gerant/catalogue_produit", async function(req,res){
     let produits = await pool.query("SELECT * FROM produit");
-    res.render("catalogue_produit", {liste_produits : produits[0]});
+    res.render("gerant/catalogue_produit", {liste_produits : produits[0]});
 });
 
 app.get("/gerant/catalogue_categorie/:categorie", async function(req,res){
@@ -170,7 +170,7 @@ app.get("/gerant/catalogue_categorie/:categorie", async function(req,res){
 app.get('/gerant/produit/:id', async (req, res) => {
     const produitId = req.params.id;
     const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
-    res.render('produit', { produit : row[0]})
+    res.render('gerant/produit', { produit : row[0]})
 });
 
 
