@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import crypto from "crypto";
 import bodyParser from "body-parser";
 import pool from "./db.js";
 
@@ -94,10 +95,11 @@ app.post("/connexion", async function(req,res){
     // recup info de connexion
     let username = req.body.login;
     let password = req.body.mdp;
+    let hashedPassword = crypto.createHash('SHA-512').update(password).digest('hex');
 
     let result = await pool.query (
         "SELECT * FROM utilisateur WHERE login = ? AND password = ?",
-        [username, password]
+        [username, hashedPassword]
     )
 
     // verification info de l'utilisateur sont dans la bdd
@@ -142,11 +144,11 @@ app.get("/gerant/ajout_suppr_produit", function(req,res){
     res.render("gerant/ajout_suppr_produit", {variable : "aled"});
 });
 
-app.get("/gerant/check_resa", function(req,res){
+app.get("/gerant/check_reservation", function(req,res){
     res.render("check_reservation", {variable : "aled"});
 });
 
-app.get("/gerant/liste_resa", function(req,res){
+app.get("/gerant/liste_reservation", function(req,res){
     res.render("liste_resa", {variable : "aled"});
 });
 
