@@ -16,7 +16,34 @@ app.use(session({
     cookie: { secure: true }
 }));
 
-// partie pour le grand public
+//MIDDLEWARES MAISON
+function authenticate(req,res,next) {
+    if (req.session.hasOwnProperty("userId")){
+        next();
+    }
+    else {
+        res.status(403).redirect("login")
+    }
+}
+
+function isAdmin(req, res, next){
+    if (req.session.userRole == "Admin"){
+        next();
+    }
+    else {
+        res.status(403).redirect("/");
+    }
+}
+
+//protéger une page (rajout d'authenticate et par ex isAdmin)
+// app.get("/", authenticate, isAdmin, async function(req,res){
+//     //récupération bdd (code à réutiliser pour les autres routes)
+//     let data = await pool.query("SELECT * FROM produit");
+//     res.render("index", {variable : data});
+// });
+
+
+// ROUTES
 
 app.get("/", async function(req,res){
     //récupération bdd (code à réutiliser pour les autres routes)
@@ -78,8 +105,7 @@ app.post("/connexion", async function(req,res){
     if (result [0].length > 0){
         req.session.userRole = result[0][0].role;
         req.session.userID = result[0][0].id;
-
-        res.render("index");
+        res.redirect("index");
     }
     //si c'est le cas : on recup le rôle + on initialise une session + redirection page accueil
     else {

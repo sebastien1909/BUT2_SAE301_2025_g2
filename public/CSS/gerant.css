@@ -23,6 +23,14 @@
     border-radius: 0.5em; 
     padding: 1%;
 }
+.ajout_supp {
+    align-items: end;
+    display: flex;
+    justify-content: end;
+}
+.ajout_supp button {
+    width: 20%;
+}
 #categorie {
     font-size: 1rem;
     padding: 1%;
@@ -33,4 +41,7 @@
     color:black;
     text-decoration: none;
     border:none;
+}
+#imageimport {
+    background-color: #5F5F5F;
 }
