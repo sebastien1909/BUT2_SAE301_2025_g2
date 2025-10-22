@@ -81,6 +81,62 @@
 }
 /*check reservation*/
 .reservation_card {
+    padding: 2em;
     background-color: #2E2E2E;
     color: white;
+    border-radius: 25px;
+    width: 60%;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10%;
 }
+.reservation_card h3 {
+    text-align: center;
+}
+.back_liste h2:hover {
+    text-decoration: underline;
+}
+.reservation_card img {
+    width: 80%;
+    height: auto;
+    background: white;
+}
+.reservation_card_info h4 {
+    text-align: center;
+    color: #E3AE58;
+}
+.reservation_card_info h5 {
+    font-size: 1.5rem;
+}
+.info-reserv {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 50%;
+}
+.boutons_reserv {
+    gap:4%;
+    display: flex;
+}
+.boutons_reserv button{
+    font-size: 0.8rem;
+    padding: 1.5%;
+    border-radius: 0.8em;
+    width: 22.5%;
+    text-align: center;
+    color:black;
+    border:none;
+}
+.fin_reserv {
+    background-color: #EE7070;
+}
+.fin_reserv:hover {
+    background-color: #923f3f;
+}
+.contact_reserv {
+    background-color: #E3AE58;
+}
+.contact_reserv:hover {
+    background-color: #9e6e27;
+}
+

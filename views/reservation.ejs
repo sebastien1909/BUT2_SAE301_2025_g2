@@ -1,3 +1,62 @@
 <%- include("header") %>
+<button class="btn_retour" onclick="history.back()">Retour a la liste </button>
+<div class="reservation">
+        
+        <div class="card_recap">
+            <div>
+            <img src="#">
+            <button class="btn_reserver">ajouter au pannier</button>
+        </div>
+            <div>
+                <h3>Produit 1</h3>
+                <p>description</p>
+                <p>prix</p>
+                <div id="calendar"></div>
+                <div>
+                   
+                </div>
 
+<script>
+  function generateCalendar() {
+    const calendar = document.getElementById('calendar');
+    const now = new Date();
+    const month = now.getMonth();
+    const year = now.getFullYear();
+
+    const months = [
+      'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+      'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+    ];
+
+    const daysOfWeek = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+
+    // En-tête du calendrier
+    let html = `<h3>${months[month]} ${year}</h3>`;
+    html += '<table><thead><tr>';
+    daysOfWeek.forEach(day => html += `<th>${day}</th>`);
+    html += '</tr></thead><tbody><tr>';
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDate = new Date(year, month + 1, 0).getDate();
+
+    // Cases vides avant le 1er du mois
+    for (let i = 0; i < firstDay; i++) html += '<td></td>';
+
+    // Jours du mois
+    for (let day = 1; day <= lastDate; day++) {
+      html += `<td>${day}</td>`;
+      if ((day + firstDay) % 7 === 0) html += '</tr><tr>';
+    }
+
+    html += '</tr></tbody></table>';
+    calendar.innerHTML = html;
+  }
+
+  generateCalendar();
+</script>
+
+            
+            </div>
+        </div>
+    </div>
 <%- include("footer") %>
