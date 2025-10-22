@@ -90,9 +90,14 @@
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 10%;
+    margin-bottom: 5%;
 }
 .reservation_card h3 {
     text-align: center;
+}
+.back_liste {
+    padding: 1%;
+    margin-left: 2%;
 }
 .back_liste h2:hover {
     text-decoration: underline;
