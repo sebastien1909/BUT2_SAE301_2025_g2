@@ -34,12 +34,14 @@
 }
 
 .image-reservation-produit{
-    width: 30%;
+    width: 20%;
 }
 
 .image-reservation-produit img{
-    width: 70%;
     border-radius: 10px;
+    position: relative;
+    right: 80px;
+    width: 100%;
 }
 
 .card-reservation-produit{
