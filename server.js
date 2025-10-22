@@ -47,8 +47,8 @@ function isAdmin(req, res, next){
 
 app.get("/", async function(req,res){
     //récupération bdd (code à réutiliser pour les autres routes)
-    let data = await pool.query("SELECT * FROM produit");
-    res.render("index", {variable : data});
+    let produits_aime = await pool.query("SELECT * FROM produit LIMIT 5");
+    res.render("index", {produits_aime : produits_aime[0]});
 });
 
 app.get("/nouveaute", function(req,res){
