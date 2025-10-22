@@ -1,6 +1,6 @@
-<%- include("../header") %>
+<%- include("/header") %>
 
-    <h1>Ajouter/supprimer un produit</h1>
+    <h1 class="hgerant">Ajouter/supprimer un produit</h1>
 
     <div class="ajout-produit-container">
         <form action="/ajouter-produit" method="POST" enctype="multipart/form-data">
@@ -26,15 +26,16 @@
 
             <div class="form-group">
                 <label for="image">Importer une image</label>
-                <input type="file" name="image" id="image" accept="/img/produits/">
+                <input type="file" name="image" id="imageimport" accept="/img/produits/">
             </div>
 
             <div class="form-group description">
                 <label for="description">Description</label>
                 <textarea name="description" id="description" rows="4" placeholder="Décrivez le produit..."></textarea>
             </div>
-
-            <button type="submit">Ajouter le produit</button>
+            <div class="ajout_supp">
+                <button type="submit">Ajouter le produit</button>
+            </div>
         </form>
     </div>
 

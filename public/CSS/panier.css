@@ -36,18 +36,21 @@
     display: flex;
     gap: 1%;
     background-color: #E3AE58;
+    border-radius: 2em;
     width: fit-content;
  }
 .quantite button {
     background-color: #E3AE58;
     border: none;
     color: white;
+    border-radius: 2em;
 }
 
 .card_panier i {
     cursor: pointer;
     padding: 0.1em;
     margin-top: 0.2em;
+    height:20px;
 }
 .card_panier i:hover {
     color:#E3AE58;

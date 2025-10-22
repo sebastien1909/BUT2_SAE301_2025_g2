@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import crypto from "crypto";
 import bodyParser from "body-parser";
 import pool from "./db.js";
 
@@ -13,10 +14,36 @@ app.use(session({
     secret:'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
 }));
 
-// partie pour le grand public
+//MIDDLEWARES MAISON
+function authenticate(req,res,next) {
+    if (req.session.hasOwnProperty("userId")){
+        next();
+    }
+    else {
+        res.status(403).redirect("login")
+    }
+}
+
+function isAdmin(req, res, next){
+    if (req.session.userRole == "Admin"){
+        next();
+    }
+    else {
+        res.status(403).redirect("/");
+    }
+}
+
+//protéger une page (rajout d'authenticate et par ex isAdmin)
+// app.get("/", authenticate, isAdmin, async function(req,res){
+//     //récupération bdd (code à réutiliser pour les autres routes)
+//     let data = await pool.query("SELECT * FROM produit");
+//     res.render("index", {variable : data});
+// });
+
+
+// ROUTES
 
 app.get("/", async function(req,res){
     //récupération bdd (code à réutiliser pour les autres routes)
@@ -68,18 +95,18 @@ app.post("/connexion", async function(req,res){
     // recup info de connexion
     let username = req.body.login;
     let password = req.body.mdp;
+    let hashedPassword = crypto.createHash('SHA-512').update(password).digest('hex');
 
     let result = await pool.query (
         "SELECT * FROM utilisateur WHERE login = ? AND password = ?",
-        [username, password]
+        [username, hashedPassword]
     )
 
     // verification info de l'utilisateur sont dans la bdd
     if (result [0].length > 0){
         req.session.userRole = result[0][0].role;
         req.session.userID = result[0][0].id;
-
-        res.render("index");
+        res.redirect("index");
     }
     //si c'est le cas : on recup le rôle + on initialise une session + redirection page accueil
     else {
@@ -108,7 +135,7 @@ app.get("/catalogue_categorie", function(req,res){
 // partie pour le gerant
 
 app.get("/gerant/accueil", async function(req,res){
-    let produits_aime = await pool.query("SELECT * FROM produit ORDER BY note DESC LIMIT 5");
+    let produits_aime = await pool.query("SELECT * FROM produit LIMIT 5");
     res.render("gerant/accueil", {produits_aime : produits_aime[0]});
 
 });
@@ -117,21 +144,21 @@ app.get("/gerant/ajout_suppr_produit", function(req,res){
     res.render("gerant/ajout_suppr_produit", {variable : "aled"});
 });
 
-app.get("/gerant/check_resa", function(req,res){
-    res.render("check_reservation", {variable : "aled"});
+app.get("/gerant/check_reservation", function(req,res){
+    res.render("gerant/check_reservation", {variable : "aled"});
 });
 
-app.get("/gerant/liste_resa", function(req,res){
-    res.render("liste_resa", {variable : "aled"});
+app.get("/gerant/liste_reservation", function(req,res){
+    res.render("gerant/liste_resa", {variable : "aled"});
 });
 
 app.get("/gerant/nouveaute", function(req,res){
-    res.render("nouveaute", {variable : "aled"});
+    res.render("gerant/nouveaute", {variable : "aled"});
 });
 
 app.get("/gerant/catalogue_produit", async function(req,res){
     let produits = await pool.query("SELECT * FROM produit");
-    res.render("catalogue_produit", {liste_produits : produits[0]});
+    res.render("gerant/catalogue_produit", {liste_produits : produits[0]});
 });
 
 app.get("/gerant/catalogue_categorie/:categorie", async function(req,res){
@@ -143,7 +170,7 @@ app.get("/gerant/catalogue_categorie/:categorie", async function(req,res){
 app.get('/gerant/produit/:id', async (req, res) => {
     const produitId = req.params.id;
     const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
-    res.render('produit', { produit : row[0]})
+    res.render('gerant/produit', { produit : row[0]})
 });
 
 
