@@ -24,8 +24,13 @@
     position: relative;
     margin-left: 4em;
 }
+
+.liste-categorie a{
+    transition:transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
 .liste-categorie a:hover {
-    opacity: 0.5;
+    opacity: 0.8;
+    transform:scale(1.05);
 }
 
 
@@ -44,6 +49,14 @@ h1{
 .liked-products-cont{
     display:flex;
     justify-content : space-evenly;
+}
+
+.liked-products-cont a{
+    transition:transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+.liked-products-cont a:hover {
+    opacity: 0.8;
+    transform:scale(1.05);
 }
 
 .liked-products{
@@ -92,4 +105,12 @@ a{
   border-radius: 5px;
   padding: 1%;
   border: none;
+}
+
+.categorie-lien{
+    transition: transform 0.3s ease-in-out;
+}
+
+.categorie-lien:hover{
+    transform:scale(1.05);
 }
