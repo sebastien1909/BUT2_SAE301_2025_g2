@@ -18,7 +18,7 @@
             <img src="/img/appareil.jpg" class="categorie-illu">
             <h4>Appareils</h4>
         </a>
-        <a href="catalogue_categorie/nutrition" class="illu-nutri">
+        <a href="catalogue_categorie/nutrition">
             <img src="/img/Nutrition.png" class="categorie-illu">
             <h4>Nutrition</h4>
         </a>
@@ -26,8 +26,6 @@
 
     <div class="liste-plus-aime">
         <h1>Les plus aimés</h1>
-    </div>
-
         <ul class="liked-products-cont">
             <% for (element of produits_aime){ %>
                 <a href="produit/<%= element.id %>">
@@ -45,5 +43,14 @@
                 </a>
             <% } %>
         </ul>
+    </div>
+
+    <div class="card_newsletter">
+        <p>Abonnez-vous à notre newsletter pour rester informés de nos évènements et collections.</p>
+        <div class="serch_newsletter">
+            <input type="text" name="search" id="search" placeholder="  Saisissez votre adresse mail">
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+    </div>
 
 <%- include("footer") %>

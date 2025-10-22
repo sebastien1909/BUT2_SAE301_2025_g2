@@ -1,0 +1,104 @@
+
+.navbar-reservation{
+    background-color: #454545;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15%;
+    margin-bottom: 50px;
+    color: white;
+}
+
+.navbar-reservation p:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+
+.backgound-reservation-produit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-liste-produit{
+    background-color: #454545;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    height: 400px;
+    color: white;
+    margin-bottom: 50px;
+}
+
+.image-reservation-produit{
+    width: 20%;
+}
+
+.image-reservation-produit img{
+    border-radius: 10px;
+    position: relative;
+    right: 80px;
+    width: 100%;
+}
+
+.card-reservation-produit{
+    width: 60%;
+}
+
+.titre-produit-reservation{
+    color: white;
+    font-size: 2em;
+    position: relative;
+    right: 310px;
+    margin-bottom: 60px;
+    font-weight: none;
+}
+
+.titre-reservation{
+    position: relative;
+    top: 55px;
+    font-size: 1.5em;
+}
+
+.bouton-reservation-annulation{
+    position: relative;
+    left: 420px;
+    transition: 0.2s ease;
+}
+
+.bouton-annulation:hover{
+    color: rgb(255, 255, 255);
+    transform: scale(1.05);
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.bouton-reservation:hover{
+    color: rgb(255, 255, 255);
+    transform: scale(1.05);
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.bouton-reservation{
+    background-color: #E3AE58;
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-family: "Jacques Francois", serif;
+    position: relative;
+    right: 40px;
+}
+
+.bouton-annulation{
+    background-color: #EE7070;
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-family: "Jacques Francois", serif;
+}
