@@ -90,8 +90,12 @@ app.get("/produit", function(req,res){
     res.render("produit", {variable : "aled"});
 });
 
-app.get("/autres_produits", function(req,res){
-    res.render("autres_produits", {variable : "aled"});
+app.get("/nutrition", function(req,res){
+    res.render("nutrition", {variable : "aled"});
+});
+
+app.get("/appareils_produits", function(req,res){
+    res.render("appareils_produits", {variable : "aled"});
 });
 
 app.get("/profil", function(req,res){

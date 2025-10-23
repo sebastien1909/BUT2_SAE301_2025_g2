@@ -5,34 +5,17 @@
     <div class="produit-background">
 
         <div class="card-produit">
-            <img src="<%=produit.image%>" alt="produit">
+            <img src="/img/produits/Prdt12.png" alt="produit">
         </div>
         <div class="elements-card-produit">
             <div class="retour-card-produit">
-                <a href="catalogue_categorie.ejs">Retourner en arrière</a>
+                <a href="catalogue_categorie">Retourner en arrière</a>
                 <i class="fa-solid fa-arrow-left" style="color: white;"></i>
             </div>
-            <h3><%=produit.marque%> <%=produit.modele%></h3>
-            <p><%=produit.prix_location%></p>
-            <p><%=produit.description%></p>
-
-            <!-- VETEMENTS -->
-            <h4>Choisir la taille</h4>
-                <div class="taille-produit">
-                    <div class="taille-produit-border">
-                        <p>S</p>
-                    </div>
-                    <div class="taille-produit-border">
-                        <p>M</p>
-                    </div>
-                    <div class="taille-produit-border">
-                        <p>L</p>
-                    </div>
-                    <div class="taille-produit-border">
-                        <p>XL</p>
-                    </div>
-                </div>
-
+                <h3><%=produit.marque%> <%=produit.modele%></h3>
+                <p><%=produit.prix_location%></p>
+                <p><%=produit.description%></p>
+                
             <button type="submit">Réserver ce produit</button>
 
         </div>
@@ -41,8 +24,12 @@
 
     <h1>Cela pourrait également vous plaire</h1>
 
+    <div class="voir-plus-produit-centre">
+        <button type="submit" class="voir-plus-produit">Voir plus</button>
+    </div>
 
-    <div class="produit-plaire-cont">
+
+        <div class="produit-plaire-cont">
         <% for (element of produit_plaire){ %>
             <div class="catalogue-produit-card">
                 <a href="produit/<%= element.id %>" class="lien-produit">
@@ -72,11 +59,13 @@
 
         </div>
 
-    <a href="/gerant/catalogue_produit">
+    <a href="/catalogue_produit">
         <div class="voir-plus-produit-centre">
             <button type="submit" class="voir-plus-produit">Voir plus</button>
         </div>
     </a>
+
+
 </body>
 
-<%- include("../footer") %>
+<%- include("footer") %>
