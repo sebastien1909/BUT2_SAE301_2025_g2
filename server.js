@@ -107,6 +107,7 @@ app.get("/appareils_produits", function(req,res){
 });
 
 app.get("/profil", function(req,res){
+    //mettre un if pour quand co l'icone connexion mène à profil
     res.render("profil", {variable : "aled"});
 });
 
