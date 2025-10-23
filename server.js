@@ -86,8 +86,16 @@ app.get("/paiement", function(req,res){
     res.render("paiement", {variable : "aled"});
 });
 
-app.get("/produit", function(req,res){
-    res.render("produit", {variable : "aled"});
+app.get('/produit/:id', async function(req, res) {
+    const produitId = req.params.id;
+    const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
+    const produit = row[0][0]
+    const type = produit.type
+    const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ?LIMIT 3", [type, produitId]);
+    res.render('produit', { 
+        produit : produit,
+        produit_plaire : produit_plaire[0]
+    })
 });
 
 app.get("/nutrition", function(req,res){
