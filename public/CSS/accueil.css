@@ -47,6 +47,7 @@ h1{
 }
 
 .liked-products-cont{
+    margin-top: 3%;
     display:flex;
     justify-content : space-evenly;
 }
