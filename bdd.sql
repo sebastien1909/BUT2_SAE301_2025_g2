@@ -155,7 +155,7 @@ INSERT INTO `utilisateur` (`id`, `login`, `password`, `nom`, `prenom`, `ddn`, `e
 (9, 'sconfrere', '81dc9bdb52d04dc20036dbd8313ed055', 'Sebabou', 'Troubadour', '0000-00-00', 'sconfrere6@gmail.com', 'client', 56, 2147483647, 0);
 COMMIT;
 
-
+DROP TABLE IF EXISTS `panier`;
 CREATE TABLE IF NOT EXISTS `panier` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_utilisateur` varchar(100) NOT NULL,
@@ -163,6 +163,7 @@ CREATE TABLE IF NOT EXISTS `panier` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS `favoris`;
 CREATE TABLE IF NOT EXISTS `favoris` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_utilisateur` varchar(100) NOT NULL,
@@ -171,14 +172,14 @@ CREATE TABLE IF NOT EXISTS `favoris` (
 ) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `panier` (`id`, `id_utilisateur`, `id_produit`) VALUES
-(1, 'jdupont', '17'),
-(2, 'jdupont', '39'),
-(3, 'lpetit', '28');
+(1, '1', '17'),
+(2, '1', '39'),
+(3, '4', '28');
 COMMIT;
 
 INSERT INTO `favoris` (`id`, `id_utilisateur`, `id_produit`) VALUES
-(1, 'jdupont', '40'),
-(2, 'sleclerc', '5');
+(1, '1', '40'),
+(2, '7', '5');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
