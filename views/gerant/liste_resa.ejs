@@ -32,50 +32,29 @@
     </div>
 
 
+    <div class="liste-reservation-cont">
 
+        <% for (element of liste_resa){ %>
+            <div class="backgound-reservation-produit">                      
+                        <% let marque = element.marque%>
+                        <% let modele =element.modele %>
+                        <% let prix = element.prix_location %>
+                        <% let image = element.image %>
+                        <img src="<%= image %>" class="catalogue-produit-img">
+                        <div class="catalogue-produit-info">
+                            <strong>
+                                <%= marque %> 
+                            </strong>
+                            <%= modele %>
 
-    <div class="backgound-reservation-produit">
-        <div class="background-liste-produit">
-            <div class="image-reservation-produit">
-                <img src="/img/produits/Prdt15.jpg" alt="image">
+                            <p class="catalogue-produit-prix">
+                                <%= prix %>
+                            </p>
+                        </div>
+                        
             </div>
+            <% } %>
 
-            <div class="card-reservation-produit">
-                <h1 class="titre-produit-reservation">Titre du produit</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur mi enim, malesuada sed volutpat quis, dictum in turpis. Vivamus volutpat, nunc in pellentesque gravida, elit velit egestas orci, sed tempus velit ex et sem. Sed sed pulvinar neque.</p>
-                    <p class="titre-reservation">59.99€</p>
-
-            <div class="bouton-reservation-annulation">
-                <button type="submit" class="bouton-reservation">Voir la réservation</button>
-                <button type="submit" class="bouton-annulation">Mettre fin à la réservation</button>
-            </div>
-            </div>
         </div>
-    </div>
-
-
-
-
-    <div class="backgound-reservation-produit">
-        <div class="background-liste-produit">
-            <div class="image-reservation-produit">
-                <img src="/img/produits/Prdt16.jpg" alt="image">
-            </div>
-
-            <div class="card-reservation-produit">
-                <h1 class="titre-produit-reservation">Titre du produit</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur mi enim, malesuada sed volutpat quis, dictum in turpis. Vivamus volutpat, nunc in pellentesque gravida, elit velit egestas orci, sed tempus velit ex et sem. Sed sed pulvinar neque.</p>
-                    <p class="titre-reservation">59.99€</p>
-
-            <div class="bouton-reservation-annulation">
-                <button type="submit" class="bouton-reservation">Voir la réservation</button>
-                <button type="submit" class="bouton-annulation">Mettre fin à la réservation</button>
-            </div>
-            </div>
-        </div>
-    </div>
-
-
-</body>
 
 <%- include("../footer") %>

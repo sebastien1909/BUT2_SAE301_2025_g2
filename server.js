@@ -176,8 +176,9 @@ app.get("/gerant/check_reservation", function(req,res){
     res.render("gerant/check_reservation", {variable : "aled"});
 });
 
-app.get("/gerant/liste_reservation", function(req,res){
-    res.render("gerant/liste_resa", {variable : "aled"});
+app.get("/gerant/liste_reservation", async function(req,res){
+    const liste_reservation = await pool.query("SELECT produit.marque, produit.modele, produit.image, location.date_debut, location.date_retour_prevue, location.id, location.prix_total, location.date_retour_effective, utilisateur.login, utilisateur.email FROM produit NATURAL JOIN location LEFT JOIN utilisateur ON (utilisateur.id = location.utilisateur_id) WHERE location.date_retour_effective is null")
+    res.render("gerant/liste_resa", {liste_resa :liste_reservation});
 });
 
 app.get("/gerant/nouveaute", function(req,res){
