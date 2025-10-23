@@ -90,6 +90,10 @@ app.get("/produit", function(req,res){
     res.render("produit", {variable : "aled"});
 });
 
+app.get("/autres_produits", function(req,res){
+    res.render("autres_produits", {variable : "aled"});
+});
+
 app.get("/profil", function(req,res){
     res.render("profil", {variable : "aled"});
 });
