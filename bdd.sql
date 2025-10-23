@@ -1,81 +1,160 @@
-INSERT INTO `produit` (`type`, `description`, `marque`, `modele`, `prix_location`, `etat`) VALUES
--- 🧥 VETEMENTS
-('vetements', 'Veste coupe-vent imperméable pour la randonnée', 'Quechua', 'MH100', 6.99, 'bon état'),
-('vetements', 'Pantalon de ski chaud et respirant', 'Wedze', 'SKI 500', 7.99, 'très bon état'),
-('vetements', 'T-shirt technique anti-transpiration', 'Nike', 'Dri-Fit Pro', 3.49, 'neuf'),
-('vetements', 'Veste de running réfléchissante', 'Kalenji', 'Run Light', 5.99, 'bon état'),
-('vetements', 'Combinaison de plongée 3mm', 'Cressi', 'Morea', 9.99, 'état moyen'),
-('vetements', 'Gants de vélo respirants', 'Giro', 'Jag', 2.49, 'bon état'),
-('vetements', 'Casquette de sport ajustable', 'Adidas', 'AEROREADY', 1.99, 'très bon état'),
-('vetements', 'Veste de cyclisme coupe-vent', 'Btwin', 'RC 500', 4.99, 'bon état'),
-('vetements', 'Maillot de foot officiel', 'Puma', 'UltraDry 2025', 5.49, 'bon état'),
-('vetements', 'Chaussettes de compression pour running', 'Compressport', 'Pro Racing v3', 2.99, 'neuf'),
-('vetements', 'Veste softshell coupe-froid', 'Columbia', 'Windbreaker Pro', 6.49, 'bon état'),
-('vetements', 'T-shirt de sport respirant unisexe', 'Domyos', 'Essential 100', 2.49, 'bon état'),
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le : jeu. 23 oct. 2025 à 06:14
+-- Version du serveur : 9.1.0
+-- Version de PHP : 8.3.14
 
--- 🧃 NUTRITION
-('nutrition', 'Pack de barres protéinées au chocolat', 'MyProtein', 'Bar Max', 3.99, 'neuf'),
-('nutrition', 'Boisson isotonique citron en poudre 500g', 'Isostar', 'Hydrate & Perform', 4.49, 'neuf'),
-('nutrition', 'Complément BCAA pour la récupération musculaire', 'Optimum Nutrition', 'BCAA 5000', 6.99, 'neuf'),
-('nutrition', 'Gels énergétiques goût fruits rouges (pack x5)', 'PowerBar', 'Energy Gel', 5.99, 'neuf'),
-('nutrition', 'Shaker de sport gradué 700ml', 'Decathlon', 'Shaker 700', 1.49, 'très bon état'),
-('nutrition', 'Protéine Whey saveur vanille 1kg', 'Scitec Nutrition', '100% Whey Protein', 8.99, 'neuf'),
-('nutrition', 'Barres de céréales bio pour sportifs', 'Iswari', 'Raw Energy', 3.49, 'bon état'),
-('nutrition', 'Gourde isotherme en inox 1L', 'Hydro Flask', 'Sport Steel', 2.99, 'très bon état'),
-('nutrition', 'Boîte de compléments multivitaminés', 'Nutrimuscle', 'MultiVits', 6.49, 'neuf'),
-('nutrition', 'Pack de boissons énergisantes sans sucre', 'Red Bull', 'Zero Power 6x250ml', 5.99, 'bon état'),
-
--- 🏋️‍♂️ APPAREILS
-('appareils', 'Tapis de course connecté avec capteurs cardiaques', 'ProForm', 'Carbon T7', 84.99, 'bon état'),
-('appareils', 'Vélo d’appartement magnétique', 'Domyos', 'EB500', 59.99, 'bon état'),
-('appareils', 'Rameur pliable avec résistance magnétique', 'SportPlus', 'SP-MSP-008', 49.99, 'état moyen'),
-('appareils', 'Vélo elliptique connecté Bluetooth', 'NordicTrack', 'E7.5', 64.99, 'très bon état'),
-('appareils', 'Stepper compact avec bandes élastiques', 'Ultrasport', 'Up Down Stepper', 22.99, 'bon état'),
-('appareils', 'Banc de musculation inclinable avec support haltères', 'Care Fitness', 'Pro Bench 300', 26.99, 'bon état'),
-('appareils', 'Station de traction murale renforcée', 'Domyos', 'Pull Up Bar 900', 19.99, 'très bon état'),
-('appareils', 'Roue abdominale double avec tapis genouillère', 'Domyos', 'Ab Wheel 100', 5.49, 'neuf'),
-('appareils', 'Mini vélo de rééducation pour bras et jambes', 'Reeducare', 'MiniBike 100', 12.99, 'bon état'),
-('appareils', 'Multigym complet pour exercices à domicile', 'Marcy', 'MKM-81010', 69.99, 'bon état'),
-('appareils', 'Vélo spinning professionnel à résistance magnétique', 'BH Fitness', 'SB3.0', 72.99, 'très bon état'),
-('appareils', 'Tapis de marche pliable silencieux', 'Reebok', 'Jet 100', 74.99, 'bon état'),
-
--- 🛠️ ÉQUIPEMENT
-('équipement', 'Casque de vélo réglable avec visière', 'Giro', 'Register', 3.99, 'très bon état'),
-('équipement', 'Sac de sport étanche 50L', 'Adidas', 'Tiro Duffel', 4.99, 'bon état'),
-('équipement', 'Sac à dos de randonnée 30L', 'Quechua', 'MH500', 6.99, 'bon état'),
-('équipement', 'Tapis de yoga antidérapant 6mm', 'Domyos', 'Comfort 6', 3.99, 'bon état'),
-('équipement', 'Lunettes de natation anti-buée', 'Speedo', 'Futura Biofuse', 1.99, 'bon état'),
-('équipement', 'Ceinture porte-bouteilles pour running', 'Kalenji', 'Run 500', 2.99, 'neuf'),
-('équipement', 'Gants de musculation rembourrés', 'Reebok', 'Grip Pro', 2.49, 'état moyen'),
-('équipement', 'Raquette de tennis en graphite', 'Babolat', 'Pure Drive', 8.99, 'très bon état'),
-('équipement', 'Raquette de badminton légère', 'Yonex', 'Astrox 77', 6.99, 'bon état'),
-('équipement', 'Raquette de padel avec grip ergonomique', 'Head', 'Graphene 360 Alpha', 10.99, 'bon état'),
-('équipement', 'Planche de surf en mousse pour débutants', 'Olaian', '500 Softboard', 29.99, 'état moyen'),
-('équipement', 'Skateboard complet en érable', 'Oxelo', 'Mid 500', 12.99, 'bon état'),
-('équipement', 'Stand up paddle gonflable avec pompe', 'Itwit', 'SUP 11', 34.99, 'bon état'),
-('équipement', 'Bodyboard avec leash inclus', 'Tribord', '500 Dynamique', 8.99, 'bon état');
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Base de données : `sae301`
+--
 
-INSERT INTO `location` ( `date_debut`, `date_retour_prevue`, `date_retour_effective`, `prix_total`, `utilisateur_id`, `produit_id`) VALUES
--- ✅ Locations terminées (retour effectué)
-( '2025-01-15', '2025-01-20', '2025-01-20', 6.99, 1, 1),
-( '2025-02-10', '2025-02-15', '2025-02-14', 6.49, 2, 11),
-( '2025-03-01', '2025-03-06', '2025-03-06', 2.99, 3, 10),
-( '2025-03-15', '2025-03-20', '2025-03-19', 19.99, 4, 18),
-( '2025-04-01', '2025-04-05', '2025-04-04', 3.49, 5, 20),
+-- --------------------------------------------------------
 
--- ⏳ Locations en cours (date_debut passée, pas encore rendues)
-( '2025-10-10', '2025-10-17', NULL, 59.99, 1, 24),
-( '2025-10-12', '2025-10-19', NULL, 22.99, 2, 27),
-( '2025-10-13', '2025-10-18', NULL, 5.49, 3, 30),
-( '2025-10-05', '2025-10-15', NULL, 74.99, 4, 34),
-( '2025-10-01', '2025-10-14', NULL, 4.99, 5, 36),
+--
+-- Structure de la table `location`
+--
 
--- 🕒 Locations à venir (non commencées)
-( '2025-10-20', '2025-10-25', NULL, 3.99, 1, 40),
-( '2025-10-22', '2025-10-28', NULL, 10.99, 2, 44),
-( '2025-11-01', '2025-11-05', NULL, 5.49, 3, 46),
-( '2025-11-10', '2025-11-15', NULL, 8.99, 4, 50),
-( '2025-12-01', '2025-12-07', NULL, 10.99, 5, 52);
+DROP TABLE IF EXISTS `location`;
+CREATE TABLE IF NOT EXISTS `location` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `date_debut` date NOT NULL,
+  `date_retour_prevue` date NOT NULL,
+  `date_retour_effective` date DEFAULT NULL,
+  `prix_total` float DEFAULT NULL,
+  `utilisateur_id` int NOT NULL,
+  `produit_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `utilisateur_id` (`utilisateur_id`),
+  KEY `produit_id` (`produit_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `produit`
+--
+
+DROP TABLE IF EXISTS `produit`;
+CREATE TABLE IF NOT EXISTS `produit` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `type` varchar(100) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `marque` varchar(100) NOT NULL,
+  `modele` varchar(100) NOT NULL,
+  `prix_location` float NOT NULL,
+  `etat` varchar(20) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `note` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `produit`
+--
+
+INSERT INTO `produit` (`id`, `type`, `description`, `marque`, `modele`, `prix_location`, `etat`, `image`, `note`) VALUES
+(1, 'vetements', 'Veste coupe-vent imperméable pour la randonnée', 'Quechua', 'MH100', 6.99, 'bon état', '/img/produits/Prdt1.jpg', 4),
+(2, 'vetements', 'Pantalon de ski chaud et respirant', 'Wedze', 'SKI 500', 7.99, 'très bon état', '/img/produits/Prdt2.jpg', 3),
+(3, 'vetements', 'T-shirt technique anti-transpiration', 'Nike', 'Dri-Fit Pro', 3.49, 'neuf', '/img/produits/Prdt3.jpg', 4),
+(4, 'vetements', 'Veste de running réfléchissante', 'Kalenji', 'Run Light', 5.99, 'bon état', '/img/produits/Prdt4.jpg', 4),
+(5, 'vetements', 'Combinaison de plongée 3mm', 'Cressi', 'Morea', 9.99, 'état moyen', '/img/produits/Prdt5.jpg', 3),
+(6, 'vetements', 'Gants de vélo respirants', 'Giro', 'Jag', 2.49, 'bon état', '/img/produits/Prdt6.jpg', 4),
+(7, 'vetements', 'Casquette de sport ajustable', 'Adidas', 'AEROREADY', 1.99, 'très bon état', '/img/produits/Prdt7.jpg', 3),
+(8, 'vetements', 'Veste de cyclisme coupe-vent', 'Btwin', 'RC 500', 4.99, 'bon état', '/img/produits/Prdt8.jpg', 4),
+(9, 'vetements', 'Maillot de foot officiel', 'Puma', 'UltraDry 2025', 5.49, 'bon état', '/img/produits/Prdt9.jpg', 5),
+(10, 'vetements', 'Chaussettes de compression pour running', 'Compressport', 'Pro Racing v3', 2.99, 'neuf', '/img/produits/Prdt10.jpg', 4),
+(11, 'vetements', 'Veste softshell coupe-froid', 'Columbia', 'Windbreaker Pro', 6.49, 'bon état', '/img/produits/Prdt11.jpg', 3),
+(12, 'vetements', 'T-shirt de sport respirant unisexe', 'Domyos', 'Essential 100', 2.49, 'bon état', '/img/produits/Prdt12.jpg', 4),
+(13, 'nutrition', 'Pack de barres protéinées au chocolat', 'MyProtein', 'Bar Max', 3.99, 'neuf', '/img/produits/Prdt13.jpg', 3),
+(14, 'nutrition', 'Boisson isotonique citron en poudre 500g', 'Isostar', 'Hydrate & Perform', 4.49, 'neuf', '/img/produits/Prdt14.jpg', 4),
+(15, 'nutrition', 'Complément BCAA pour la récupération musculaire', 'Optimum Nutrition', 'BCAA 5000', 6.99, 'neuf', '/img/produits/Prdt15.jpg', 4),
+(16, 'nutrition', 'Gels énergétiques goût fruits rouges (pack x5)', 'PowerBar', 'Energy Gel', 5.99, 'neuf', '/img/produits/Prdt16.jpg', 5),
+(17, 'nutrition', 'Shaker de sport gradué 700ml', 'Decathlon', 'Shaker 700', 1.49, 'très bon état', '/img/produits/Prdt17.jpg', 4),
+(18, 'nutrition', 'Protéine Whey saveur vanille 1kg', 'Scitec Nutrition', '100% Whey Protein', 8.99, 'neuf', '/img/produits/Prdt18.jpg', 3),
+(19, 'nutrition', 'Barres de céréales bio pour sportifs', 'Iswari', 'Raw Energy', 3.49, 'bon état', '/img/produits/Prdt19.jpg', 4),
+(20, 'nutrition', 'Gourde isotherme en inox 1L', 'Hydro Flask', 'Sport Steel', 2.99, 'très bon état', '/img/produits/Prdt20.jpg', 3),
+(21, 'nutrition', 'Boîte de compléments multivitaminés', 'Nutrimuscle', 'MultiVits', 6.49, 'neuf', '/img/produits/Prdt21.jpg', 4),
+(22, 'nutrition', 'Pack de boissons énergisantes sans sucre', 'Red Bull', 'Zero Power 6x250ml', 5.99, 'bon état', '/img/produits/Prdt22.jpg', 4),
+(23, 'appareils', 'Tapis de course connecté avec capteurs cardiaques', 'ProForm', 'Carbon T7', 84.99, 'bon état', '/img/produits/Prdt23.jpg', 3),
+(24, 'appareils', 'Vélo d’appartement magnétique', 'Domyos', 'EB500', 59.99, 'bon état', '/img/produits/Prdt24.jpg', 5),
+(25, 'appareils', 'Rameur pliable avec résistance magnétique', 'SportPlus', 'SP-MSP-008', 49.99, 'état moyen', '/img/produits/Prdt25.jpg', 4),
+(26, 'appareils', 'Vélo elliptique connecté Bluetooth', 'NordicTrack', 'E7.5', 64.99, 'très bon état', '/img/produits/Prdt26.jpg', 3),
+(27, 'appareils', 'Stepper compact avec bandes élastiques', 'Ultrasport', 'Up Down Stepper', 22.99, 'bon état', '/img/produits/Prdt27.jpg', 4),
+(28, 'appareils', 'Banc de musculation inclinable avec support haltères', 'Care Fitness', 'Pro Bench 300', 26.99, 'bon état', '/img/produits/Prdt28.jpg', 4),
+(29, 'appareils', 'Station de traction murale renforcée', 'Domyos', 'Pull Up Bar 900', 19.99, 'très bon état', '/img/produits/Prdt29.jpg', 5),
+(30, 'appareils', 'Roue abdominale double avec tapis genouillère', 'Domyos', 'Ab Wheel 100', 5.49, 'neuf', '/img/produits/Prdt30.jpg', 3),
+(31, 'appareils', 'Mini vélo de rééducation pour bras et jambes', 'Reeducare', 'MiniBike 100', 12.99, 'bon état', '/img/produits/Prdt31.jpg', 4),
+(32, 'appareils', 'Multigym complet pour exercices à domicile', 'Marcy', 'MKM-81010', 69.99, 'bon état', '/img/produits/Prdt32.jpg', 4),
+(33, 'appareils', 'Vélo spinning professionnel à résistance magnétique', 'BH Fitness', 'SB3.0', 72.99, 'très bon état', '/img/produits/Prdt33.jpg', 3),
+(34, 'appareils', 'Tapis de marche pliable silencieux', 'Reebok', 'Jet 100', 74.99, 'bon état', '/img/produits/Prdt34.jpg', 4),
+(35, 'équipement', 'Casque de vélo réglable avec visière', 'Giro', 'Register', 3.99, 'très bon état', '/img/produits/Prdt35.jpg', 2),
+(36, 'équipement', 'Sac de sport étanche 50L', 'Adidas', 'Tiro Duffel', 4.99, 'bon état', '/img/produits/Prdt36.jpg', 4),
+(37, 'équipement', 'Sac à dos de randonnée 30L', 'Quechua', 'MH500', 6.99, 'bon état', '/img/produits/Prdt37.jpg', 4),
+(38, 'équipement', 'Tapis de yoga antidérapant 6mm', 'Domyos', 'Comfort 6', 3.99, 'bon état', '/img/produits/Prdt38.jpg', 3),
+(39, 'équipement', 'Lunettes de natation anti-buée', 'Speedo', 'Futura Biofuse', 1.99, 'bon état', '/img/produits/Prdt39.jpg', 5),
+(40, 'équipement', 'Ceinture porte-bouteilles pour running', 'Kalenji', 'Run 500', 2.99, 'neuf', '/img/produits/Prdt40.jpg', 4),
+(41, 'équipement', 'Gants de musculation rembourrés', 'Reebok', 'Grip Pro', 2.49, 'état moyen', '/img/produits/Prdt41.jpg', 3),
+(42, 'équipement', 'Raquette de tennis en graphite', 'Babolat', 'Pure Drive', 8.99, 'très bon état', '/img/produits/Prdt42.jpg', 4),
+(43, 'équipement', 'Raquette de badminton légère', 'Yonex', 'Astrox 77', 6.99, 'bon état', '/img/produits/Prdt43.jpg', 3),
+(44, 'équipement', 'Raquette de padel avec grip ergonomique', 'Head', 'Graphene 360 Alpha', 10.99, 'bon état', '/img/produits/Prdt44.jpg', 4),
+(45, 'équipement', 'Planche de surf en mousse pour débutants', 'Olaian', '500 Softboard', 29.99, 'état moyen', '/img/produits/Prdt45.jpg', 5),
+(46, 'équipement', 'Skateboard complet en érable', 'Oxelo', 'Mid 500', 12.99, 'bon état', '/img/produits/Prdt46.jpg', 3),
+(47, 'équipement', 'Stand up paddle gonflable avec pompe', 'Itwit', 'SUP 11', 34.99, 'bon état', '/img/produits/Prdt47.jpg', 4),
+(48, 'équipement', 'Bodyboard avec leash inclus', 'Tribord', '500 Dynamique', 8.99, 'bon état', '/img/produits/Prdt48.jpg', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateur`
+--
+
+DROP TABLE IF EXISTS `utilisateur`;
+CREATE TABLE IF NOT EXISTS `utilisateur` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `login` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `prenom` varchar(50) NOT NULL,
+  `ddn` date NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `type_utilisateur` varchar(10) NOT NULL,
+  `age` int DEFAULT NULL,
+  `téléphone` int DEFAULT NULL,
+  `newsletter` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `login` (`login`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`id`, `login`, `password`, `nom`, `prenom`, `ddn`, `email`, `type_utilisateur`, `age`, `téléphone`, `newsletter`) VALUES
+(1, 'jdupont', '81dc9bdb52d04dc20036dbd8313ed055', 'Dupont', 'Jean', '1990-05-12', 'jdupont@example.com', 'client', NULL, NULL, NULL),
+(2, 'sleclerc', '81dc9bdb52d04dc20036dbd8313ed055', 'Leclerc', 'Sophie', '1985-09-21', 'sleclerc@example.com', 'client', NULL, NULL, NULL),
+(3, 'plefebvre', '81dc9bdb52d04dc20036dbd8313ed055', 'Lefebvre', 'Pierre', '1988-12-05', 'plefebvre@example.com', 'client', NULL, NULL, NULL),
+(4, 'mleroy', '81dc9bdb52d04dc20036dbd8313ed055', 'Leroy', 'Marie', '1995-07-18', 'mleroy@example.com', 'client', NULL, NULL, NULL),
+(5, 'amartin', '81dc9bdb52d04dc20036dbd8313ed055', 'Martin', 'Alex', '1982-03-28', 'amartin@example.com', 'agent', NULL, NULL, NULL),
+(6, 'lpetit', '81dc9bdb52d04dc20036dbd8313ed055', 'Petit', 'Laura', '1989-11-15', 'lpetit@example.com', 'agent', NULL, NULL, NULL),
+(7, 'adufrene', '81dc9bdb52d04dc20036dbd8313ed055', 'Dufrène', 'Alice', '1975-01-01', 'adufrene@example.com', 'admin', NULL, NULL, NULL),
+(8, 'test', '81dc9bdb52d04dc20036dbd8313ed055', 'Confrere', 'Sébastien', '0000-00-00', 'sconfrere@gmail.com', 'client', NULL, NULL, NULL),
+(9, 'sconfrere', '81dc9bdb52d04dc20036dbd8313ed055', 'Sebabou', 'Troubadour', '0000-00-00', 'sconfrere6@gmail.com', 'client', 56, 2147483647, 0);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
