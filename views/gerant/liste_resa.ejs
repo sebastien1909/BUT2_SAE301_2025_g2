@@ -23,10 +23,10 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur mi enim, malesuada sed volutpat quis, dictum in turpis. Vivamus volutpat, nunc in pellentesque gravida, elit velit egestas orci, sed tempus velit ex et sem. Sed sed pulvinar neque.</p>
                     <p class="titre-reservation">59.99€</p>
 
-            <div class="bouton-reservation-annulation">
-                <button type="submit" class="bouton-reservation">Voir la réservation</button>
-                <button type="submit" class="bouton-annulation">Mettre fin à la réservation</button>
-            </div>
+                <div class="bouton-reservation-annulation">
+                    <button type="submit" class="bouton-reservation">Voir la réservation</button>
+                    <button type="submit" class="bouton-annulation">Mettre fin à la réservation</button>
+                </div>
             </div>
         </div>
     </div>
@@ -35,23 +35,57 @@
     <div class="liste-reservation-cont">
 
         <% for (element of liste_resa){ %>
-            <div class="backgound-reservation-produit">                      
+            <div class="backgound-reservation-produit">
+                <div class="background-liste-produit">                      
                         <% let marque = element.marque%>
                         <% let modele =element.modele %>
-                        <% let prix = element.prix_location %>
+                        <% let nom = marque + " " + modele%>
+                        <% let desc = element.description%>
+                        <% let prix = element.prix_total %>
                         <% let image = element.image %>
-                        <img src="<%= image %>" class="catalogue-produit-img">
-                        <div class="catalogue-produit-info">
-                            <strong>
-                                <%= marque %> 
-                            </strong>
-                            <%= modele %>
+                        <% let date_retour = element.date_retour_effective %>
+                        <% let login = element.login %>
+                        <% let mail = element.email %>
 
-                            <p class="catalogue-produit-prix">
-                                <%= prix %>
-                            </p>
-                        </div>
                         
+                        <% const date_fin = new Date(element.date_retour_prevue); 
+                            const jour_fin = String(date_fin.getDate()).padStart(2, '0');
+                            const mois_fin = String(date_fin.getMonth() + 1).padStart(2, '0');
+                            const annee_fin = date_fin.getFullYear();
+                        %>
+
+
+
+                        <% const date_debut = new Date(element.date_debut); 
+                            const jour_debut = String(date_debut.getDate()).padStart(2, '0');
+                            const mois_debut = String(date_debut.getMonth() + 1).padStart(2, '0');
+                            const annee_debut = date_debut.getFullYear();
+                        %>
+                        
+                        <div class="image-reservation-produit">
+                            <img src="<%= image %>" class="catalogue-produit-img">
+                        </div>
+                        <div class="card-reservation-produit">
+                            <h1 class="titre-produit-reservation"><%= nom %></h1>
+                                <p> Réservation effectuée par <%=login%></p>
+                                <p> Adresse mail de l'utilisateur : <%=mail%></p>
+                                <p><%= desc %></p>
+                                <p class="titre-reservation"><%=prix%>€</p>
+                                <ul>
+                                    <li>
+                                        Début de réservation :  <%= `${jour_debut}-${mois_debut}-${annee_debut}` %>
+                                    </li>
+                                    <li>
+                                        fin de réservation prévue :  <%= `${jour_fin}-${mois_fin}-${annee_fin}` %>
+                                    </li>
+                                </ul>
+
+                            <div class="bouton-reservation-annulation">
+                                <button type="submit" class="bouton-reservation">Voir la réservation</button>
+                                <button type="submit" class="bouton-annulation">Mettre fin à la réservation</button>
+                            </div>
+                        </div>
+                    </div>
             </div>
             <% } %>
 

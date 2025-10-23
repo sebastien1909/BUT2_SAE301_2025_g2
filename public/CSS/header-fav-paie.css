@@ -147,25 +147,28 @@ header {
   padding: 0.5em;
 }
 
-
+body, p, h1, h2, h3, h4, a, button {
+  font-family: "Jacques Francois", serif;
+}
 
 
 /* favoris */
 .favoris {
-  padding: 2%;
+  padding: 3%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .card_favoris_gris {
   background-color: #454545;
   padding: 1%;
   color: white;
-  width: 70%;
+  width: 80%;
   height: fit-content;
   margin: 1em;
   display: flex;
   gap: 2%;
+  align-self: center;
 }
 .card_favoris_yellow {
   background-color: #E3AE58;

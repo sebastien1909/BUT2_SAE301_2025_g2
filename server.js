@@ -45,7 +45,7 @@ function authenticate(req,res,next) {
         next();
     }
     else {
-        res.status(403).redirect("login")
+        res.status(403).redirect("connexion")
     }
 }
 
@@ -123,6 +123,7 @@ app.get('/appareils_equipements/:id', async function(req, res) {
 });
 
 app.get("/profil", function(req,res){
+    //mettre un if pour quand co l'icone connexion mène à profil
     res.render("profil", {variable : "aled"});
 });
 
@@ -150,7 +151,7 @@ app.post("/connexion", async function(req,res){
     // recup info de connexion
     let username = req.body.login;
     let password = req.body.mdp;
-    let hashedPassword = crypto.createHash('SHA-512').update(password).digest('hex');
+    let hashedPassword = crypto.createHash('md5').update(password).digest('hex');
 
     let result = await pool.query (
         "SELECT * FROM utilisateur WHERE login = ? AND password = ?",
@@ -161,15 +162,13 @@ app.post("/connexion", async function(req,res){
     if (result [0].length > 0){
         req.session.userRole = result[0][0].role;
         req.session.userID = result[0][0].id;
-        res.redirect("index");
+        res.redirect("/");
     }
     //si c'est le cas : on recup le rôle + on initialise une session + redirection page accueil
     else {
         res.render("connexion", {message : "Nom d'utilisateur ou mot de passe incorrect"});
     }
     //sinon : message d'erreur + redirection page connexion
-
-    res.render("connexion", {variable : "aled"});
 });
 
 
@@ -205,8 +204,8 @@ app.get("/gerant/check_reservation", function(req,res){
 });
 
 app.get("/gerant/liste_reservation", async function(req,res){
-    const liste_reservation = await pool.query("SELECT produit.marque, produit.modele, produit.image, location.date_debut, location.date_retour_prevue, location.id, location.prix_total, location.date_retour_effective, utilisateur.login, utilisateur.email FROM produit NATURAL JOIN location LEFT JOIN utilisateur ON (utilisateur.id = location.utilisateur_id) WHERE location.date_retour_effective is null")
-    res.render("gerant/liste_resa", {liste_resa :liste_reservation});
+    const liste_reservation = await pool.query("SELECT produit.description, produit.marque, produit.modele, produit.image, location.date_debut, location.date_retour_prevue, location.id, location.prix_total, location.date_retour_effective, utilisateur.login, utilisateur.email FROM produit NATURAL JOIN location LEFT JOIN utilisateur ON (utilisateur.id = location.utilisateur_id) WHERE location.date_retour_effective is null")
+    res.render("gerant/liste_resa", {liste_resa :liste_reservation[0]});
 });
 
 app.get("/gerant/nouveaute", function(req,res){
