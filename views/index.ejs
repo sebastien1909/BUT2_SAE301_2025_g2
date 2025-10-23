@@ -30,9 +30,9 @@
             <% for (element of produits_aime){ %>
                 <a href="produit/<%= element.id %>">
                     <li class="liked-products">
-                        
-                        <% let nom_produit = element.marque + element.modele %>
-                        <img src="/img/<%= (element.marque + element.modele).toLowerCase() %>.jpg" class="liked-img">
+                        <% let illustration = element.image %>
+                        <% let nom_produit = element.marque + " " + element.modele %>
+                        <img src="<%= illustration.toLowerCase() %>" class="liked-img">
                         <strong>
                             <%= element.marque %> 
                             <br>
@@ -43,6 +43,7 @@
                 </a>
             <% } %>
         </ul>
+
     </div>
 
     <div class="card_newsletter">

@@ -45,7 +45,7 @@ function authenticate(req,res,next) {
         next();
     }
     else {
-        res.status(403).redirect("login")
+        res.status(403).redirect("connexion")
     }
 }
 
@@ -86,8 +86,16 @@ app.get("/paiement", function(req,res){
     res.render("paiement", {variable : "aled"});
 });
 
-app.get("/produit", function(req,res){
-    res.render("produit", {variable : "aled"});
+app.get('/produit/:id', async function(req, res) {
+    const produitId = req.params.id;
+    const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
+    const produit = row[0][0]
+    const type = produit.type
+    const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ?LIMIT 3", [type, produitId]);
+    res.render('produit', { 
+        produit : produit,
+        produit_plaire : produit_plaire[0]
+    })
 });
 
 app.get("/nutrition", function(req,res){
@@ -99,6 +107,7 @@ app.get("/appareils_produits", function(req,res){
 });
 
 app.get("/profil", function(req,res){
+    //mettre un if pour quand co l'icone connexion mène à profil
     res.render("profil", {variable : "aled"});
 });
 
@@ -126,7 +135,7 @@ app.post("/connexion", async function(req,res){
     // recup info de connexion
     let username = req.body.login;
     let password = req.body.mdp;
-    let hashedPassword = crypto.createHash('SHA-512').update(password).digest('hex');
+    let hashedPassword = crypto.createHash('md5').update(password).digest('hex');
 
     let result = await pool.query (
         "SELECT * FROM utilisateur WHERE login = ? AND password = ?",
@@ -137,15 +146,13 @@ app.post("/connexion", async function(req,res){
     if (result [0].length > 0){
         req.session.userRole = result[0][0].role;
         req.session.userID = result[0][0].id;
-        res.redirect("index");
+        res.redirect("/");
     }
     //si c'est le cas : on recup le rôle + on initialise une session + redirection page accueil
     else {
         res.render("connexion", {message : "Nom d'utilisateur ou mot de passe incorrect"});
     }
     //sinon : message d'erreur + redirection page connexion
-
-    res.render("connexion", {variable : "aled"});
 });
 
 

@@ -46,13 +46,14 @@
     justify-content:space-between;
 }
 
-h1{
+.tous_produits h1{
     margin-top:5%;
     color:black;
-    margin-left:8%;
+    text-align: left;
+    margin-left: 5%;
 }
 
-h5{
+.tous_produits h5{
     margin-left:5%;
     margin-bottom:6%;
 }
