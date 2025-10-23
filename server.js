@@ -98,12 +98,28 @@ app.get('/produit/:id', async function(req, res) {
     })
 });
 
-app.get("/nutrition", function(req,res){
-    res.render("nutrition", {variable : "aled"});
+app.get('/nutrition/:id', async function(req, res) {
+    const produitId = req.params.id;
+    const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
+    const produit = row[0][0]
+    const type = produit.type
+    const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ?LIMIT 3", [type, produitId]);
+    res.render('nutrition', { 
+        produit : produit,
+        produit_plaire : produit_plaire[0]
+    })
 });
 
-app.get("/appareils_produits", function(req,res){
-    res.render("appareils_produits", {variable : "aled"});
+app.get('/appareils_equipements/:id', async function(req, res) {
+    const produitId = req.params.id;
+    const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
+    const produit = row[0][0]
+    const type = produit.type
+    const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ?LIMIT 3", [type, produitId]);
+    res.render('appareils_equipements', { 
+        produit : produit,
+        produit_plaire : produit_plaire[0]
+    })
 });
 
 app.get("/profil", function(req,res){

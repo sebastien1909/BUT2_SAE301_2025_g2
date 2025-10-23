@@ -5,31 +5,31 @@
     <div class="produit-background">
 
         <div class="card-produit">
-            <img src="/img/produits/Prdt12.png" alt="produit">
+            <img src="<%=produit.image%>" alt="produit">
         </div>
         <div class="elements-card-produit">
             <div class="retour-card-produit">
-                <a href="catalogue_categorie">Retourner en arrière</a>
+                <a href="catalogue_categorie.ejs">Retourner en arrière</a>
                 <i class="fa-solid fa-arrow-left" style="color: white;"></i>
             </div>
+
+            <div class="infos-produits">
                 <h3><%=produit.marque%> <%=produit.modele%></h3>
                 <p><%=produit.prix_location%></p>
                 <p><%=produit.description%></p>
-                
+            </div>
+
+
             <button type="submit">Réserver ce produit</button>
 
         </div>
 
     </div>
 
-    <h1>Cela pourrait également vous plaire</h1>
-
-    <div class="voir-plus-produit-centre">
-        <button type="submit" class="voir-plus-produit">Voir plus</button>
-    </div>
+    <h1 class="titre-plaire">Cela pourrait également vous plaire</h1>
 
 
-        <div class="produit-plaire-cont">
+    <div class="produit-plaire-cont">
         <% for (element of produit_plaire){ %>
             <div class="catalogue-produit-card">
                 <a href="produit/<%= element.id %>" class="lien-produit">
@@ -64,8 +64,6 @@
             <button type="submit" class="voir-plus-produit">Voir plus</button>
         </div>
     </a>
-
-
 </body>
 
 <%- include("footer") %>
