@@ -155,6 +155,32 @@ INSERT INTO `utilisateur` (`id`, `login`, `password`, `nom`, `prenom`, `ddn`, `e
 (9, 'sconfrere', '81dc9bdb52d04dc20036dbd8313ed055', 'Sebabou', 'Troubadour', '0000-00-00', 'sconfrere6@gmail.com', 'client', 56, 2147483647, 0);
 COMMIT;
 
+
+CREATE TABLE IF NOT EXISTS `panier` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_utilisateur` varchar(100) NOT NULL,
+  `id_produit` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE IF NOT EXISTS `favoris` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_utilisateur` varchar(100) NOT NULL,
+  `id_produit` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `panier` (`id`, `id_utilisateur`, `id_produit`) VALUES
+(1, 'jdupont', '17'),
+(2, 'jdupont', '39'),
+(3, 'lpetit', '28');
+COMMIT;
+
+INSERT INTO `favoris` (`id`, `id_utilisateur`, `id_produit`) VALUES
+(1, 'jdupont', '40'),
+(2, 'sleclerc', '5');
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
