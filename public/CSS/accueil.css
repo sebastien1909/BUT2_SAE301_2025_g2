@@ -1,0 +1,116 @@
+.background-image-deco{
+    width:100%;
+}
+
+.liste-categorie{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+}
+
+.liste-categorie img {
+    width:90%;
+    height:auto;
+}
+
+.liste-categorie a{
+    color:black;
+    width: 20%;
+}
+
+.liste-categorie h4 {
+    font-size: 1.2em;
+    position: relative;
+    margin-left: 4em;
+}
+
+.liste-categorie a{
+    transition:transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+.liste-categorie a:hover {
+    opacity: 0.8;
+    transform:scale(1.05);
+}
+
+
+
+
+
+h1{
+    color:black;
+    text-align:center;
+}
+
+.liked-products{
+    color:black;
+}
+
+.liked-products-cont{
+    display:flex;
+    justify-content : space-evenly;
+}
+
+.liked-products-cont a{
+    transition:transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+.liked-products-cont a:hover {
+    opacity: 0.8;
+    transform:scale(1.05);
+}
+
+.liked-products{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+}
+
+.liked-img{
+    margin-bottom:15px;
+}
+
+a{
+    text-decoration:none;
+}
+
+/* newsletter */
+.card_newsletter {
+    background-color: #E3AE58;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+}
+.card_newsletter p {
+    width: 35%;
+    text-align: center;
+}
+.serch_newsletter {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 1%;
+}
+.serch_newsletter input {
+    border-radius: 5px;
+  width: 30em;
+  padding: 1%;
+  border: none;
+}
+.serch_newsletter button {
+  background-color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 1%;
+  border: none;
+}
+
+.categorie-lien{
+    transition: transform 0.3s ease-in-out;
+}
+
+.categorie-lien:hover{
+    transform:scale(1.05);
+}

@@ -50,9 +50,11 @@ footer {
   width: 35%;
   margin-top: 5%;
   margin-bottom: 5%;
+  color: white;
 }
 .card-inscrip h1 {
     text-align: center;
+    color: white;
 }
 .background-ins {
   background-image: url("/img/fond.jpg");
@@ -62,9 +64,9 @@ footer {
   justify-content: center;
   align-items: center;
 }
-/* form p {
-    font-family: ;
-} */
+form p {
+    font-family: "Inter", sans-serif;
+} 
 
 form input {
     background-color: #5F5F5F;

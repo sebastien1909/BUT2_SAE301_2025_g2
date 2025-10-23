@@ -1,16 +1,28 @@
-<%- include("/header") %>
+<%- include("header") %>
 
     <h1 class="hgerant">Ajouter/supprimer un produit</h1>
 
     <div class="ajout-produit-container">
         <form action="/ajouter-produit" method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="description">Marque</label>
+                <input type="text" name="marque" id="marque" placeholder="Veuillez entrer le nom de la marque"></input>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Modèle</label>
+                <input type="text" name="modele" id="modele" placeholder="Veuillez entrer le modèle précis"></input>
+            </div>
+
             <div class="form-group">
                 <label for="categorie">Catégorie</label>
                 <select name="categorie" id="categorie">
                     <option value="">Sélectionner une catégorie</option>
-                    <option value="vetements">Vêtements</option>
-                    <option value="accessoires">Accessoires</option>
-                    <option value="chaussures">Chaussures</option>
+                    <option value="vetements">Vetements</option>
+                    <option value="accessoires">Nutrition</option>
+                    <option value="chaussures">Appareils</option>
+                    <option value="chaussures">Équipement</option>
                 </select>
             </div>
 
@@ -31,7 +43,7 @@
 
             <div class="form-group description">
                 <label for="description">Description</label>
-                <textarea name="description" id="description" rows="4" placeholder="Décrivez le produit..."></textarea>
+                <input name="description" id="description" placeholder="Décrivez le produit..."></input>
             </div>
             <div class="ajout_supp">
                 <button type="submit">Ajouter le produit</button>
@@ -39,29 +51,47 @@
         </form>
     </div>
 
+
+
+
+
+
+
+
+
     <div class="recherche-produit">
-        <input type="text" name="search" id="search" placeholder="Rechercher un produit">
-        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <form action="/rechercher_suppression" method="POST" class="recherche-produit recherche-suppresion">
+            <input type="text" name="search" id="search" placeholder="Rechercher un modèle ou une marque">
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
     </div>
 
     <div class="liste-produits">
-        <div class="produit">
-            <img src="/images/produit1.jpg" alt="Produit 1">
-            <p>Nom du produit</p>
-            <button type="button" class="supprimer-produit">Supprimer</button>
-        </div>
 
-        <div class="produit">
-            <img src="/images/produit2.jpg" alt="Produit 2">
-            <p>Nom du produit</p>
-            <button type="button" class="supprimer-produit">Supprimer</button>
-        </div>
+        <% for (element of produits_suppr){ %>
+            <div class="produit-suppression">
+                <% let marque = element.marque%>
+                <% let modele =element.modele %>
+                <% let image = element.image %>
+                <img src="<%= image %>" class="catalogue-produit-img">
+                <div class="catalogue-produit-info">
+                    <strong>
+                        <%= marque %> 
+                    </strong>
+                    <%= modele %>
 
-        <div class="produit">
-            <img src="/images/produit3.jpg" alt="Produit 3">
-            <p>Nom du produit</p>
-            <button type="button" class="supprimer-produit">Supprimer</button>
-        </div>
+                </div>
+                        
+                <form action="/supprimer-produit" method="POST" style="display:inline;">
+                    <input type="hidden" name="id" value="<%= element.id %>">
+                    <button type="submit" class="supprimer-produit">Supprimer</button>
+                </form>
+                    
+            </div>
+            <% } %>
+
+
+
     </div>
 
 

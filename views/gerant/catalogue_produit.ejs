@@ -5,17 +5,55 @@
     <h1> Tout les produits</h1>
     <h5> Ici, vous pouvez accéder à notre liste complète de produits disponibles</h5>
     <tri>
+
+        <div class="separateur1"></div>
+
+
         <p class="trier-par"> Trier par </p>
         <div class="tri-cont">
             <ul class="sous-menu-holder">
-                <li class="sous-menu"> <a href="#" class="lien-menu">Prix &ensp;</a></li>
-                <li class="sous-menu"> <a href="#" class="lien-menu">Catégorie &ensp;</a></li>
-                <li class="sous-menu"> <a href="#" class="lien-menu">Marque &ensp;</a></li>
-                <li class="sous-menu"> <a href="#" class="lien-menu">État &ensp;</a></li>
-                <li class="sous-menu"> <a href="#" class="lien-menu">Note &ensp;</a></li>
-
+                <li class="sous-menu"> Prix &ensp;
+                    <ul>
+                        <li> <a href="/gerant/catalogue_produit?tri=prix_location&ordre=asc"> Croissant </a></li>
+                        <li> <a href="/gerant/catalogue_produit?tri=prix_location&ordre=desc"> Décroissant </a></li>
+                    </ul>
+                </li>
+                <li class="sous-menu">Catégorie &ensp;
+                    <ul>
+                        <li> <a href="/gerant/catalogue_produit?filtre=type&valeur=vetements"> Vêtements </a></li>
+                        <li> <a href="/gerant/catalogue_produit?filtre=type&valeur=nutrition"> Nutrition </a></li>
+                        <li> <a href="/gerant/catalogue_produit?filtre=type&valeur=équipement"> Équipement </a></li>
+                        <li> <a href="/gerant/catalogue_produit?filtre=type&valeur=appareils"> Appareils </a></li>
+                    </ul>
+                </li>
+                <li class="sous-menu">Marque &ensp;
+                    <ul>
+                        <li> <a href="/gerant/catalogue_produit?filtre=marque&valeur=Décathlon"> Décathlon </a></li>
+                        <li> <a href="/gerant/catalogue_produit?filtre=marque&valeur=Puma"> Puma </a></li>
+                        <li> <a href="/gerant/catalogue_produit?filtre=marque&valeur=Nike"> Nike </a></li>
+                        <li> <a href="/gerant/catalogue_produit?filtre=marque&valeur=Quechua"> Quechua </a></li>
+                        <li> <a href="/gerant/catalogue_produit?filtre=marque&valeur=Domyos"> Domyos </a></li>
+                        <li> <a href="/gerant/catalogue_produit?filtre=marque&valeur=Isostar"> Isostar </a></li>
+                    </ul>
+                </li>
+                <li class="sous-menu">État &ensp;
+                    <ul>
+                        <li> <a href="/gerant/catalogue_produit?tri=etat&ordre=asc"> Croissant </a></li>
+                        <li> <a href="/gerant/catalogue_produit?tri=etat&ordre=desc"> Décroissant </a></li>
+                    </ul>
+                </li>
+                <li class="sous-menu">Note &ensp;
+                    <ul>
+                        <li> <a href="/gerant/catalogue_produit?tri=note&ordre=asc"> Croissant </a></li>
+                        <li> <a href="/gerant/catalogue_produit?tri=note&ordre=desc"> Décroissant </a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
+
+        <div class="separateur2"></div>
+
+
     </tri>
     
     <div class="produit-cont">
@@ -28,8 +66,8 @@
                         <% let marque = element.marque%>
                         <% let modele =element.modele %>
                         <% let prix = element.prix_location %>
-                        <% let image = element.img %>
-                        <img src="/img/<%= image %>.jpg" class="catalogue-produit-img">
+                        <% let image = element.image %>
+                        <img src="<%= image %>" class="catalogue-produit-img">
                         <div class="catalogue-produit-info">
                             <strong>
                                 <%= marque %> 
@@ -49,4 +87,34 @@
 
         </div>
 
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const sousMenus = document.querySelectorAll('.sous-menu');
+
+                sousMenus.forEach(menu => {
+                    menu.addEventListener('click', function (e) {
+                        e.stopPropagation();
+
+                        // Ferme tous les autres menus
+                        sousMenus.forEach(m => {
+                            if (m !== menu) {
+                                m.classList.remove('active');
+                            }
+                        });
+
+                        // Bascule l'état du menu cliqué
+                        menu.classList.toggle('active');
+                    });
+                });
+
+                // Ferme tous les menus si clic en dehors
+                document.addEventListener('click', function () {
+                    sousMenus.forEach(menu => {
+                        menu.classList.remove('active');
+                    });
+                });
+            });
+        </script>
 <%- include("../footer") %>

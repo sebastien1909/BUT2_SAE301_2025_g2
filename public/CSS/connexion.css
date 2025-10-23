@@ -16,15 +16,12 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   width: 300px;
   text-align: center;
+  color: white;
+}
+.card-connexion h1 {
+  color: white;
 }
 
-h1 {
-    color: white;
-}
-
-p {
-    color: white;
-}
 
 .pdc {
   text-decoration: underline;
@@ -37,6 +34,7 @@ p {
 .lieninscrip {
   width: 30%;
   font-size: 0.7em;
+  color: white;
 }
 .lienconn {
   width: 50%;

@@ -1,0 +1,17 @@
+.produit-plaire-cont{
+    margin:5% 0px;;
+    display:flex;
+    justify-content:center;
+    gap:15%;
+}
+
+.catalogue-produit-card{
+    display:flex;
+    flex-direction:column;
+    text-align:center;
+    color:black;
+}
+
+a{
+    color:black;
+}

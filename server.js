@@ -3,6 +3,29 @@ import session from "express-session";
 import crypto from "crypto";
 import bodyParser from "body-parser";
 import pool from "./db.js";
+import multer from "multer";
+import path from "path";
+
+
+
+
+
+// Multer
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/img/produits'); // dossier de stockage des images
+    },
+    filename: (req, file, cb) => {
+        const ext = path.extname(file.originalname);
+        const uniqueName = 'Prdt' + Date.now() + ext;
+        cb(null, uniqueName);
+    }
+});
+
+
+
+
+const upload = multer({ storage: storage });
 
 const app = express();
 app.set("view engine", "ejs");
@@ -47,8 +70,8 @@ function isAdmin(req, res, next){
 
 app.get("/", async function(req,res){
     //récupération bdd (code à réutiliser pour les autres routes)
-    let data = await pool.query("SELECT * FROM produit");
-    res.render("index", {variable : data});
+    let produits_aime = await pool.query("SELECT * FROM produit LIMIT 5");
+    res.render("index", {produits_aime : produits_aime[0]});
 });
 
 app.get("/nouveaute", function(req,res){
@@ -65,6 +88,10 @@ app.get("/paiement", function(req,res){
 
 app.get("/produit", function(req,res){
     res.render("produit", {variable : "aled"});
+});
+
+app.get("/autres_produits", function(req,res){
+    res.render("autres_produits", {variable : "aled"});
 });
 
 app.get("/profil", function(req,res){
@@ -140,8 +167,9 @@ app.get("/gerant/accueil", async function(req,res){
 
 });
 
-app.get("/gerant/ajout_suppr_produit", function(req,res){
-    res.render("gerant/ajout_suppr_produit", {variable : "aled"});
+app.get("/gerant/ajout_suppr_produit", async function(req,res){
+    const liste_produit = await pool.query("SELECT * FROM produit");
+    res.render("gerant/ajout_suppr_produit", {produits_suppr : liste_produit[0]});
 });
 
 app.get("/gerant/check_reservation", function(req,res){
@@ -156,22 +184,134 @@ app.get("/gerant/nouveaute", function(req,res){
     res.render("gerant/nouveaute", {variable : "aled"});
 });
 
-app.get("/gerant/catalogue_produit", async function(req,res){
-    let produits = await pool.query("SELECT * FROM produit");
-    res.render("gerant/catalogue_produit", {liste_produits : produits[0]});
+app.get("/gerant/catalogue_produit", async function(req, res) {
+    const tri = req.query.tri;
+    const ordre = req.query.ordre === 'desc' ? 'DESC' : 'ASC';
+    const filtre = req.query.filtre;
+    const valeur = req.query.valeur;
+
+    let RequetedeBase = "SELECT * FROM produit";
+    let queryParams = [];
+
+    if (filtre && valeur) {
+        RequetedeBase += ` WHERE ${filtre} = ?`;
+        queryParams.push(valeur);
+    }
+
+    // Ajout du tri si demandé
+    if (tri) {
+        RequetedeBase += ` ORDER BY ${tri} ${ordre}`;
+    }
+
+    try {
+        const result = await pool.query(RequetedeBase, queryParams);
+        res.render("gerant/catalogue_produit", { liste_produits: result[0] });
+    } catch (error) {
+        console.error("Erreur SQL :", error);
+        res.status(500).send("Erreur serveur");
+    }
 });
 
-app.get("/gerant/catalogue_categorie/:categorie", async function(req,res){
-    const categorie = req.params.categorie;
-    let produits_categorie = await pool.query("SELECT * from produit WHERE type LIKE '?'", [categorie])
-    res.render("catalogue_categorie", {variable : "aled"});
-});
 
-app.get('/gerant/produit/:id', async (req, res) => {
+app.get('/gerant/produit/:id', async function(req, res) {
     const produitId = req.params.id;
     const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
-    res.render('gerant/produit', { produit : row[0]})
+    const produit = row[0][0]
+    const type = produit.type
+    const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ?LIMIT 3", [type, produitId]);
+    res.render('gerant/produit', { 
+        produit : produit,
+        produit_plaire : produit_plaire[0]
+    })
 });
+
+
+
+
+
+// Actions au click sur les boutons
+
+app.post('/ajouter-produit', upload.single('image'), async function(req, res) {
+    try {
+        const { marque, modele, categorie, prix, description } = req.body;
+        const image = req.file ? `/img/produits/${req.file.filename}` : null;
+        await pool.query("INSERT INTO produit (type, description, marque, modele, prix_location, etat, image) VALUES (?, ?, ?, ?, ?, ?, ?)",[categorie, description, marque, modele, prix, 'très bon état', image]);
+
+        res.redirect('/gerant/ajout_suppr_produit'); 
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Erreur lors de l'ajout du produit");
+    }
+});
+
+app.post('/rechercher_suppression', async function(req, res) {
+    try {
+        const nomRecherche = '%' + req.body.search + '%';
+        const produits_suppr = await pool.query("SELECT * FROM produit WHERE modele LIKE ? OR marque LIKE ?", [nomRecherche, nomRecherche]);
+        res.render("gerant/ajout_suppr_produit", { produits_suppr: produits_suppr[0] });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Erreur lors de la recherche du produit");
+    }
+});
+
+
+app.post('/supprimer-produit', async function(req, res){
+    try {
+        const produitId = req.body.id;
+        await pool.query("DELETE FROM produit WHERE id = ?", [produitId]);
+        res.redirect('/gerant/ajout_suppr_produit');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Erreur lors de la suppression du produit");
+    }
+});
+
+app.post('/inscription_infos', async function(req, res){
+    const nom = req.body.nom;
+    const prenom = req.body.prenom;
+    const tel = req.body.telephone;
+    const age = req.body.age;
+    const mail = req.body.mail;
+    const mdp = req.body.mdp;
+    const mdp_confirm = req.body.mdp_confirm;
+    const conditions_générales = req.body.conditions_générales;
+    const recevoir_mail = !!req.body.recevoir_mail;
+    const login = req.body.login;
+
+    const mailExistant = await pool.query("SELECT * FROM utilisateur WHERE email = ?",[mail]);
+    const loginExistant = await pool.query("SELECT * FROM utilisateur WHERE login = ?",[login])
+
+
+    if (mailExistant[0].length > 0) {
+        return res.render("inscription", { message: "Email déjà utilisé" });
+    }
+    else if (loginExistant[0].length > 0) {
+        return res.render("inscription", { message: "Email déjà utilisé" });
+    }
+
+    else if (mdp == mdp_confirm){
+        const mdp_hash = crypto.createHash('md5').update(mdp).digest('hex')
+        await pool.query("INSERT INTO utilisateur(login,password,nom,prenom,email,type_utilisateur, téléphone, age, newsletter) VALUES (?,?,?,?,?,?,?,?, ?)", [login, mdp_hash, nom, prenom, mail, 'client', tel, age, recevoir_mail]);
+        res.redirect('/');
+    } else{
+        res.render("/inscription", {message : "Une information est erronée"});
+    }
+
+
+    
+});
+
+
+
+
+
+
+
+
+
+
+
 
 
 

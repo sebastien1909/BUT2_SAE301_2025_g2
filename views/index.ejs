@@ -1,6 +1,56 @@
 <%- include ("header") %>
 
-</body>
+    <img src="/img/fond_accueil.png" class="background-image-deco" alt="image de presentation">
+
+
+    <h1>Les catégories</h1>
+
+    <div class="liste-categorie">
+        <a href="catalogue_categorie/vetements">
+            <img src="/img/vetement.jpg" class="categorie-illu">
+            <h4>Vetements</h4>
+        </a>
+        <a href="catalogue_categorie/equipement">
+            <img src="/img/equipement.jpg" class="categorie-illu">
+            <h4>Équipement</h4>
+        </a>
+        <a href="catalogue_categorie/appareils">
+            <img src="/img/appareil.jpg" class="categorie-illu">
+            <h4>Appareils</h4>
+        </a>
+        <a href="catalogue_categorie/nutrition">
+            <img src="/img/Nutrition.png" class="categorie-illu">
+            <h4>Nutrition</h4>
+        </a>
+    </div>
+
+    <div class="liste-plus-aime">
+        <h1>Les plus aimés</h1>
+        <ul class="liked-products-cont">
+            <% for (element of produits_aime){ %>
+                <a href="produit/<%= element.id %>">
+                    <li class="liked-products">
+                        
+                        <% let nom_produit = element.marque + element.modele %>
+                        <img src="/img/<%= (element.marque + element.modele).toLowerCase() %>.jpg" class="liked-img">
+                        <strong>
+                            <%= element.marque %> 
+                            <br>
+                        </strong>
+                        <%= element.modele %>
+
+                    </li> 
+                </a>
+            <% } %>
+        </ul>
+    </div>
+
+    <div class="card_newsletter">
+        <p>Abonnez-vous à notre newsletter pour rester informés de nos évènements et collections.</p>
+        <div class="serch_newsletter">
+            <input type="text" name="search" id="search" placeholder="  Saisissez votre adresse mail">
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+    </div>
 
 <%- include("footer") %>
-</html>
