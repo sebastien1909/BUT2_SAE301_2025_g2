@@ -132,8 +132,31 @@ app.get("/reservation", function(req,res){
 });
 
 app.get("/catalogue_produit", async function(req,res){
-    let produits = await pool.query("SELECT * FROM produit");
-    res.render("catalogue_produit", {liste_produits : produits[0]});
+    const tri = req.query.tri;
+    const ordre = req.query.ordre === 'desc' ? 'DESC' : 'ASC';
+    const filtre = req.query.filtre;
+    const valeur = req.query.valeur;
+
+    let RequetedeBase = "SELECT * FROM produit";
+    let queryParams = [];
+
+    if (filtre && valeur) {
+        RequetedeBase += ` WHERE ${filtre} = ?`;
+        queryParams.push(valeur);
+    }
+
+    // Ajout du tri si demandé
+    if (tri) {
+        RequetedeBase += ` ORDER BY ${tri} ${ordre}`;
+    }
+
+    try {
+        const result = await pool.query(RequetedeBase, queryParams);
+        res.render("gerant/catalogue_produit", { liste_produits: result[0] });
+    } catch (error) {
+        console.error("Erreur SQL :", error);
+        res.status(500).send("Erreur serveur");
+    }
 });
 
 app.get("/favoris", function(req,res){
@@ -147,6 +170,9 @@ app.get("/abonnement", function(req,res){
 app.get("/connexion", function(req,res){
     res.render("connexion", {variable : "aled"});
 });
+
+
+
 app.post("/connexion", async function(req,res){
     // recup info de connexion
     let username = req.body.login;
@@ -252,7 +278,6 @@ app.get('/gerant/produit/:id', async function(req, res) {
         produit_plaire : produit_plaire[0]
     })
 });
-
 
 
 
