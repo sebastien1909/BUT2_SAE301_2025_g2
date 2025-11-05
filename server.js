@@ -57,6 +57,15 @@ function isAdmin(req, res, next){
         res.status(403).redirect("/");
     }
 }
+app.get("/co", authenticate, async function(req,res){
+    if (req.session.userRole == "client"){
+        res.render("profil")
+    }
+    else {
+        res.render("connexion");
+    }
+});
+
 
 //protéger une page (rajout d'authenticate et par ex isAdmin)
 // app.get("/", authenticate, isAdmin, async function(req,res){
