@@ -127,8 +127,10 @@ app.get("/profil", function(req,res){
     res.render("profil", {variable : "aled"});
 });
 
-app.get("/reservation", function(req,res){
-    res.render("reservation", {variable : "aled"});
+app.get("/reservation/:id", async function(req,res){
+    const produitId = req.params.id;
+    const result = await pool.query("SELECT * from produits WHERE id = ?",[produitId]);
+    res.render("reservation", {produit : result});
 });
 
 app.get("/catalogue_produit", async function(req,res){
@@ -179,16 +181,22 @@ app.post("/connexion", async function(req,res){
     let password = req.body.mdp;
     let hashedPassword = crypto.createHash('md5').update(password).digest('hex');
 
-    let result = await pool.query (
-        "SELECT * FROM utilisateur WHERE login = ? AND password = ?",
-        [username, hashedPassword]
-    )
+    let result = await pool.query ("SELECT * FROM utilisateur WHERE login = ? AND password = ?",[username, hashedPassword])
 
     // verification info de l'utilisateur sont dans la bdd
     if (result [0].length > 0){
         req.session.userRole = result[0][0].role;
         req.session.userID = result[0][0].id;
-        res.redirect("/");
+        if (result[0][0].role == "agent"){
+            res.redirect("/gerant/accueil");
+        }
+        else if (result[0][0].role == "admin"){
+            res.redirect("/admin/accueil");
+        }
+        else{
+            res.redirect("/");
+        }
+        
     }
     //si c'est le cas : on recup le rôle + on initialise une session + redirection page accueil
     else {
@@ -279,6 +287,16 @@ app.get('/gerant/produit/:id', async function(req, res) {
     })
 });
 
+app.get('/gerant/reservation/:id', async function(req, res) {
+    const produitId = req.params.id;
+    const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
+    const produit = row[0][0]
+    const type = produit.type
+    const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ?LIMIT 3", [type, produitId]);
+    res.render('gerant/reservation', { 
+        produit : produit
+    })
+});
 
 
 

@@ -1,5 +1,5 @@
 <%- include("header") %>
-
+<link rel="stylesheet" href="/CSS/reservation.css">
 <div class="page_produit">
   <button class="btn_retour" onclick="history.back()">← Revenir à la liste des produits</button>
 
@@ -42,32 +42,3 @@
 
 <%- include("footer") %>
 
-<script>
-  // --- Gestion quantité ---
-  const prixUnitaire = 59.99;
-  const quantiteEl = document.getElementById("quantite");
-  const totalEl = document.getElementById("total");
-  const btnMoins = document.getElementById("moins");
-  const btnPlus = document.getElementById("plus");
-  const inputQuantite = document.getElementById("quantite_input");
-
-  let quantite = 1;
-
-  function updateTotal() {
-    quantiteEl.textContent = quantite;
-    totalEl.textContent = (prixUnitaire * quantite).toFixed(2).replace('.', ',');
-    inputQuantite.value = quantite;
-  }
-
-  btnPlus.addEventListener("click", () => {
-    quantite++;
-    updateTotal();
-  });
-
-  btnMoins.addEventListener("click", () => {
-    if (quantite > 1) {
-      quantite--;
-      updateTotal();
-    }
-  });
-</script>
