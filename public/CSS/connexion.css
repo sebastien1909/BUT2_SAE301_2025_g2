@@ -39,3 +39,9 @@
 .lienconn {
   width: 50%;
 }
+
+.message {
+  margin-top: 5%;
+  color: #ffffff;
+  font-weight: bold;
+}
