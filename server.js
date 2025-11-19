@@ -325,17 +325,6 @@ app.post('/ajouter-produit', upload.single('image'), async function(req, res) {
     }
 });
 
-app.post('/supprimer-produit', async function(req, res) {
-    try {
-        const produitId = req.params.id;
-        await pool.query("DELETE FROM produit WHERE id = ?", [produitId]);
-        res.redirect('/gerant/ajout_suppr_produit');
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Erreur lors de la suppression du produit");
-    }
-});
-
 app.post('/rechercher_suppression', async function(req, res) {
     try {
         const nomRecherche = '%' + req.body.search + '%';
@@ -347,6 +336,17 @@ app.post('/rechercher_suppression', async function(req, res) {
     }
 });
 
+
+app.post('/supprimer-produit', async function(req, res){
+    try {
+        const produitId = req.body.id;
+        await pool.query("DELETE FROM produit WHERE id = ?", [produitId]);
+        res.redirect('/gerant/ajout_suppr_produit');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Erreur lors de la suppression du produit");
+    }
+});
 
 app.post('/inscription_infos', async function(req, res){
     const nom = req.body.nom;

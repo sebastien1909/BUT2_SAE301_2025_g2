@@ -94,12 +94,14 @@
   outline: none;
   background-color: #e0e0e0;
 }
+.recherche-produit button {
+  width: 10%;
+}
 
 .recherche-produit i {
   color: black;
   font-size: 1rem;
   position: relative;
-  right: 40px;
 }
 
 .recherche-produit i:hover {
@@ -115,10 +117,12 @@
     gap: 5%;
     justify-content: center;
     margin-top: 5%;
+    margin-bottom: 5%;
 }
 .liste-produits button {
     background-color: #EE7070;
     border:none ;
+    width: 50%;
 }
 .liste-produits button:hover {
     background-color: #923f3f;
