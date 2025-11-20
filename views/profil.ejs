@@ -1,8 +1,8 @@
 <%- include("header") %>
 
-<body>
+    <body>
 
-    <h1 class="titre-profil">Mon historique d'achat</h1>
+        <h1 class="titre-profil">Mon historique d'achat</h1>
         <div class="background-historique-profil">
             <img src="/img/produits/Prdt1.png">
             <img src="/img/produits/Prdt10.jpg">
@@ -10,33 +10,76 @@
         </div>
 
 
-    <div class="background-favoris-profil">
-        <h1 class>Mes favoris</h1>
+        <div class="background-favoris-profil">
+            <h1 class>Mes favoris</h1>
             <div class="background-favoris-profil-image">
                 <img src="/img/produits/Prdt28.png">
                 <img src="/img/produits/Prdt1.png">
                 <img src="/img/produits/Prdt1.png">
                 <img src="/img/produits/Prdt1.png">
             </div>
-    </div>
-
-    <div class="background-abonnement-profil">
-        <div class="background-abonnement-profil-gauche">
-            <h2>Mon abonnement</h2>
-            <img src="/img/ranks/VIP.png">
-            
         </div>
 
-        <div class="background-abonnement-profil-droit">
-            <p>Ici vous pourrez changer vos informations et votre abonnement si vous le souhaitez</p>
-            <button type="submit">Changer mes informations</button>
-            <a href="abonnement">
-                <button type="submit">Changer mon abonnement</button>
-            </a>
+        <div class="background-abonnement-profil">
+            <div class="background-abonnement-profil-gauche">
+                <h2>Mon abonnement</h2>
+                <img src="/img/ranks/VIP.png">
+
+            </div>
+
+            <div class="background-abonnement-profil-droit">
+                <p>Ici vous pourrez changer vos informations et votre abonnement si vous le souhaitez</p>
+                <button type="submit" class="btn" id="openModifBtn">Changer mes informations</button>
+                <a href="abonnement">
+                    <button type="submit">Changer mon abonnement</button>
+                </a>
+            </div>
+
         </div>
 
-    </div>
+    </body>
 
-</body>
+    <%- include("footer") %>
+        <div class="modif-profil" id="modifProfil">
+            <button class="close-btn" id="closeModifBtn">&times;</button>
+            <div class="modifpro">
+                <h2>Modifier mon profil</h2>
+                <p class="login">Nom utilisateur</p>
+                <form action="/inscription_infos" method="POST">
+                    <p>Nom</p>
+                    <input type="text" name="nom" placeholder="   Nom*">
+                    <p>Prénom</p>
+                    <input type="text" name="prenom" placeholder="   Prénom*">
+                    <p>Âge</p>
+                    <input type="age" name="age" placeholder="   Âge*">
+                    <p>Email</p>
+                    <input type="email" name="mail" placeholder="   Email*">
+                    <p>Mot de passe</p>
+                    <input type="password" name="mdp" placeholder="   Mot de passe*">
+                    <div class="conditions">
+                        <p>**1 Majuscule obligatoire</p>
+                        <p>**1 Caractère spécial obligatoire</p>
+                        <p>**1 chiffre obligatoire</p>
+                    </div>
+                    <br>
+                    <div class="submit">
+                        <button type="submit" class="save-btn" id="saveBtn">Confirmer les modification</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-<%- include("footer") %>
+        <script>
+            const modif = document.getElementById('modifProfil');
+            const openBtn = document.getElementById('openModifBtn');
+            const closeBtn = document.getElementById('closeModifBtn');
+
+            openBtn.addEventListener('click', function () {
+                modif.classList.add('active');
+            });
+
+            closeBtn.addEventListener('click', function () {
+                modif.classList.remove('active');
+            });
+
+        </script>

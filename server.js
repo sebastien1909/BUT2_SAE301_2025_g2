@@ -340,11 +340,11 @@ app.post('/rechercher_suppression', async function(req, res) {
 app.post('/supprimer-produit', async function(req, res){
     try {
         const produitId = req.body.id;
-        await pool.query("DELETE FROM produit WHERE id = ?", [produitId]);
+        await pool.query("DELETE FROM produit WHERE id = ? NOT IN (SELECT produit_id FROM location);", [produitId]);
         res.redirect('/gerant/ajout_suppr_produit');
     } catch (err) {
         console.error(err);
-        res.status(500).send("Erreur lors de la suppression du produit");
+        res.status(500).send("Le produit est en réservation ou erreur lors de la suppression du produit");
     }
 });
 
