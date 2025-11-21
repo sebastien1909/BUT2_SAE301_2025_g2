@@ -15,7 +15,7 @@
             <div class="background-favoris-profil-image">
                 <img src="/img/produits/Prdt28.png">
                 <img src="/img/produits/Prdt1.png">
-                <img src="/img/produits/Prdt1.png">prén
+                <img src="/img/produits/Prdt1.png">
                 <img src="/img/produits/Prdt1.png">
             </div>
         </div>
@@ -41,10 +41,10 @@
 
     <%- include("footer") %>
         <div class="modif-profil" id="modifProfil">
-            <button class="close-btn" id="closeModifBtn">&times;</button>
             <div class="modifpro">
+                <button class="close-btn" id="closeModifBtn">&times;</button>
+                <button action="deco" class="deco">Déconnexion</button>
                 <h2>Modifier mon profil</h2>
-                <p class="login">Nom utilisateur</p>
                 <form action="/inscription_infos" method="POST">
                     <p>Nom</p>
                     <input type="text" name="nom" placeholder="   Nom*">
@@ -65,8 +65,8 @@
                     <div class="submit">
                         <button type="submit" class="save-btn" id="saveBtn">Confirmer les modification</button>
                     </div>
-                    <p action="supp-compte" class="supp_compte">Supprimer le compte</p>
                 </form>
+                 <p action="/supp-compte" class="supp_compte">Supprimer le compte</p>
             </div>
         </div>
 
@@ -86,3 +86,18 @@
         </script>
 
 
+app.post('/inscription_infos', async function(req, res){
+    try {
+        const userId = req.body.id;
+        const userprenom = req.body.prenom;
+        const usernom = req.body.nom;
+        const userddn = req.body.age;
+        const useremail = req.body.mail;
+        const userpassword = req.body.mdp;
+        await pool.query("UPDATE utilisateur SET prenom = ?, nom = ?, ddn = ?, email = ?, password = ? WHERE id = ? );", [userprenom, usernom, userddn, useremail, userpassword, userId]);
+        res.redirect('/index');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("L'utilisateur à des réservation ou erreur lors de la suppression du compte");
+    }
+});
