@@ -125,13 +125,6 @@ body {
     font-size: 1.2rem;
 }
 
-.titre-profil {
-    color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 3em;
-}
 
 .background-historique-profil {
     display: flex;
@@ -153,9 +146,8 @@ body {
     height: 550px;
 }
 
-.background-favoris-profil h1 {
+.background-favoris-profil h2 {
     padding-top: 30px;
-    font-size: 3em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -255,7 +247,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1.5em;
-    height: 85%;
+    height: 90%;
 }
 .modifpro h2, .modifpro .login {
     text-align: center;
@@ -273,4 +265,25 @@ body {
     font-size: 2rem;
     color: white;
     cursor: pointer;
+}
+.supp_compte {
+    color: red;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.titre-profil {
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2em;
+}
+.secondtitre-profil {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2em;
 }

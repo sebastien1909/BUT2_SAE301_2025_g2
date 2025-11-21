@@ -352,6 +352,17 @@ app.post('/supprimer-produit', async function(req, res){
     }
 });
 
+app.post('/supp-compte', async function(req, res){
+    try {
+        const userId = req.body.id;
+        await pool.query("DELETE FROM utilisateur WHERE id = ? AND type_utilisateur NOT LIKE 'agent' AND NOT EXISTS (SELECT 1 FROM location WHERE utilisateur_id = ?);", [userId, userId]);
+        res.redirect('/index');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("L'utilisateur à des réservation ou erreur lors de la suppression du compte");
+    }
+});
+
 app.post('/inscription_infos', async function(req, res){
     const nom = req.body.nom;
     const prenom = req.body.prenom;
