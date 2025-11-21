@@ -71,10 +71,16 @@ function isAdmin(req, res, next){
 
 // ROUTES
 
-app.get("/co", function(req,res){
-    
+app.get("/co", async function(req,res){
+    let user = await pool.query("SELECT * FROM utilisateur");
     if (req.session.userRole == "client"){
-        res.render("profil", {login : Login})
+        res.render("profil",{user : user[0],
+        userlogin : user[0][0].login,
+        userFName : user[0][0].prenom,
+        userLName : user[0][0].nom,
+        userAge : user[0][0].ddn,
+        userMail : user[0][0].email,
+    })
     }
     else {
         res.redirect("connexion");
@@ -88,6 +94,7 @@ app.get("/", async function(req,res){
         userName : req.session.prenom
     });
 });
+
 
 app.get("/nouveaute", function(req,res){
     res.render("nouveaute", {variable : "aled"});

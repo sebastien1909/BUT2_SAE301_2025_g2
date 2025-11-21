@@ -1,7 +1,7 @@
 <%- include("header") %>
 
     <body>
-        <h1>Bonjour Prénom</h1>
+        <h1>Bonjour <%= userlogin %></h1>
         <h2 class="titre-profil">Mon historique d'achat</h2>
         <div class="background-historique-profil">
             <img src="/img/produits/Prdt1.png">
@@ -48,13 +48,13 @@
                 </form>
                 <h2>Modifier mon profil</h2>
                 <form action="/inscription_infos" method="POST">
-                    <p>Nom</p>
+                    <p><%= userLName %></p>
                     <input type="text" name="nom" placeholder="   Nom*">
-                    <p>Prénom</p>
+                    <p><%= userFName %></p>
                     <input type="text" name="prenom" placeholder="   Prénom*">
-                    <p>Âge</p>
+                    <p><%= userAge %></p>
                     <input type="age" name="age" placeholder="   Âge*">
-                    <p>Email</p>
+                    <p><%= userMail %></p>
                     <input type="email" name="mail" placeholder="   Email*">
                     <p>Mot de passe</p>
                     <input type="password" name="mdp" placeholder="   Mot de passe*">
@@ -88,6 +88,7 @@
             });
 
         </script>
+
 
 
 app.post('/inscription_infos', async function(req, res){
