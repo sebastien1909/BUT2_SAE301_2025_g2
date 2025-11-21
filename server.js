@@ -195,12 +195,14 @@ app.post("/connexion", async function(req,res){
 
     // verification info de l'utilisateur sont dans la bdd
     if (result [0].length > 0){
-        req.session.userRole = result[0][0].role;
+        let nom = await pool.query ("SELECT prenom FROM utilisateur WHERE login = ?", [username]);
+        req.session.userRole = result[0][0].type_utilisateur;
         req.session.userID = result[0][0].id;
-        if (result[0][0].role == "agent"){
+        req.session.prenom = nom[0];
+        if (req.session.userRole == "agent"){
             res.redirect("/gerant/accueil");
         }
-        else if (result[0][0].role == "admin"){
+        else if (req.session.userRole == "admin"){
             res.redirect("/admin/accueil");
         }
         else{
@@ -234,7 +236,9 @@ app.get("/catalogue_categorie", function(req,res){
 
 app.get("/gerant/accueil", async function(req,res){
     let produits_aime = await pool.query("SELECT * FROM produit LIMIT 5");
-    res.render("gerant/accueil", {produits_aime : produits_aime[0]});
+    res.render("gerant/accueil", {produits_aime : produits_aime[0],
+        prenom:req.session.nom
+    });
 
 });
 
@@ -340,7 +344,7 @@ app.post('/rechercher_suppression', async function(req, res) {
 app.post('/supprimer-produit', async function(req, res){
     try {
         const produitId = req.body.id;
-        await pool.query("DELETE FROM produit WHERE id = ? NOT IN (SELECT produit_id FROM location);", [produitId]);
+        await pool.query("DELETE FROM produit WHERE id = ? AND NOT EXISTS (SELECT * FROM location WHERE produit_id = ?);", [produitId,produitId]);
         res.redirect('/gerant/ajout_suppr_produit');
     } catch (err) {
         console.error(err);
