@@ -72,9 +72,9 @@ function isAdmin(req, res, next){
 // ROUTES
 
 app.get("/co", function(req,res){
-
+    
     if (req.session.userRole == "client"){
-        res.render("profil")
+        res.render("profil", {login : Login})
     }
     else {
         res.redirect("connexion");
