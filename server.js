@@ -72,8 +72,9 @@ function isAdmin(req, res, next){
 // ROUTES
 
 app.get("/co", function(req,res){
+
     if (req.session.userRole == "client"){
-        res.redirect("profil")
+        res.render("profil")
     }
     else {
         res.redirect("connexion");
@@ -411,7 +412,7 @@ app.post('/inscription_infos', async function(req, res){
 
 app.post('/deco', async function(req, res){
     
-    req.session_destroy();
+    req.session.destroy();
     res.redirect('/connexion');
 
 });

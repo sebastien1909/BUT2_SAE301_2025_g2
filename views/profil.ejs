@@ -43,7 +43,9 @@
         <div class="modif-profil" id="modifProfil">
             <div class="modifpro">
                 <button class="close-btn" id="closeModifBtn">&times;</button>
-                <button action="deco" class="deco">Déconnexion</button>
+                <form action="/deco" method="POST">
+                    <button type="submit" class="deco">Déconnexion</button>
+                </form>
                 <h2>Modifier mon profil</h2>
                 <form action="/inscription_infos" method="POST">
                     <p>Nom</p>
@@ -66,7 +68,9 @@
                         <button type="submit" class="save-btn" id="saveBtn">Confirmer les modification</button>
                     </div>
                 </form>
-                 <p action="/supp-compte" class="supp_compte">Supprimer le compte</p>
+                <form action="/supp-compte">
+                    <p class="supp_compte">Supprimer le compte</p>
+                </form>
             </div>
         </div>
 
