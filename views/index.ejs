@@ -2,7 +2,11 @@
 
     <img src="/img/fond_accueil.png" class="background-image-deco" alt="image de presentation">
 
-
+    <% if (userName) { %>
+        <p>Bonjour <%= userName %></p>
+    <% } else { %>
+        <p>Bienvenue sur LocFit</p>
+    <% } %>
     <h1>Les catégories</h1>
 
     <div class="liste-categorie">

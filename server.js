@@ -57,14 +57,7 @@ function isAdmin(req, res, next){
         res.status(403).redirect("/");
     }
 }
-app.get("/co", authenticate, async function(req,res){
-    if (req.session.userRole == "client"){
-        res.render("profil")
-    }
-    else {
-        res.render("connexion");
-    }
-});
+
 
 
 //protéger une page (rajout d'authenticate et par ex isAdmin)
@@ -78,10 +71,21 @@ app.get("/co", authenticate, async function(req,res){
 
 // ROUTES
 
+app.get("/co", function(req,res){
+    if (req.session.userRole == "client"){
+        res.redirect("profil")
+    }
+    else {
+        res.redirect("connexion");
+    }
+});
+
 app.get("/", async function(req,res){
     //récupération bdd (code à réutiliser pour les autres routes)
     let produits_aime = await pool.query("SELECT * FROM produit LIMIT 5");
-    res.render("index", {produits_aime : produits_aime[0]});
+    res.render("index", {produits_aime : produits_aime[0],
+        userName : req.session.prenom
+    });
 });
 
 app.get("/nouveaute", function(req,res){
@@ -195,11 +199,10 @@ app.post("/connexion", async function(req,res){
 
     // verification info de l'utilisateur sont dans la bdd
     if (result [0].length > 0){
-        let nom = await pool.query ("SELECT prenom FROM utilisateur WHERE login = ?", [username]);
         req.session.userRole = result[0][0].type_utilisateur;
         req.session.userID = result[0][0].id;
-        req.session.prenom = nom[0];
-        if (req.session.userRole == "agent"){
+        req.session.prenom = result[0][0].prenom;
+        if (req.session.userRole == "agent"){   
             res.redirect("/gerant/accueil");
         }
         else if (req.session.userRole == "admin"){
@@ -312,6 +315,14 @@ app.get('/gerant/reservation/:id', async function(req, res) {
     })
 });
 
+app.get('/admin/accueil', async function(req, res) {
+    
+    let produits_aime = await pool.query("SELECT * FROM produit LIMIT 5");
+    res.render("admin/accueil", {produits_aime : produits_aime[0],
+        prenom:req.session.nom
+    });
+});
+
 
 
 // Actions au click sur les boutons
@@ -396,6 +407,13 @@ app.post('/inscription_infos', async function(req, res){
 
 
     
+});
+
+app.post('/deco', async function(req, res){
+    
+    req.session_destroy();
+    res.redirect('/connexion');
+
 });
 
 
