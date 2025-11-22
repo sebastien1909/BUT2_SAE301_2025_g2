@@ -277,6 +277,9 @@ body {
     color: rgb(101, 0, 0);
     background-color: rgba(0, 0, 0, 0);
 }
+.form_modif{
+    text-align: left;
+}
 
 .titre-profil {
     color: black;

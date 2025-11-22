@@ -378,7 +378,7 @@ app.post('/supprimer-produit', async function (req, res) {
 app.post('/supp-compte', async function (req, res) {
     try {
         const userId = req.session.userID;
-        const result = await pool.query("DELETE FROM utilisateur WHERE id = ? AND type_utilisateur = 'client' AND NOT EXISTS (SELECT * FROM location WHERE utilisateur_id = ? );" , [userId, userId]);
+        const result = await pool.query("DELETE FROM utilisateur WHERE id = ? AND type_utilisateur = 'client' AND NOT EXISTS (SELECT * FROM location WHERE utilisateur_id = ? );", [userId, userId]);
         if (result[0].affectedRows > 0) { //affectedRows = le nombre de lignes modifiées par la requête et result[0] c'est ce qu'il y a dans la table
             req.session.destroy();
             res.redirect('/connexion');
@@ -426,22 +426,66 @@ app.post('/inscription_infos', async function (req, res) {
 
 });
 
-app.post('/modif_infos', async function(req, res){
+app.post('/modif_infos', async function (req, res) {
     try {
-        req.session.userId = result[0][0].id;
-        req.session.userprenom = result[0][0].prenom;
-        req.session.usernom = result[0][0].nom;
-        req.session.userddn = result[0][0].ddn;
-        req.session.useremail = result[0][0].email;
-        req.session.userpassword = result[0][0].password;
-        await pool.query("UPDATE utilisateur SET prenom = ?, nom = ?, ddn = ?, email = ?, password = ? WHERE id = ? );", [userprenom, usernom, userddn, useremail, userpassword, userId]);
-        res.redirect('/index');
+        const userId = req.session.userID;
+        const currentUser = await pool.query("SELECT * FROM utilisateur WHERE id = ?", [userId]);
+        const useractuel = currentUser[0][0];
+        const { prenom, nom, ddn, email, password } = req.body;
+
+        const updates = [];
+        const values = [];
+
+        if (prenom && prenom !== useractuel.prenom) { // le prenom && prenom évite de mettre à jour si le champ est vide
+            updates.push('prenom = ?');
+            values.push(prenom); //ajoute la nouvelle valeur de prenom au tableau values
+        }
+
+        if (nom && nom !== useractuel.nom) {
+            updates.push('nom = ?');
+            values.push(nom);
+        }
+
+        if (ddn && ddn !== useractuel.ddn) {
+            updates.push('ddn = ?');
+            values.push(ddn);
+        }
+
+        if (email && email !== useractuel.email) {
+            updates.push('email = ?');
+            values.push(email);
+        }
+
+
+        if (password && password.trim() !== '') { //.trim() enlève les espaces
+            let hashedPassword = crypto.createHash('md5').update(password).digest('hex');
+            updates.push('password = ?');
+            values.push(hashedPassword);
+        }
+
+        if (updates.length === 0) { // si aucun champ n'a été modifié
+            return res.redirect('/co');
+        }
+
+        values.push(userId); // ID à la fin
+
+        //modif info bdd
+        const requete = `UPDATE utilisateur SET ${updates.join(', ')} WHERE id = ?`;
+        await pool.query(requete, values);
+
+        //smodif info session
+        if (prenom) req.session.userprenom = prenom;
+        if (nom) req.session.usernom = nom;
+        if (ddn) req.session.userddn = ddn;
+        if (email) req.session.useremail = email;
+
+        res.redirect('/co');
+
     } catch (err) {
         console.error(err);
-        res.status(500).send("Erreur lors des modification du compte");
+        res.status(500).send("Erreur lors de la modification du compte");
     }
 });
-
 
 app.post('/deco', async function (req, res) {
 

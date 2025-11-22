@@ -44,10 +44,8 @@
                     <button type="submit" class="deco">Déconnexion</button>
                 </form>
                 <h2>Modifier mon profil</h2>
-                <form action="/modif_infos" method="POST">
-                    <p>
-                        <%= user.nom %>
-                    </p>
+                <form action="/modif_infos" class="form_modif" method="POST">
+                    <p><%= user.nom %></p>
                     <input type="text" name="nom" placeholder="   Nom*">
                     <p>
                         <%= user.prenom %>
