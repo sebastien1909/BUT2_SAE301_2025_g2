@@ -271,6 +271,11 @@ body {
     text-align: center;
     cursor: pointer;
     text-decoration: underline;
+    background-color: rgba(0, 0, 0, 0);
+}
+.supp_compte:hover {
+    color: rgb(101, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .titre-profil {

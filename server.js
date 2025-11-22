@@ -32,16 +32,16 @@ app.set("view engine", "ejs");
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
-    secret:'keyboard cat',
+    secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
 }));
 
 //MIDDLEWARES MAISON
-function authenticate(req,res,next) {
-    if (req.session.hasOwnProperty("userId")){
+function authenticate(req, res, next) {
+    if (req.session.hasOwnProperty("userId")) {
         next();
     }
     else {
@@ -49,8 +49,8 @@ function authenticate(req,res,next) {
     }
 }
 
-function isAdmin(req, res, next){
-    if (req.session.userRole == "Admin"){
+function isAdmin(req, res, next) {
+    if (req.session.userRole == "Admin") {
         next();
     }
     else {
@@ -71,91 +71,95 @@ function isAdmin(req, res, next){
 
 // ROUTES
 
-app.get("/co", async function(req,res){
-    let user = await pool.query("SELECT * FROM utilisateur");
-    if (req.session.userRole == "client"){
-        res.render("profil",{user : user[0],
-        userlogin : user[0][0].login,
-        userFName : user[0][0].prenom,
-        userLName : user[0][0].nom,
-        userAge : user[0][0].ddn,
-        userMail : user[0][0].email,
-    })
+
+
+
+app.get("/", async function (req, res) {
+    //récupération bdd (code à réutiliser pour les autres routes)
+    let produits_aime = await pool.query("SELECT * FROM produit LIMIT 5");
+    res.render("index", {
+        produits_aime: produits_aime[0],
+        userName: req.session.prenom
+    });
+});
+
+app.get("/co", async function (req, res) {
+    if (req.session.userRole == "client") {
+        let user = await pool.query("SELECT * FROM utilisateur WHERE id = ?", [req.session.userID]);
+
+        if (user[0].length > 0) { // vérifie si l'utilisateur existe
+            res.render("profil", {
+                user: user[0][0]  // prends tout le tableau de l'utilisateur
+            });
+        } else {
+            res.redirect("connexion");
+        }
     }
     else {
         res.redirect("connexion");
     }
 });
 
-app.get("/", async function(req,res){
-    //récupération bdd (code à réutiliser pour les autres routes)
-    let produits_aime = await pool.query("SELECT * FROM produit LIMIT 5");
-    res.render("index", {produits_aime : produits_aime[0],
-        userName : req.session.prenom
-    });
+app.get("/nouveaute", function (req, res) {
+    res.render("nouveaute", { variable: "aled" });
 });
 
-
-app.get("/nouveaute", function(req,res){
-    res.render("nouveaute", {variable : "aled"});
+app.get("/panier", function (req, res) {
+    res.render("panier", { variable: "aled" });
 });
 
-app.get("/panier", function(req,res){
-    res.render("panier", {variable : "aled"});
+app.get("/paiement", function (req, res) {
+    res.render("paiement", { variable: "aled" });
 });
 
-app.get("/paiement", function(req,res){
-    res.render("paiement", {variable : "aled"});
-});
-
-app.get('/produit/:id', async function(req, res) {
+app.get('/produit/:id', async function (req, res) {
     const produitId = req.params.id;
     const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
     const produit = row[0][0]
     const type = produit.type
     const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ?LIMIT 3", [type, produitId]);
-    res.render('produit', { 
-        produit : produit,
-        produit_plaire : produit_plaire[0]
+    res.render('produit', {
+        produit: produit,
+        produit_plaire: produit_plaire[0]
     })
 });
 
-app.get('/nutrition/:id', async function(req, res) {
+app.get('/nutrition/:id', async function (req, res) {
     const produitId = req.params.id;
     const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
     const produit = row[0][0]
     const type = produit.type
     const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ?LIMIT 3", [type, produitId]);
-    res.render('nutrition', { 
-        produit : produit,
-        produit_plaire : produit_plaire[0]
+    res.render('nutrition', {
+        produit: produit,
+        produit_plaire: produit_plaire[0]
     })
 });
 
-app.get('/appareils_equipements/:id', async function(req, res) {
+app.get('/appareils_equipements/:id', async function (req, res) {
     const produitId = req.params.id;
     const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
     const produit = row[0][0]
     const type = produit.type
     const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ?LIMIT 3", [type, produitId]);
-    res.render('appareils_equipements', { 
-        produit : produit,
-        produit_plaire : produit_plaire[0]
+    res.render('appareils_equipements', {
+        produit: produit,
+        produit_plaire: produit_plaire[0]
     })
 });
 
-app.get("/profil", function(req,res){
+app.get("/profil", function (req, res) {
     //mettre un if pour quand co l'icone connexion mène à profil
-    res.render("profil", {variable : "aled"});
+    res.render("profil", { variable: "aled" });
 });
 
-app.get("/reservation/:id", async function(req,res){
+app.get("/reservation/:id", async function (req, res) {
     const produitId = req.params.id;
-    const result = await pool.query("SELECT * from produits WHERE id = ?",[produitId]);
-    res.render("reservation", {produit : result});
+    const result = await pool.query("SELECT * from produits WHERE id = ?", [produitId]);
+    res.render("reservation", { produit: result });
 });
 
-app.get("/catalogue_produit", async function(req,res){
+app.get("/catalogue_produit", async function (req, res) {
     const tri = req.query.tri;
     const ordre = req.query.ordre === 'desc' ? 'DESC' : 'ASC';
     const filtre = req.query.filtre;
@@ -183,61 +187,59 @@ app.get("/catalogue_produit", async function(req,res){
     }
 });
 
-app.get("/favoris", function(req,res){
-    res.render("favoris", {variable : "aled"});
+app.get("/favoris", function (req, res) {
+    res.render("favoris", { variable: "aled" });
 });
 
-app.get("/abonnement", function(req,res){
-    res.render("abonnement", {variable : "aled"});
+app.get("/abonnement", function (req, res) {
+    res.render("abonnement", { variable: "aled" });
 });
 
-app.get("/connexion", function(req,res){
-    res.render("connexion", {variable : "aled"});
+app.get("/connexion", function (req, res) {
+    res.render("connexion", { variable: "aled" });
 });
 
 
 
-app.post("/connexion", async function(req,res){
+app.post("/connexion", async function (req, res) {
     // recup info de connexion
     let username = req.body.login;
     let password = req.body.mdp;
     let hashedPassword = crypto.createHash('md5').update(password).digest('hex');
 
-    let result = await pool.query ("SELECT * FROM utilisateur WHERE login = ? AND password = ?",[username, hashedPassword])
+    let result = await pool.query("SELECT * FROM utilisateur WHERE login = ? AND password = ?", [username, hashedPassword])
 
     // verification info de l'utilisateur sont dans la bdd
-    if (result [0].length > 0){
+    if (result[0].length > 0) {
         req.session.userRole = result[0][0].type_utilisateur;
         req.session.userID = result[0][0].id;
         req.session.prenom = result[0][0].prenom;
-        if (req.session.userRole == "agent"){   
+        if (req.session.userRole == "agent") {
             res.redirect("/gerant/accueil");
         }
-        else if (req.session.userRole == "admin"){
+        else if (req.session.userRole == "admin") {
             res.redirect("/admin/accueil");
         }
-        else{
+        else {
             res.redirect("/");
         }
-        
+
     }
     //si c'est le cas : on recup le rôle + on initialise une session + redirection page accueil
     else {
-        res.render("connexion", {message : "Nom d'utilisateur ou mot de passe incorrect"});
+        res.render("connexion", { message: "Nom d'utilisateur ou mot de passe incorrect" });
     }
     //sinon : message d'erreur + redirection page connexion
 });
 
 
-app.get("/inscription", function(req,res){
-    res.render("inscription", {variable : "aled"});
+app.get("/inscription", function (req, res) {
+    res.render("inscription", { variable: "aled" });
 });
 
-app.get("/catalogue_categorie", function(req,res){
-    res.render("catalogue_categorie", {variable : "aled"});
+app.get("/catalogue_categorie", function (req, res) {
+    res.render("catalogue_categorie", { variable: "aled" });
 });
-
-
 
 
 
@@ -245,33 +247,34 @@ app.get("/catalogue_categorie", function(req,res){
 
 // partie pour le gerant
 
-app.get("/gerant/accueil", async function(req,res){
+app.get("/gerant/accueil", async function (req, res) {
     let produits_aime = await pool.query("SELECT * FROM produit LIMIT 5");
-    res.render("gerant/accueil", {produits_aime : produits_aime[0],
-        prenom:req.session.nom
+    res.render("gerant/accueil", {
+        produits_aime: produits_aime[0],
+        prenom: req.session.nom
     });
 
 });
 
-app.get("/gerant/ajout_suppr_produit", async function(req,res){
+app.get("/gerant/ajout_suppr_produit", async function (req, res) {
     const liste_produit = await pool.query("SELECT * FROM produit");
-    res.render("gerant/ajout_suppr_produit", {produits_suppr : liste_produit[0]});
+    res.render("gerant/ajout_suppr_produit", { produits_suppr: liste_produit[0] });
 });
 
-app.get("/gerant/check_reservation", function(req,res){
-    res.render("gerant/check_reservation", {variable : "aled"});
+app.get("/gerant/check_reservation", function (req, res) {
+    res.render("gerant/check_reservation", { variable: "aled" });
 });
 
-app.get("/gerant/liste_reservation", async function(req,res){
+app.get("/gerant/liste_reservation", async function (req, res) {
     const liste_reservation = await pool.query("SELECT produit.description, produit.marque, produit.modele, produit.image, location.date_debut, location.date_retour_prevue, location.id, location.prix_total, location.date_retour_effective, utilisateur.login, utilisateur.email FROM produit NATURAL JOIN location LEFT JOIN utilisateur ON (utilisateur.id = location.utilisateur_id) WHERE location.date_retour_effective is null")
-    res.render("gerant/liste_resa", {liste_resa :liste_reservation[0]});
+    res.render("gerant/liste_resa", { liste_resa: liste_reservation[0] });
 });
 
-app.get("/gerant/nouveaute", function(req,res){
-    res.render("gerant/nouveaute", {variable : "aled"});
+app.get("/gerant/nouveaute", function (req, res) {
+    res.render("gerant/nouveaute", { variable: "aled" });
 });
 
-app.get("/gerant/catalogue_produit", async function(req, res) {
+app.get("/gerant/catalogue_produit", async function (req, res) {
     const tri = req.query.tri;
     const ordre = req.query.ordre === 'desc' ? 'DESC' : 'ASC';
     const filtre = req.query.filtre;
@@ -300,34 +303,35 @@ app.get("/gerant/catalogue_produit", async function(req, res) {
 });
 
 
-app.get('/gerant/produit/:id', async function(req, res) {
+app.get('/gerant/produit/:id', async function (req, res) {
     const produitId = req.params.id;
     const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
     const produit = row[0][0]
     const type = produit.type
     const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ?LIMIT 3", [type, produitId]);
-    res.render('gerant/produit', { 
-        produit : produit,
-        produit_plaire : produit_plaire[0]
+    res.render('gerant/produit', {
+        produit: produit,
+        produit_plaire: produit_plaire[0]
     })
 });
 
-app.get('/gerant/reservation/:id', async function(req, res) {
+app.get('/gerant/reservation/:id', async function (req, res) {
     const produitId = req.params.id;
     const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
     const produit = row[0][0]
     const type = produit.type
     const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ?LIMIT 3", [type, produitId]);
-    res.render('gerant/reservation', { 
-        produit : produit
+    res.render('gerant/reservation', {
+        produit: produit
     })
 });
 
-app.get('/admin/accueil', async function(req, res) {
-    
+app.get('/admin/accueil', async function (req, res) {
+
     let produits_aime = await pool.query("SELECT * FROM produit LIMIT 5");
-    res.render("admin/accueil", {produits_aime : produits_aime[0],
-        prenom:req.session.nom
+    res.render("admin/accueil", {
+        produits_aime: produits_aime[0],
+        prenom: req.session.nom
     });
 });
 
@@ -335,20 +339,20 @@ app.get('/admin/accueil', async function(req, res) {
 
 // Actions au click sur les boutons
 
-app.post('/ajouter-produit', upload.single('image'), async function(req, res) {
+app.post('/ajouter-produit', upload.single('image'), async function (req, res) {
     try {
         const { marque, modele, categorie, prix, description } = req.body;
         const image = req.file ? `/img/produits/${req.file.filename}` : null;
-        await pool.query("INSERT INTO produit (type, description, marque, modele, prix_location, etat, image) VALUES (?, ?, ?, ?, ?, ?, ?)",[categorie, description, marque, modele, prix, 'très bon état', image]);
+        await pool.query("INSERT INTO produit (type, description, marque, modele, prix_location, etat, image) VALUES (?, ?, ?, ?, ?, ?, ?)", [categorie, description, marque, modele, prix, 'très bon état', image]);
 
-        res.redirect('/gerant/ajout_suppr_produit'); 
+        res.redirect('/gerant/ajout_suppr_produit');
     } catch (err) {
         console.error(err);
         res.status(500).send("Erreur lors de l'ajout du produit");
     }
 });
 
-app.post('/rechercher_suppression', async function(req, res) {
+app.post('/rechercher_suppression', async function (req, res) {
     try {
         const nomRecherche = '%' + req.body.search + '%';
         const produits_suppr = await pool.query("SELECT * FROM produit WHERE modele LIKE ? OR marque LIKE ?", [nomRecherche, nomRecherche]);
@@ -360,10 +364,10 @@ app.post('/rechercher_suppression', async function(req, res) {
 });
 
 
-app.post('/supprimer-produit', async function(req, res){
+app.post('/supprimer-produit', async function (req, res) {
     try {
         const produitId = req.body.id;
-        await pool.query("DELETE FROM produit WHERE id = ? AND NOT EXISTS (SELECT * FROM location WHERE produit_id = ?);", [produitId,produitId]);
+        await pool.query("DELETE FROM produit WHERE id = ? AND NOT EXISTS (SELECT * FROM location WHERE produit_id = ?);", [produitId, produitId]);
         res.redirect('/gerant/ajout_suppr_produit');
     } catch (err) {
         console.error(err);
@@ -371,22 +375,27 @@ app.post('/supprimer-produit', async function(req, res){
     }
 });
 
-app.post('/supp-compte', async function(req, res){
+app.post('/supp-compte', async function (req, res) {
     try {
-        const userId = req.body.id;
-        await pool.query("DELETE FROM utilisateur WHERE id = ? AND type_utilisateur NOT LIKE 'agent' AND NOT EXISTS (SELECT 1 FROM location WHERE utilisateur_id = ?);", [userId, userId]);
-        res.redirect('/index');
+        const userId = req.session.userID;
+        const result = await pool.query("DELETE FROM utilisateur WHERE id = ? AND type_utilisateur = 'client' AND NOT EXISTS (SELECT * FROM location WHERE utilisateur_id = ? );" , [userId, userId]);
+        if (result[0].affectedRows > 0) { //affectedRows = le nombre de lignes modifiées par la requête et result[0] c'est ce qu'il y a dans la table
+            req.session.destroy();
+            res.redirect('/connexion');
+        } else {
+            res.status(400).send("Votre compte a des réservations en cours. Impossible de le supprimer.");
+        }
     } catch (err) {
         console.error(err);
-        res.status(500).send("L'utilisateur à des réservation ou erreur lors de la suppression du compte");
+        res.status(500).send("Erreur lors de la suppression du compte");
     }
 });
 
-app.post('/inscription_infos', async function(req, res){
+app.post('/inscription_infos', async function (req, res) {
     const nom = req.body.nom;
     const prenom = req.body.prenom;
     const tel = req.body.telephone;
-    const age = req.body.age;
+    const age = req.body.ddn;
     const mail = req.body.mail;
     const mdp = req.body.mdp;
     const mdp_confirm = req.body.mdp_confirm;
@@ -394,8 +403,8 @@ app.post('/inscription_infos', async function(req, res){
     const recevoir_mail = !!req.body.recevoir_mail;
     const login = req.body.login;
 
-    const mailExistant = await pool.query("SELECT * FROM utilisateur WHERE email = ?",[mail]);
-    const loginExistant = await pool.query("SELECT * FROM utilisateur WHERE login = ?",[login])
+    const mailExistant = await pool.query("SELECT * FROM utilisateur WHERE email = ?", [mail]);
+    const loginExistant = await pool.query("SELECT * FROM utilisateur WHERE login = ?", [login])
 
 
     if (mailExistant[0].length > 0) {
@@ -405,20 +414,37 @@ app.post('/inscription_infos', async function(req, res){
         return res.render("inscription", { message: "Email déjà utilisé" });
     }
 
-    else if (mdp == mdp_confirm){
+    else if (mdp == mdp_confirm) {
         const mdp_hash = crypto.createHash('md5').update(mdp).digest('hex')
         await pool.query("INSERT INTO utilisateur(login,password,nom,prenom,email,type_utilisateur, téléphone, age, newsletter) VALUES (?,?,?,?,?,?,?,?, ?)", [login, mdp_hash, nom, prenom, mail, 'client', tel, age, recevoir_mail]);
         res.redirect('/');
-    } else{
-        res.render("/inscription", {message : "Une information est erronée"});
+    } else {
+        res.render("/inscription", { message: "Une information est erronée" });
     }
 
 
-    
+
 });
 
-app.post('/deco', async function(req, res){
-    
+app.post('/modif_infos', async function(req, res){
+    try {
+        req.session.userId = result[0][0].id;
+        req.session.userprenom = result[0][0].prenom;
+        req.session.usernom = result[0][0].nom;
+        req.session.userddn = result[0][0].ddn;
+        req.session.useremail = result[0][0].email;
+        req.session.userpassword = result[0][0].password;
+        await pool.query("UPDATE utilisateur SET prenom = ?, nom = ?, ddn = ?, email = ?, password = ? WHERE id = ? );", [userprenom, usernom, userddn, useremail, userpassword, userId]);
+        res.redirect('/index');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Erreur lors des modification du compte");
+    }
+});
+
+
+app.post('/deco', async function (req, res) {
+
     req.session.destroy();
     res.redirect('/connexion');
 
@@ -444,7 +470,7 @@ app.post('/deco', async function(req, res){
 
 
 
-app.use((req,res) =>{
+app.use((req, res) => {
     res.status(404).render("404");
 })
 

@@ -1,7 +1,8 @@
 <%- include("header") %>
 
     <body>
-        <h1>Bonjour <%= userlogin %></h1>
+        <h1>Bonjour <%= user.login %>
+        </h1>
         <h2 class="titre-profil">Mon historique d'achat</h2>
         <div class="background-historique-profil">
             <img src="/img/produits/Prdt1.png">
@@ -36,10 +37,6 @@
             </div>
 
         </div>
-
-    </body>
-
-    <%- include("footer") %>
         <div class="modif-profil" id="modifProfil">
             <div class="modifpro">
                 <button class="close-btn" id="closeModifBtn">&times;</button>
@@ -47,14 +44,22 @@
                     <button type="submit" class="deco">Déconnexion</button>
                 </form>
                 <h2>Modifier mon profil</h2>
-                <form action="/inscription_infos" method="POST">
-                    <p><%= userLName %></p>
+                <form action="/modif_infos" method="POST">
+                    <p>
+                        <%= user.nom %>
+                    </p>
                     <input type="text" name="nom" placeholder="   Nom*">
-                    <p><%= userFName %></p>
+                    <p>
+                        <%= user.prenom %>
+                    </p>
                     <input type="text" name="prenom" placeholder="   Prénom*">
-                    <p><%= userAge %></p>
-                    <input type="age" name="age" placeholder="   Âge*">
-                    <p><%= userMail %></p>
+                    <p>
+                        <%= user.ddn %>
+                    </p>
+                    <input type="age" name="age" placeholder="   Date de naissance*">
+                    <p>
+                        <%= user.email %>
+                    </p>
                     <input type="email" name="mail" placeholder="   Email*">
                     <p>Mot de passe</p>
                     <input type="password" name="mdp" placeholder="   Mot de passe*">
@@ -68,11 +73,17 @@
                         <button type="submit" class="save-btn" id="saveBtn">Confirmer les modification</button>
                     </div>
                 </form>
-                <form action="/supp-compte">
-                    <p class="supp_compte">Supprimer le compte</p>
+                <form action="/supp-compte" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');">
+                    <button type="submit" class="supp_compte">
+                        Supprimer le compte
+                    </button>
                 </form>
             </div>
         </div>
+    </body>
+
+    <%- include("footer") %>
+
 
         <script>
             const modif = document.getElementById('modifProfil');
@@ -88,21 +99,3 @@
             });
 
         </script>
-
-
-
-app.post('/inscription_infos', async function(req, res){
-    try {
-        const userId = req.body.id;
-        const userprenom = req.body.prenom;
-        const usernom = req.body.nom;
-        const userddn = req.body.age;
-        const useremail = req.body.mail;
-        const userpassword = req.body.mdp;
-        await pool.query("UPDATE utilisateur SET prenom = ?, nom = ?, ddn = ?, email = ?, password = ? WHERE id = ? );", [userprenom, usernom, userddn, useremail, userpassword, userId]);
-        res.redirect('/index');
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("L'utilisateur à des réservation ou erreur lors de la suppression du compte");
-    }
-});
