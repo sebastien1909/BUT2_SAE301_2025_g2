@@ -10,31 +10,9 @@
     </div>
 
 
-
-
-    <div class="backgound-reservation-produit">
-        <div class="background-liste-produit">
-            <div class="image-reservation-produit">
-                <img src="/img/produits/Prdt14.jpg" alt="image">
-            </div>
-
-            <div class="card-reservation-produit">
-                <h1 class="titre-produit-reservation">Titre du produit</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur mi enim, malesuada sed volutpat quis, dictum in turpis. Vivamus volutpat, nunc in pellentesque gravida, elit velit egestas orci, sed tempus velit ex et sem. Sed sed pulvinar neque.</p>
-                    <p class="titre-reservation">59.99€</p>
-
-                <div class="bouton-reservation-annulation">
-                    <button type="submit" class="bouton-reservation">Voir la réservation</button>
-                    <button type="submit" class="bouton-annulation">Mettre fin à la réservation</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <div class="liste-reservation-cont">
 
-        <% for (element of liste_resa){ %>
+        <% for (let element of liste_resa){ %>
             <div class="backgound-reservation-produit">
                 <div class="background-liste-produit">                      
                         <% let marque = element.marque%>
@@ -43,18 +21,15 @@
                         <% let desc = element.description%>
                         <% let prix = element.prix_total %>
                         <% let image = element.image %>
-                        <% let date_retour = element.date_retour_effective %>
+                        <% let date_debut_resa = new Date(element.date_debut) %>
                         <% let login = element.login %>
                         <% let mail = element.email %>
-
-                        
+                        <% let date_actu = new Date() %>
                         <% const date_fin = new Date(element.date_retour_prevue); 
                             const jour_fin = String(date_fin.getDate()).padStart(2, '0');
                             const mois_fin = String(date_fin.getMonth() + 1).padStart(2, '0');
                             const annee_fin = date_fin.getFullYear();
                         %>
-
-
 
                         <% const date_debut = new Date(element.date_debut); 
                             const jour_debut = String(date_debut.getDate()).padStart(2, '0');
@@ -82,7 +57,15 @@
 
                             <div class="bouton-reservation-annulation">
                                 <button type="submit" class="bouton-reservation">Voir la réservation</button>
-                                <button type="submit" class="bouton-annulation">Mettre fin à la réservation</button>
+
+                                <% if (date_debut_resa > date_actu) { %>
+                                    <form action="/deleteReservation/<%= element.id %>" method="POST">
+                                        <button type="submit" class="bouton-annulation">Mettre fin à la réservation</button>
+                                    </form>
+                                <% } else { %>
+                                    <p class="info-indispo">Impossible d'annuler : la réservation a déjà commencé.</p>
+                                <% } %>
+
                             </div>
                         </div>
                     </div>

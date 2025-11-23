@@ -83,8 +83,33 @@ app.get("/", async function (req, res) {
     });
 });
 
+app.get("/logo-accueil", function(req,res){
+    let role = req.session.userRole;
+    if (role == "agent"){
+        res.redirect("/gerant/accueil");
+    } else if (role == "admin"){
+        res.redirect("/admin/accueil");
+    } else {
+        res.redirect("/");
+    }
+})
+
+app.get("/retour-menu", async function (req, res) {
+    let role = req.session.userRole;
+
+    if (role == "client"){
+        res.redirect("/");
+    } else if (role == "agent"){
+        res.redirect("/gerant/accueil");
+    } else if (role == "admin"){
+        res.redirect("/admin/accueil");
+    } else {
+        res.redirect("/connexion");
+    }
+});
+
 app.get("/co", async function (req, res) {
-    if (req.session.userRole == "client") {
+    if (req.session.userRole) {
         let user = await pool.query("SELECT * FROM utilisateur WHERE id = ?", [req.session.userID]);
 
         if (user[0].length > 0) { // vérifie si l'utilisateur existe
@@ -266,8 +291,9 @@ app.get("/gerant/check_reservation", function (req, res) {
 });
 
 app.get("/gerant/liste_reservation", async function (req, res) {
-    const liste_reservation = await pool.query("SELECT produit.description, produit.marque, produit.modele, produit.image, location.date_debut, location.date_retour_prevue, location.id, location.prix_total, location.date_retour_effective, utilisateur.login, utilisateur.email FROM produit NATURAL JOIN location LEFT JOIN utilisateur ON (utilisateur.id = location.utilisateur_id) WHERE location.date_retour_effective is null")
-    res.render("gerant/liste_resa", { liste_resa: liste_reservation[0] });
+    const liste_reservation = await pool.query("SELECT produit.description, produit.marque, produit.modele, produit.image, location.date_debut, location.date_retour_prevue, location.id, location.prix_total, location.date_retour_effective, utilisateur.login, utilisateur.email FROM produit NATURAL JOIN location LEFT JOIN utilisateur ON (utilisateur.id = location.utilisateur_id)")
+    const resa_unfinished = await pool.query("SELECT produit.description, produit.marque, produit.modele, produit.image, location.date_debut, location.date_retour_prevue, location.id, location.prix_total, location.date_retour_effective, utilisateur.login, utilisateur.email FROM location JOIN utilisateur ON (utilisateur.id = location.utilisateur_id) JOIN produit ON (produit.id = location.produit_id) WHERE location.date_retour_effective IS NULL")
+    res.render("gerant/liste_resa", { liste_resa: liste_reservation[0], resa_pas_finis:resa_unfinished[0] });
 });
 
 app.get("/gerant/nouveaute", function (req, res) {
@@ -326,6 +352,9 @@ app.get('/gerant/reservation/:id', async function (req, res) {
     })
 });
 
+
+
+
 app.get('/admin/accueil', async function (req, res) {
 
     let produits_aime = await pool.query("SELECT * FROM produit LIMIT 5");
@@ -335,9 +364,76 @@ app.get('/admin/accueil', async function (req, res) {
     });
 });
 
+app.get('/ajout_gerant', async function (req,res){
+    const liste_gerant = await pool.query("SELECT * FROM utilisateur WHERE type_utilisateur LIKE 'agent'")
+    res.render("admin/liste_gerants", {gerants:liste_gerant[0]})
+})
+
+
+app.get('/admin/ajout_agent', async function (req,res){
+    const liste_gerant = await pool.query("SELECT * FROM utilisateur WHERE type_utilisateur LIKE 'agent'")
+    res.render("admin/ajout_agent", {gerants:liste_gerant[0]})
+})
+
+
+
+
+
+
+
+
+
 
 
 // Actions au click sur les boutons
+
+app.post("/deleteReservation/:id", async function(req, res){
+    try {
+        const id = req.params.id;
+        console.log("ID à supprimer:", id); // DEBUG
+        
+        const suppression = await pool.query("DELETE FROM location WHERE id = ?", [id]);
+        console.log("Résultat suppression:", suppression[0]); // DEBUG
+        
+        res.redirect("/gerant/liste_reservation");
+    }
+    catch(err) {
+        console.error("Erreur:", err);
+        res.status(500).send("Erreur lors de la suppression de la réservation");
+    }
+});
+
+
+app.post("/ajouter-agent", async function (req, res){
+    try{
+        const { username, nom, prenom, ddn, mdp, mail } = req.body;
+        
+        
+        const loginExistant = await pool.query("SELECT * FROM utilisateur WHERE login = ?", [username]);
+        const mailExistant = await pool.query("SELECT * FROM utilisateur WHERE email = ?", [mail]);
+        
+        if (loginExistant[0].length > 0) {
+            return res.status(400).send("Ce nom d'utilisateur existe déjà");
+        }
+        
+        if (mailExistant[0].length > 0) {
+            return res.status(400).send("Cet email est déjà utilisé");
+        }
+        
+        // Hasher le mot de passe
+        const mdp_hash = crypto.createHash('md5').update(mdp).digest('hex');
+        
+        await pool.query("INSERT INTO utilisateur (login, password, nom, prenom, ddn, email, type_utilisateur) VALUES (?, ?, ?, ?, ?, ?, 'agent')", [username, mdp_hash, nom, prenom, ddn, mail]);
+        
+        console.log("Agent ajouté avec succès");
+        res.redirect('/ajout_gerant');
+        
+    } catch(err){
+        console.error("Erreur complète:", err);
+        res.status(500).send(`Erreur lors de l'ajout de l'agent: ${err.message}`);
+    }
+});
+
 
 app.post('/ajouter-produit', upload.single('image'), async function (req, res) {
     try {

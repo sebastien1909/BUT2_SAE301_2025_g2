@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/footer-inscription.css">
+    <link rel="stylesheet" href="/CSS/connexion.css">
+    <link rel="stylesheet" href="/CSS/panier.css">
+    <link rel="stylesheet" href="/CSS/header-fav-paie.css">
+    <link rel="stylesheet" href="/CSS/accueil.css">
+    <link rel="stylesheet" href="/CSS/gerant.css">
+    
+    <link rel="stylesheet" href="/CSS/produit.css">
+    <link rel="stylesheet" href="/CSS/autres_produits.css">
+ 
+ 
+    <link href="https://fonts.googleapis.com/css2?family=Jacques+Francois" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+<body>
+    <header>
+        <div class="top-header">
+          <div class="logo">
+              <a href="/logo-accueil">
+                <img src="/img/logo.png" alt="LocFit Logo" width="120">
+              </a>
+          </div>
+
+          <div class="search-bar">
+              <input type="text" placeholder="   Rechercher">
+              <button><i class="fa fa-search"></i></button>
+          </div>
+
+          <div class="icons">
+                <a href="/favoris"><i class="fa-regular fa-heart fa-xl" style="color: #ffffff;"></i></a>
+                <a href="/panier"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ffffff;"></i></a>
+                <a href="/co"><i class="fa-regular fa-user fa-2x" style="color: #ffffff;"></i></a>
+          </div>
+      </div>
+
+      <nav class="bottom-header">
+          <a href="/catalogue_categorie">Nouveautés</a>
+          <a href="/catalogue_produit">Produits</a>
+          <a href="/ajout_gerant">Liste gérants</a>
+      </nav>
+  </header>
+
+
+<div class="ajout-produit-container">
+        <form action="/ajouter-agent" method="POST">
+
+            <div class="form-group">
+                <label for="username">username</label>
+                <input type="text" name="username" id="username" placeholder="Veuillez entrer le username de l'agent"></input>
+            </div>
+
+            <div class="form-group">
+                <label for="nom">Nom</label>
+                <input type="text" name="nom" id="nom" placeholder="Veuillez entrer le nom de l'agent"></input>
+            </div>
+
+            <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <input type="text" name="prenom" id="prenom" placeholder="Veuillez entrer le prenom de l'agent">
+            </div>
+
+            <div class="form-group">
+                <label for="ddn">Date de naissance</label>
+                <input type="date" name="ddn" id="ddn" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mdp">Mot de Passe</label>
+                <input type="text" name="mdp" id="mdp" placeholder="Définissez le mot de passe de l'agent">
+            </div>
+
+            <div class="form-group">
+                <label for="mail">email</label>
+                <input type="text" name="mail" id="mail" placeholder="Définissez l'adresse mail de l'agent">
+            </div>
+
+            <div class="ajout_supp">
+                <button type="submit">Ajouter l'agent</button>
+            </div>
+        </form>
+    </div>
+  </div>
+<%- include("../footer") %>
