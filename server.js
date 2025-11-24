@@ -527,7 +527,7 @@ app.post('/modif_infos', async function (req, res) {
     try {
         const userId = req.session.userID;
         const currentUser = await pool.query("SELECT * FROM utilisateur WHERE id = ?", [userId]);
-        const useractuel = currentUser[0][0];
+        const useractuel = currentUser[0]; // prends la table de l'user
         const { prenom, nom, ddn, email, password } = req.body;
 
         const updates = [];
@@ -564,9 +564,8 @@ app.post('/modif_infos', async function (req, res) {
             return res.redirect('/co');
         }
 
-        values.push(userId); // ID à la fin
-
         //modif info bdd
+        values.push(userId);
         const requete = `UPDATE utilisateur SET ${updates.join(', ')} WHERE id = ?`;
         await pool.query(requete, values);
 
