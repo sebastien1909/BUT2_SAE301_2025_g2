@@ -420,7 +420,6 @@ app.post("/ajouter-agent", async function (req, res){
             return res.status(400).send("Cet email est déjà utilisé");
         }
         
-        // Hasher le mot de passe
         const mdp_hash = crypto.createHash('md5').update(mdp).digest('hex');
         
         await pool.query("INSERT INTO utilisateur (login, password, nom, prenom, ddn, email, type_utilisateur) VALUES (?, ?, ?, ?, ?, ?, 'agent')", [username, mdp_hash, nom, prenom, ddn, mail]);
@@ -500,14 +499,14 @@ app.post('/inscription_infos', async function (req, res) {
     const login = req.body.login;
 
     const mailExistant = await pool.query("SELECT * FROM utilisateur WHERE email = ?", [mail]);
-    const loginExistant = await pool.query("SELECT * FROM utilisateur WHERE login = ?", [login])
+    const loginExistant = await pool.query("SELECT * FROM utilisateur WHERE login = ?", [login]);
 
 
     if (mailExistant[0].length > 0) {
         return res.render("inscription", { message: "Email déjà utilisé" });
     }
     else if (loginExistant[0].length > 0) {
-        return res.render("inscription", { message: "Email déjà utilisé" });
+        return res.render("inscription", { message: "Login déjà utilisé" });
     }
 
     else if (mdp == mdp_confirm) {
@@ -517,9 +516,6 @@ app.post('/inscription_infos', async function (req, res) {
     } else {
         res.render("/inscription", { message: "Une information est erronée" });
     }
-
-
-
 });
 
 app.post('/modif_infos', async function (req, res) {
