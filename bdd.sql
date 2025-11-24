@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 23 oct. 2025 à 06:14
+-- Généré le : lun. 24 nov. 2025 à 07:30
 -- Version du serveur : 9.1.0
 -- Version de PHP : 8.3.14
 
@@ -24,6 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `favoris`
+--
+
+DROP TABLE IF EXISTS `favoris`;
+CREATE TABLE IF NOT EXISTS `favoris` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_utilisateur` varchar(100) NOT NULL,
+  `id_produit` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `favoris`
+--
+
+INSERT INTO `favoris` (`id`, `id_utilisateur`, `id_produit`) VALUES
+(1, '1', '40'),
+(2, '7', '5');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `location`
 --
 
@@ -39,7 +61,51 @@ CREATE TABLE IF NOT EXISTS `location` (
   PRIMARY KEY (`id`),
   KEY `utilisateur_id` (`utilisateur_id`),
   KEY `produit_id` (`produit_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `location`
+--
+
+INSERT INTO `location` (`id`, `date_debut`, `date_retour_prevue`, `date_retour_effective`, `prix_total`, `utilisateur_id`, `produit_id`) VALUES
+(1, '2025-01-05', '2025-01-09', '2025-01-09', 23.96, 1, 4),
+(2, '2025-01-15', '2025-01-18', '2025-01-18', 23.97, 2, 2),
+(3, '2025-02-03', '2025-02-05', '2025-02-05', 9.98, 3, 8),
+(4, '2025-02-10', '2025-02-12', '2025-02-12', 4.98, 4, 6),
+(5, '2025-03-08', '2025-03-12', '2025-03-12', 23.96, 5, 24),
+(6, '2025-03-20', '2025-03-25', '2025-03-25', 424.95, 6, 23),
+(7, '2025-04-12', '2025-04-14', '2025-04-14', 9.98, 9, 36),
+(8, '2025-05-05', '2025-05-08', '2025-05-08', 20.97, 3, 1),
+(9, '2025-05-20', '2025-05-22', '2025-05-22', 4.98, 2, 12),
+(10, '2025-06-02', '2025-06-06', '2025-06-06', 364.95, 1, 33),
+(11, '2025-06-18', '2025-06-21', '2025-06-21', 5.97, 4, 7),
+(12, '2025-07-10', '2025-07-14', '2025-07-14', 27.96, 8, 43),
+(13, '2025-08-05', '2025-08-10', NULL, 174.95, 9, 47),
+(14, '2025-09-03', '2025-09-07', NULL, 27.96, 5, 37),
+(15, '2025-10-12', '2025-10-16', NULL, 299.96, 6, 34);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `panier`
+--
+
+DROP TABLE IF EXISTS `panier`;
+CREATE TABLE IF NOT EXISTS `panier` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_utilisateur` varchar(100) NOT NULL,
+  `id_produit` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `panier`
+--
+
+INSERT INTO `panier` (`id`, `id_utilisateur`, `id_produit`) VALUES
+(1, '1', '17'),
+(2, '1', '39'),
+(3, '4', '28');
 
 -- --------------------------------------------------------
 
@@ -59,14 +125,13 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `image` varchar(255) DEFAULT NULL,
   `note` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `produit`
 --
 
 INSERT INTO `produit` (`id`, `type`, `description`, `marque`, `modele`, `prix_location`, `etat`, `image`, `note`) VALUES
-(1, 'vetements', 'Veste coupe-vent imperméable pour la randonnée', 'Quechua', 'MH100', 6.99, 'bon état', '/img/produits/Prdt1.png', 4),
 (2, 'vetements', 'Pantalon de ski chaud et respirant', 'Wedze', 'SKI 500', 7.99, 'très bon état', '/img/produits/Prdt2.png', 3),
 (3, 'vetements', 'T-shirt technique anti-transpiration', 'Nike', 'Dri-Fit Pro', 3.49, 'neuf', '/img/produits/Prdt3.png', 4),
 (4, 'vetements', 'Veste de running réfléchissante', 'Kalenji', 'Run Light', 5.99, 'bon état', '/img/produits/Prdt4.png', 4),
@@ -112,8 +177,8 @@ INSERT INTO `produit` (`id`, `type`, `description`, `marque`, `modele`, `prix_lo
 (44, 'équipement', 'Raquette de padel avec grip ergonomique', 'Head', 'Graphene 360 Alpha', 10.99, 'bon état', '/img/produits/Prdt44.png', 4),
 (45, 'équipement', 'Planche de surf en mousse pour débutants', 'Olaian', '500 Softboard', 29.99, 'état moyen', '/img/produits/Prdt45.png', 5),
 (46, 'équipement', 'Skateboard complet en érable', 'Oxelo', 'Mid 500', 12.99, 'bon état', '/img/produits/Prdt46.png', 3),
-(47, 'équipement', 'Stand up paddle gonflable avec pompe', 'Itwit', 'SUP 11', 34.99, 'bon état', '/img/produits/Prdt47.png', 4),
-(48, 'équipement', 'Bodyboard avec leash inclus', 'Tribord', '500 Dynamique', 8.99, 'bon état', '/img/produits/Prdt48.png', 3);
+(47, 'équipement', 'Stand up paddle gonflable avec pompe', 'Itwit', 'SUP 11', 34.99, 'bon état', '/img/produits/Prdt47.png', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -136,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
@@ -151,57 +216,9 @@ INSERT INTO `utilisateur` (`id`, `login`, `password`, `nom`, `prenom`, `ddn`, `e
 (6, 'lpetit', '81dc9bdb52d04dc20036dbd8313ed055', 'Petit', 'Laura', '1989-11-15', 'lpetit@example.com', 'agent', NULL, NULL, NULL),
 (7, 'adufrene', '81dc9bdb52d04dc20036dbd8313ed055', 'Dufrène', 'Alice', '1975-01-01', 'adufrene@example.com', 'admin', NULL, NULL, NULL),
 (8, 'test', '81dc9bdb52d04dc20036dbd8313ed055', 'Confrere', 'Sébastien', '0000-00-00', 'sconfrere@gmail.com', 'client', NULL, NULL, NULL),
-(9, 'sconfrere', '81dc9bdb52d04dc20036dbd8313ed055', 'Sebabou', 'Troubadour', '0000-00-00', 'sconfrere6@gmail.com', 'client', 56, 2147483647, 0);
+(9, 'sconfrere', '81dc9bdb52d04dc20036dbd8313ed055', 'Sebabou', 'Troubadour', '0000-00-00', 'sconfrere6@gmail.com', 'client', 56, 2147483647, 0),
+(10, 'AgentTest', '81dc9bdb52d04dc20036dbd8313ed055', 'Agent', 'Test', '2652-09-18', 'agenttest@gmail.com', 'agent', NULL, NULL, NULL);
 COMMIT;
-
-DROP TABLE IF EXISTS `panier`;
-CREATE TABLE IF NOT EXISTS `panier` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_utilisateur` varchar(100) NOT NULL,
-  `id_produit` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-DROP TABLE IF EXISTS `favoris`;
-CREATE TABLE IF NOT EXISTS `favoris` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_utilisateur` varchar(100) NOT NULL,
-  `id_produit` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-INSERT INTO `panier` (`id`, `id_utilisateur`, `id_produit`) VALUES
-(1, '1', '17'),
-(2, '1', '39'),
-(3, '4', '28');
-COMMIT;
-
-INSERT INTO `favoris` (`id`, `id_utilisateur`, `id_produit`) VALUES
-(1, '1', '40'),
-(2, '7', '5');
-COMMIT;
---
--- Déchargement des données de la table `location`
---
-
-INSERT INTO `location` (`id`, `date_debut`, `date_retour_prevue`, `date_retour_effective`, `prix_total`, `utilisateur_id`, `produit_id`) VALUES
-(1, '2025-01-05', '2025-01-09', '2025-01-09', 23.96, 1, 4), -- 4 jours × 5.99
-(2, '2025-01-15', '2025-01-18', '2025-01-18', 23.97, 2, 2), -- 3 jours × 7.99
-(3, '2025-02-03', '2025-02-05', '2025-02-05', 9.98, 3, 8), -- 2 jours × 4.99
-(4, '2025-02-10', '2025-02-12', '2025-02-12', 4.98, 4, 6), -- 2 jours × 2.49
-(5, '2025-03-08', '2025-03-12', '2025-03-12', 23.96, 5, 24), -- 4 jours × 5.99
-(6, '2025-03-20', '2025-03-25', '2025-03-25', 424.95, 6, 23), -- 5 jours × 84.99
-(7, '2025-04-12', '2025-04-14', '2025-04-14', 9.98, 9, 36), -- 2 jours × 4.99
-(8, '2025-05-05', '2025-05-08', '2025-05-08', 20.97, 3, 1), -- 3 jours × 6.99
-(9, '2025-05-20', '2025-05-22', '2025-05-22', 4.98, 2, 12), -- 2 jours × 2.49
-(10, '2025-06-02', '2025-06-06', '2025-06-06', 364.95, 1, 33), -- 5 jours × 72.99
-(11, '2025-06-18', '2025-06-21', '2025-06-21', 5.97, 4, 7), -- 3 jours × 1.99
-(12, '2025-07-10', '2025-07-14', '2025-07-14', 27.96, 8, 43), -- 4 jours × 6.99
-(13, '2025-08-05', '2025-08-10', '2025-08-10', 174.95, 9, 47), -- 5 jours × 34.99
-(14, '2025-09-03', '2025-09-07', '2025-09-07', 27.96, 5, 37), -- 4 jours × 6.99
-(15, '2025-10-12', '2025-10-16', '2025-10-16', 299.96, 6, 34); -- 4 jours × 74.99
-COMMIT;
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

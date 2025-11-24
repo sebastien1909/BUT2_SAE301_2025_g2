@@ -226,36 +226,7 @@ app.get("/connexion", function (req, res) {
 
 
 
-app.post("/connexion", async function (req, res) {
-    // recup info de connexion
-    let username = req.body.login;
-    let password = req.body.mdp;
-    let hashedPassword = crypto.createHash('md5').update(password).digest('hex');
 
-    let result = await pool.query("SELECT * FROM utilisateur WHERE login = ? AND password = ?", [username, hashedPassword])
-
-    // verification info de l'utilisateur sont dans la bdd
-    if (result[0].length > 0) {
-        req.session.userRole = result[0][0].type_utilisateur;
-        req.session.userID = result[0][0].id;
-        req.session.prenom = result[0][0].prenom;
-        if (req.session.userRole == "agent") {
-            res.redirect("/gerant/accueil");
-        }
-        else if (req.session.userRole == "admin") {
-            res.redirect("/admin/accueil");
-        }
-        else {
-            res.redirect("/");
-        }
-
-    }
-    //si c'est le cas : on recup le rôle + on initialise une session + redirection page accueil
-    else {
-        res.render("connexion", { message: "Nom d'utilisateur ou mot de passe incorrect" });
-    }
-    //sinon : message d'erreur + redirection page connexion
-});
 
 
 app.get("/inscription", function (req, res) {
@@ -387,6 +358,38 @@ app.get('/admin/ajout_agent', async function (req,res){
 
 // Actions au click sur les boutons
 
+
+app.post("/connexion", async function (req, res) {
+    // recup info de connexion
+    let username = req.body.login;
+    let password = req.body.mdp;
+    let hashedPassword = crypto.createHash('md5').update(password).digest('hex');
+
+    let result = await pool.query("SELECT * FROM utilisateur WHERE login = ? AND password = ?", [username, hashedPassword])
+
+    // verification info de l'utilisateur sont dans la bdd
+    if (result[0].length > 0) {
+        req.session.userRole = result[0][0].type_utilisateur;
+        req.session.userID = result[0][0].id;
+        req.session.prenom = result[0][0].prenom;
+        if (req.session.userRole == "agent") {
+            res.redirect("/gerant/accueil");
+        }
+        else if (req.session.userRole == "admin") {
+            res.redirect("/admin/accueil");
+        }
+        else {
+            res.redirect("/");
+        }
+
+    }
+    //si c'est le cas : on recup le rôle + on initialise une session + redirection page accueil
+    else {
+        res.render("connexion", { message: "Nom d'utilisateur ou mot de passe incorrect" });
+    }
+    //sinon : message d'erreur + redirection page connexion
+});
+
 app.post("/deleteReservation/:id", async function(req, res){
     try {
         const id = req.params.id;
@@ -517,8 +520,6 @@ app.post('/inscription_infos', async function (req, res) {
     } else {
         res.render("/inscription", { message: "Une information est erronée" });
     }
-
-
 
 });
 
