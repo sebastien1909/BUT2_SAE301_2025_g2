@@ -226,36 +226,7 @@ app.get("/connexion", function (req, res) {
 
 
 
-app.post("/connexion", async function (req, res) {
-    // recup info de connexion
-    let username = req.body.login;
-    let password = req.body.mdp;
-    let hashedPassword = crypto.createHash('md5').update(password).digest('hex');
 
-    let result = await pool.query("SELECT * FROM utilisateur WHERE login = ? AND password = ?", [username, hashedPassword])
-
-    // verification info de l'utilisateur sont dans la bdd
-    if (result[0].length > 0) {
-        req.session.userRole = result[0][0].type_utilisateur;
-        req.session.userID = result[0][0].id;
-        req.session.prenom = result[0][0].prenom;
-        if (req.session.userRole == "agent") {
-            res.redirect("/gerant/accueil");
-        }
-        else if (req.session.userRole == "admin") {
-            res.redirect("/admin/accueil");
-        }
-        else {
-            res.redirect("/");
-        }
-
-    }
-    //si c'est le cas : on recup le rôle + on initialise une session + redirection page accueil
-    else {
-        res.render("connexion", { message: "Nom d'utilisateur ou mot de passe incorrect" });
-    }
-    //sinon : message d'erreur + redirection page connexion
-});
 
 
 app.get("/inscription", function (req, res) {
@@ -387,6 +358,38 @@ app.get('/admin/ajout_agent', async function (req,res){
 
 // Actions au click sur les boutons
 
+
+app.post("/connexion", async function (req, res) {
+    // recup info de connexion
+    let username = req.body.login;
+    let password = req.body.mdp;
+    let hashedPassword = crypto.createHash('md5').update(password).digest('hex');
+
+    let result = await pool.query("SELECT * FROM utilisateur WHERE login = ? AND password = ?", [username, hashedPassword])
+
+    // verification info de l'utilisateur sont dans la bdd
+    if (result[0].length > 0) {
+        req.session.userRole = result[0][0].type_utilisateur;
+        req.session.userID = result[0][0].id;
+        req.session.prenom = result[0][0].prenom;
+        if (req.session.userRole == "agent") {
+            res.redirect("/gerant/accueil");
+        }
+        else if (req.session.userRole == "admin") {
+            res.redirect("/admin/accueil");
+        }
+        else {
+            res.redirect("/");
+        }
+
+    }
+    //si c'est le cas : on recup le rôle + on initialise une session + redirection page accueil
+    else {
+        res.render("connexion", { message: "Nom d'utilisateur ou mot de passe incorrect" });
+    }
+    //sinon : message d'erreur + redirection page connexion
+});
+
 app.post("/deleteReservation/:id", async function(req, res){
     try {
         const id = req.params.id;
@@ -474,7 +477,7 @@ app.post('/supp-compte', async function (req, res) {
     try {
         const userId = req.session.userID;
         const result = await pool.query("DELETE FROM utilisateur WHERE id = ? AND type_utilisateur = 'client' AND NOT EXISTS (SELECT * FROM location WHERE utilisateur_id = ? );", [userId, userId]);
-        if (result[0].affectedRows > 0) { //affectedRows = le nombre de lignes modifiées par la requête et result[0] c'est ce qu'il y a dans la table
+        if (result[0].length > 0) { //regarde si il y a un compte -- result[0] c'est ce qu'il y a dans la table
             req.session.destroy();
             res.redirect('/connexion');
         } else {
@@ -516,13 +519,17 @@ app.post('/inscription_infos', async function (req, res) {
     } else {
         res.render("/inscription", { message: "Une information est erronée" });
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f0e37c88c4830f8b3261bd4b1586ab04062fe35f
 });
 
 app.post('/modif_infos', async function (req, res) {
     try {
         const userId = req.session.userID;
         const currentUser = await pool.query("SELECT * FROM utilisateur WHERE id = ?", [userId]);
-        const useractuel = currentUser[0][0];
+        const useractuel = currentUser[0]; 
         const { prenom, nom, ddn, email, password } = req.body;
 
         const updates = [];
@@ -530,7 +537,7 @@ app.post('/modif_infos', async function (req, res) {
 
         if (prenom && prenom !== useractuel.prenom) { // le prenom && prenom évite de mettre à jour si le champ est vide
             updates.push('prenom = ?');
-            values.push(prenom); //ajoute la nouvelle valeur de prenom au tableau values
+            values.push(prenom);
         }
 
         if (nom && nom !== useractuel.nom) {
@@ -559,9 +566,8 @@ app.post('/modif_infos', async function (req, res) {
             return res.redirect('/co');
         }
 
-        values.push(userId); // ID à la fin
-
         //modif info bdd
+        values.push(userId);
         const requete = `UPDATE utilisateur SET ${updates.join(', ')} WHERE id = ?`;
         await pool.query(requete, values);
 
