@@ -478,7 +478,7 @@ app.post('/supp-compte', async function (req, res) {
     try {
         const userId = req.session.userID;
         const result = await pool.query("DELETE FROM utilisateur WHERE id = ? AND type_utilisateur = 'client' AND NOT EXISTS (SELECT * FROM location WHERE utilisateur_id = ? );", [userId, userId]);
-        if (result[0].affectedRows > 0) { //affectedRows = le nombre de lignes modifiées par la requête et result[0] c'est ce qu'il y a dans la table
+        if (result[0].length > 0) { //regarde si il y a un compte -- result[0] c'est ce qu'il y a dans la table
             req.session.destroy();
             res.redirect('/connexion');
         } else {
@@ -527,7 +527,7 @@ app.post('/modif_infos', async function (req, res) {
     try {
         const userId = req.session.userID;
         const currentUser = await pool.query("SELECT * FROM utilisateur WHERE id = ?", [userId]);
-        const useractuel = currentUser[0]; // prends la table de l'user
+        const useractuel = currentUser[0]; 
         const { prenom, nom, ddn, email, password } = req.body;
 
         const updates = [];
@@ -535,7 +535,7 @@ app.post('/modif_infos', async function (req, res) {
 
         if (prenom && prenom !== useractuel.prenom) { // le prenom && prenom évite de mettre à jour si le champ est vide
             updates.push('prenom = ?');
-            values.push(prenom); //ajoute la nouvelle valeur de prenom au tableau values
+            values.push(prenom);
         }
 
         if (nom && nom !== useractuel.nom) {

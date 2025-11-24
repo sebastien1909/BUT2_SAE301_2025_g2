@@ -55,10 +55,10 @@
                     <input type="text" name="prenom" placeholder="   Prénom*">
                     <% const dateDeNaissance=new Date(user.ddn); 
                     if (!isNaN(dateDeNaissance.getTime())) { <!-- Is Not a Number -->
-                        const jour=String(dateDeNaissance.getDate()).padStart(2, '0' ); 
-                        const mois=String(dateDeNaissance.getMonth() + 1).padStart(2, '0' ); 
+                        const jour=String(dateDeNaissance.getDate()); 
+                        const mois=String(dateDeNaissance.getMonth() + 1); 
                         const annee = dateDeNaissance.getFullYear();
-                        dateAffichee=`${jour}/${mois}/${annee}`; } %>
+                        dateAffichee=`${annee}-${mois}-${jour}`; } %>
                     <p>
                         <%= dateAffichee %>
                     </p>
