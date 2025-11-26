@@ -184,6 +184,7 @@ app.get("/reservation/:id", async function (req, res) {
     res.render("reservation", { produit: result });
 });
 
+
 app.get("/catalogue_produit", async function (req, res) {
     const tri = req.query.tri;
     const ordre = req.query.ordre === 'desc' ? 'DESC' : 'ASC';
@@ -198,22 +199,26 @@ app.get("/catalogue_produit", async function (req, res) {
         queryParams.push(valeur);
     }
 
-    // Ajout du tri si demandé
     if (tri) {
         RequetedeBase += ` ORDER BY ${tri} ${ordre}`;
     }
 
     try {
         const result = await pool.query(RequetedeBase, queryParams);
-        res.render("gerant/catalogue_produit", { liste_produits: result[0] });
+        
+        const view = req.session.userRole === 'agent' ? "gerant/catalogue_produit" : "catalogue_produit";
+            
+        res.render(view, { liste_produits: result[0] });
     } catch (error) {
         console.error("Erreur SQL :", error);
         res.status(500).send("Erreur serveur");
     }
 });
 
-app.get("/favoris", function (req, res) {
-    res.render("favoris", { variable: "aled" });
+app.get("/favoris", async function (req, res) {
+    let id_user = req.session.userID
+    const requete = await pool.query("SELECT * from favoris JOIN produit ON (favoris.id_produit = produit.id) JOIN utilisateur ON (favoris.id_utilisateur = utilisateur.id) WHERE id_utilisateur = ?", [id_user])
+    res.render("favoris", { liste_fav: requete[0] });
 });
 
 app.get("/abonnement", function (req, res) {

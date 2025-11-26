@@ -2,21 +2,46 @@
 <div class="favoris">
     <h1>Les favoris</h1>
     <p>Voici vos produit(s) favoris</p>
+    <% for (element of liste_fav){ %>
     <div class="card_favoris_gris">
-        <img src="#">
+
+        
+            <% let marque = element.marque%>
+            <% let modele =element.modele %>
+            <% let prix = element.prix_location %>
+            <% let image = element.image %>
+            <% let desc = element.description %>
+        <img src="<%= image %>">
         <div class="info_favoris">
-            <h3>Produit 1</h3>
-            <p>description</p>
-             <p class="prix">00,00€</p>
+            <h3>
+                <strong>
+                    <%= marque %> 
+                </strong>
+                <%= modele %>
+            </h3>
+            <p><%= desc %></p>
+             <p class="prix"><%= prix %> €</p>
            <div class="bas_favoris">
+                <% qte = element.quantite %>
+
+                <% if (qte > 0){ %>
                 <div class="dispo">
-                    <p>Disponibilité</p>
+                    <p>Disponible</p>
                 </div>
-                <button>Louer à nouveau</button>
+                <% } else{ %>
+                
+                <div class="indispo">
+                    <p>Indisponible</p>
+                </div>
+                <% } %>
+                <a href="reservation/<%= element.id %>">
+                    <button>Louer à nouveau</button>
+                </a>
             </div>
         </div>
         <i class="fa-solid fa-xmark fa-xl" style="color: white;"></i>
     </div>
+    <% } %>
     </div>
 </div>
 
