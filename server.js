@@ -519,10 +519,7 @@ app.post('/inscription_infos', async function (req, res) {
     } else {
         res.render("/inscription", { message: "Une information est erronée" });
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> f0e37c88c4830f8b3261bd4b1586ab04062fe35f
 });
 
 app.post('/modif_infos', async function (req, res) {
