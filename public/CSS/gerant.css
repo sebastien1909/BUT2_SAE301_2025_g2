@@ -1,5 +1,7 @@
 /* ajout, supp produit */
 .ajout-produit-container {
+    margin-top: 5%;
+    margin-bottom: 5%;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -198,4 +200,43 @@
 .contact_reserv:hover {
     background-color: #9e6e27;
 }
+
+.gerants-holder{
+    padding: 2em;
+    background-color: #454545;
+    color: white;
+    border: 2px solid #E3AE58;
+    border-radius: 15px;
+    border: 2px;
+    width: 40%;
+    justify-self: center;
+    display: column;
+    grid-template-columns: auto 1fr;
+    gap: 10%;
+    margin-bottom: 5%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.ajout_gerant_bouton{
+    font-size: 1rem;
+    padding: 1.5%;
+    margin-left: 20px;
+    background-color: #E3AE58;
+    border-radius: 10px;
+}
+
+.gerant_bouton_center{
+    display: flex;
+    justify-content: center;
+}
+
+.separateur_gerant{
+    margin-left:5%;
+    border-radius: 2px;
+    margin-bottom:2em;
+    background-color:#B68C48;
+    height:2px;
+    width:90%;
+}
+
 
