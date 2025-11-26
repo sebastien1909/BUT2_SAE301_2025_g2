@@ -45,33 +45,42 @@
                 </form>
                 <h2>Modifier mon profil</h2>
                 <form action="/modif_infos" class="form_modif" method="POST">
-                    <p><%= user.nom %></p>
+                    <p>
+                        <%= user.nom %>
+                    </p>
                     <input type="text" name="nom" placeholder="   Nom*">
                     <p>
                         <%= user.prenom %>
                     </p>
                     <input type="text" name="prenom" placeholder="   Prénom*">
+                    <% const dateDeNaissance=new Date(user.ddn); 
+                    if (!isNaN(dateDeNaissance.getTime())) { <!-- Is Not a Number -->
+                        const jour=String(dateDeNaissance.getDate()); 
+                        const mois=String(dateDeNaissance.getMonth() + 1); 
+                        const annee = dateDeNaissance.getFullYear();
+                        dateAffichee=`${annee}-${mois}-${jour}`; } %>
                     <p>
-                        <%= user.ddn %>
+                        <%= dateAffichee %>
                     </p>
-                    <input type="age" name="age" placeholder="   Date de naissance*">
-                    <p>
-                        <%= user.email %>
-                    </p>
-                    <input type="email" name="mail" placeholder="   Email*">
-                    <p>Mot de passe</p>
-                    <input type="password" name="mdp" placeholder="   Mot de passe*">
-                    <div class="conditions">
-                        <p>**1 Majuscule obligatoire</p>
-                        <p>**1 Caractère spécial obligatoire</p>
-                        <p>**1 chiffre obligatoire</p>
-                    </div>
-                    <br>
-                    <div class="submit">
-                        <button type="submit" class="save-btn" id="saveBtn">Confirmer les modification</button>
-                    </div>
+                        <input type="text" name="ddn" placeholder="   0000-00-00*">
+                        <p>
+                            <%= user.email %>
+                        </p>
+                        <input type="text" name="email" placeholder="   Email*">
+                        <p>Mot de passe</p>
+                        <input type="password" name="password" placeholder="   Mot de passe*">
+                        <div class="conditions">
+                            <p>**1 Majuscule obligatoire</p>
+                            <p>**1 Caractère spécial obligatoire</p>
+                            <p>**1 chiffre obligatoire</p>
+                        </div>
+                        <br>
+                        <div class="submit">
+                            <button type="submit" class="save-btn" id="saveBtn">Confirmer les modification</button>
+                        </div>
                 </form>
-                <form action="/supp-compte" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');">
+                <form action="/supp-compte" method="POST"
+                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');">
                     <button type="submit" class="supp_compte">
                         Supprimer le compte
                     </button>

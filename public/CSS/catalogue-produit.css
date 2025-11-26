@@ -24,7 +24,7 @@
     font-weight:none;
     text-decoration:none;
     color:black;
-    transition:all 0.1s ease-in-out
+    transition:all 0.1s ease-in-out;
 }
 
 
@@ -39,9 +39,6 @@
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    border: 2px solid black;
-    border-radius: 5px;
-    box-shadow: 0px 0px 1px;
 }
 
 .catalogue-produit-info{
@@ -74,7 +71,6 @@
 .sous-menu-holder{
     display:flex;
     justify-content:space-around;
-    margin: 5% 0px;
 }
 
 

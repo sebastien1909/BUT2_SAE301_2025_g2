@@ -422,7 +422,6 @@ app.post("/ajouter-agent", async function (req, res){
             return res.status(400).send("Cet email est déjà utilisé");
         }
         
-        // Hasher le mot de passe
         const mdp_hash = crypto.createHash('md5').update(mdp).digest('hex');
         
         await pool.query("INSERT INTO utilisateur (login, password, nom, prenom, ddn, email, type_utilisateur) VALUES (?, ?, ?, ?, ?, ?, 'agent')", [username, mdp_hash, nom, prenom, ddn, mail]);
@@ -477,7 +476,7 @@ app.post('/supp-compte', async function (req, res) {
     try {
         const userId = req.session.userID;
         const result = await pool.query("DELETE FROM utilisateur WHERE id = ? AND type_utilisateur = 'client' AND NOT EXISTS (SELECT * FROM location WHERE utilisateur_id = ? );", [userId, userId]);
-        if (result[0].affectedRows > 0) { //affectedRows = le nombre de lignes modifiées par la requête et result[0] c'est ce qu'il y a dans la table
+        if (result[0].length > 0) { //regarde si il y a un compte -- result[0] c'est ce qu'il y a dans la table
             req.session.destroy();
             res.redirect('/connexion');
         } else {
@@ -502,14 +501,14 @@ app.post('/inscription_infos', async function (req, res) {
     const login = req.body.login;
 
     const mailExistant = await pool.query("SELECT * FROM utilisateur WHERE email = ?", [mail]);
-    const loginExistant = await pool.query("SELECT * FROM utilisateur WHERE login = ?", [login])
+    const loginExistant = await pool.query("SELECT * FROM utilisateur WHERE login = ?", [login]);
 
 
     if (mailExistant[0].length > 0) {
         return res.render("inscription", { message: "Email déjà utilisé" });
     }
     else if (loginExistant[0].length > 0) {
-        return res.render("inscription", { message: "Email déjà utilisé" });
+        return res.render("inscription", { message: "Login déjà utilisé" });
     }
 
     else if (mdp == mdp_confirm) {
@@ -519,14 +518,17 @@ app.post('/inscription_infos', async function (req, res) {
     } else {
         res.render("/inscription", { message: "Une information est erronée" });
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> f0e37c88c4830f8b3261bd4b1586ab04062fe35f
 });
 
 app.post('/modif_infos', async function (req, res) {
     try {
         const userId = req.session.userID;
         const currentUser = await pool.query("SELECT * FROM utilisateur WHERE id = ?", [userId]);
-        const useractuel = currentUser[0][0];
+        const useractuel = currentUser[0]; 
         const { prenom, nom, ddn, email, password } = req.body;
 
         const updates = [];
@@ -534,7 +536,7 @@ app.post('/modif_infos', async function (req, res) {
 
         if (prenom && prenom !== useractuel.prenom) { // le prenom && prenom évite de mettre à jour si le champ est vide
             updates.push('prenom = ?');
-            values.push(prenom); //ajoute la nouvelle valeur de prenom au tableau values
+            values.push(prenom);
         }
 
         if (nom && nom !== useractuel.nom) {
@@ -563,9 +565,8 @@ app.post('/modif_infos', async function (req, res) {
             return res.redirect('/co');
         }
 
-        values.push(userId); // ID à la fin
-
         //modif info bdd
+        values.push(userId);
         const requete = `UPDATE utilisateur SET ${updates.join(', ')} WHERE id = ?`;
         await pool.query(requete, values);
 
