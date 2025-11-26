@@ -144,7 +144,15 @@ header {
 .payer_button {
   display: block;
   margin: 0 2% 0 auto;
-  padding: 0.5em;
+  padding: 1em;
+  background-color: #E3AE58;
+      border-radius: 5em;
+    width: 7%;
+}
+
+.payer_button:hover {
+    background-color: #9e6e27;
+    transition: 0.3s;
 }
 
 body, p, h1, h2, h3, h4, a, button {
