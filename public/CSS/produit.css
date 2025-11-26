@@ -16,6 +16,23 @@ a{
     color:black;
 }
 
+.aresa {
+    font-size: 1rem;
+    padding: 2%;
+    background-color: #E3AE58;
+    border-radius: 5em;
+    width: 40%;
+    text-align: center;
+    color:black;
+    text-decoration: none;
+    border:none;
+}
+
+.aresa:hover {
+    background-color: #9e6e27;
+    transition: 0.3s;
+}
+
 .produit-background{
     background-color: #454545;
     color: white;
