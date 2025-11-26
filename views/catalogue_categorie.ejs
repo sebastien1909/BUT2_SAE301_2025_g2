@@ -1,3 +1,49 @@
 <%- include("header") %>
+<link rel="stylesheet" href="/CSS/catalogue-produit.css">
+
+<div class="tous_produits">
+    <h1>Catalogue complet</h1>
+    <h5>Parcourez tous nos produits par catégorie</h5>
+</div>
+
+<% for (let categorie of categories){ %>
+    <div style="margin-top: 40px; margin-bottom: 40px;">
+        <h2 style="margin-left: 5%; text-transform: capitalize; color: #333;">
+            <% 
+                if(categorie.type === 'vetements') {
+                    %>Vêtements<%
+                } else if(categorie.type === 'nutrition') {
+                    %>Nutrition<%
+                } else if(categorie.type === 'équipement') {
+                    %>Équipement<%
+                } else if(categorie.type === 'appareils') {
+                    %>Appareils<%
+                }
+            %>
+        </h2>
+        <p style="margin-left: 5%; color: #666;">(<%= categorie.count %> produits)</p>
+        
+        <div class="produit-cont">
+            <% for (let produit of categorie.produits){ %>
+                <div class="catalogue-produit-card">
+                    <a href="/produit/<%= produit.id %>" class="lien-produit">
+                        <% let marque = produit.marque %>
+                        <% let modele = produit.modele %>
+                        <% let prix = produit.prix_location %>
+                        <% let image = produit.image %>
+                        <img src="<%= image %>" class="catalogue-produit-img" style="width: 200px; height: 200px; object-fit: cover;">
+                        <div class="catalogue-produit-info">
+                            <div>
+                                <strong><%= marque %></strong>
+                                <p><%= modele %></p>
+                                <p class="catalogue-produit-prix"><%= prix %>€/jour</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+<% } %>
 
 <%- include("footer") %>
