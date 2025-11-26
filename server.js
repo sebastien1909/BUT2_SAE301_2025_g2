@@ -244,12 +244,11 @@ app.get("/catalogue_categorie", function (req, res) {
 // partie pour le gerant
 
 app.get("/gerant/accueil", async function (req, res) {
-    let produits_aime = await pool.query("SELECT * FROM produit LIMIT 5");
+    let produits_aime = await pool.query("SELECT * FROM produit ORDER BY note DESC LIMIT 5;");
     res.render("gerant/accueil", {
         produits_aime: produits_aime[0],
         prenom: req.session.nom
     });
-
 });
 
 app.get("/gerant/ajout_suppr_produit", async function (req, res) {
@@ -305,7 +304,7 @@ app.get('/gerant/produit/:id', async function (req, res) {
     const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
     const produit = row[0][0]
     const type = produit.type
-    const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ?LIMIT 3", [type, produitId]);
+    const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ? LIMIT 3", [type, produitId]);
     res.render('gerant/produit', {
         produit: produit,
         produit_plaire: produit_plaire[0]
@@ -317,7 +316,7 @@ app.get('/gerant/reservation/:id', async function (req, res) {
     const row = await pool.query("SELECT * FROM produit WHERE id = ?", [produitId]);
     const produit = row[0][0]
     const type = produit.type
-    const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ?LIMIT 3", [type, produitId]);
+    const produit_plaire = await pool.query("SELECT * FROM produit WHERE type = ? AND id != ? LIMIT 3", [type, produitId]);
     res.render('gerant/reservation', {
         produit: produit
     })
