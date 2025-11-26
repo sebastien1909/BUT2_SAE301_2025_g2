@@ -1,43 +1,50 @@
 <%- include("header") %>
-<link rel="stylesheet" href="/CSS/reservation.css">
-<div class="page_produit">
-  <button class="btn_retour" onclick="history.back()">← Revenir à la liste des produits</button>
+  <link rel="stylesheet" href="/CSS/reservation.css">
+  <div class="page_produit">
+    <button class="btn_retour" onclick="history.back()">← Revenir à la liste des produits</button>
 
-  <form class="card_reservation" action="/reservation" method="post">
-    <div class="card_produit">
-      <div class="image_zone">
-        <img src="<%=produit.image%>" alt="<%=produit.marque%> <%=produit.modele%>">
-        <button type="submit" class="btn_panier">Ajouter au panier</button>
-      </div>
-
-      <div class="info_zone">
-        <h3><%=produit.marque%> <%=produit.modele%></h3>
-
-        <p class="prix_unitaire"><%=produit.prix_location%> / u</p>
-
-        <div class="quantite">
-          <button type="button" id="moins">-</button>
-          <span id="quantite">1</span>
-          <button type="button" id="plus">+</button>
+    <form class="card_reservation" action="/reservation" method="post">
+      <div class="card_produit">
+        <div class="image_zone">
+          <img src="<%=produit.image%>" alt="<%=produit.marque%> <%=produit.modele%>">
+          <button type="submit" class="btn_panier">Ajouter au panier</button>
         </div>
 
-        <p class="prix_total">Prix total : <span id="total"><%=produit.prix_location%></span>€</p>
+        <div class="info_zone">
+          <h3>
+            
+            <%= produit.marque %>
+              <%= produit.modele %>
+          </h3>
 
-        <input type="hidden" name="quantite" id="quantite_input" value="1">
+          <p class="prix_unitaire">
+            <%= produit.prix_location %> / u
+          </p>
 
-        <h4>Dates de réservation</h4>
-        <div class="calendar">
-          <div class="calendar_header">
-            <span class="month">OCTOBER</span>
+          <div class="quantite">
+            <button type="button" id="moins">-</button>
+            <span id="quantite">1</span>
+            <button type="button" id="plus">+</button>
           </div>
-          <div class="calendar_body">
-            <div class="date_selected">10</div>
+
+          <p class="prix_total">Prix total : <span id="total">
+              <%=produit.prix_location%>
+            </span>€</p>
+
+          <input type="hidden" name="quantite" id="quantite_input" value="1">
+
+          <h4>Dates de réservation</h4>
+          <div class="calendar">
+            <div class="calendar_header">
+              <span class="month">OCTOBER</span>
+            </div>
+            <div class="calendar_body">
+              <div class="date_selected">10</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
 
-<%- include("footer") %>
-
+  <%- include("footer") %>

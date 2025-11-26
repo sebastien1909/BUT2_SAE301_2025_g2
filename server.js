@@ -182,7 +182,7 @@ app.get("/profil", function (req, res) {
 app.get("/reservation/:id", async function (req, res) {
     const produitId = req.params.id;
     const result = await pool.query("SELECT * from produit WHERE id = ?", [produitId]);
-    res.render("reservation", { produit: result });
+    res.render("reservation", { produit: result[0][0], produitID:produitId });
 });
 
 
