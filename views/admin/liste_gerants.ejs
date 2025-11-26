@@ -46,30 +46,37 @@
       <nav class="bottom-header">
           <a href="/catalogue_categorie">Nouveautés</a>
           <a href="/catalogue_produit">Produits</a>
-          <a href="/ajout_gerant">Liste gérants</a>
+          <a href="/liste_gerant">Liste gérants</a>
       </nav>
   </header>
 
+<br><br><br>
+
 <div class="gerants-holder">
-    <% for (let element of gerants) { %>
-        <% let username = element.login %>
-        <% let nom = element.nom %>
-        <% let prenom = element.prenom %>
-        <% let mail = element.email %>
+    
+        <% for (let element of gerants) { %>
+           <% let username = element.login %>
+           <% let nom = element.nom %>
+            <% let prenom = element.prenom %>
+            <% let mail = element.email %>
+    
         
         <div class="gerant-info">
             <p>
-                <%= username %>
-                <%= nom %>
-                <%= prenom %>
-                <%= mail %>
+                    <p><strong>Username : </strong><%= username %></p>
+                    <p><strong>Nom : </strong> <%= nom %></p>
+                    <p><strong>Prénom : </strong><%= prenom %></p>
+                    <p><strong>Mail : </strong><%= mail %></p><br>
+
+                    <div class="separateur_gerant"></div>
             </p>
         </div>
     <% } %>
-</div>
 
-
-<a href="/admin/ajout_agent">
+<div class="gerant_bouton_center">
+<a href="/admin/ajout_agent" class="ajout_gerant_bouton">
     Ajouter un agent 
 </a>
+</div>
+</div>
 <%- include("../footer") %>

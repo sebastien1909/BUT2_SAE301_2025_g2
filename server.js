@@ -335,7 +335,7 @@ app.get('/admin/accueil', async function (req, res) {
     });
 });
 
-app.get('/ajout_gerant', async function (req,res){
+app.get('/liste_gerant', async function (req,res){
     const liste_gerant = await pool.query("SELECT * FROM utilisateur WHERE type_utilisateur LIKE 'agent'")
     res.render("admin/liste_gerants", {gerants:liste_gerant[0]})
 })
@@ -519,10 +519,6 @@ app.post('/inscription_infos', async function (req, res) {
     } else {
         res.render("/inscription", { message: "Une information est erronée" });
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> f0e37c88c4830f8b3261bd4b1586ab04062fe35f
 });
 
 app.post('/modif_infos', async function (req, res) {
