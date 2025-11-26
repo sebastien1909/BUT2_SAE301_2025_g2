@@ -6,15 +6,14 @@
   <form class="card_reservation" action="/reservation" method="post">
     <div class="card_produit">
       <div class="image_zone">
-        <img src="/public/img/produits/Prdt24.png" alt="Haltères 5 Kg">
+        <img src="<%=produit.image%>" alt="<%=produit.marque%> <%=produit.modele%>">
         <button type="submit" class="btn_panier">Ajouter au panier</button>
       </div>
 
       <div class="info_zone">
-        <h3>Haltères 5 Kg</h3>
-        <p>dammmmmmmm la teammmmmmm shape beurk </p>
+        <h3><%=produit.marque%> <%=produit.modele%></h3>
 
-        <p class="prix_unitaire">59,99€ / u</p>
+        <p class="prix_unitaire"><%=produit.prix_location%> / u</p>
 
         <div class="quantite">
           <button type="button" id="moins">-</button>
@@ -22,7 +21,7 @@
           <button type="button" id="plus">+</button>
         </div>
 
-        <p class="prix_total">Prix total : <span id="total">59,99</span>€</p>
+        <p class="prix_total">Prix total : <span id="total"><%=produit.prix_location%></span>€</p>
 
         <input type="hidden" name="quantite" id="quantite_input" value="1">
 

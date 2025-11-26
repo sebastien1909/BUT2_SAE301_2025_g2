@@ -1,3 +1,30 @@
 <%- include("header") %>
+<link rel="stylesheet" href="/CSS/catalogue-produit.css">
+
+<div class="tous_produits">
+    <h1>Nouveautés</h1>
+    <h5>Découvrez nos dernières acquisitions et produits sélectionnés aléatoirement</h5>
+</div>
+
+<div class="produit-cont">
+    <% for (element of produits_aleatoires){ %>
+        <div class="catalogue-produit-card">
+            <a href="/produit/<%= element.id %>" class="lien-produit">
+                <% let marque = element.marque%>
+                <% let modele = element.modele %>
+                <% let prix = element.prix_location %>
+                <% let image = element.image %>
+                <img src="<%= image %>" class="catalogue-produit-img" style="width: 200px; height: 200px; object-fit: cover;">
+                <div class="catalogue-produit-info">
+                    <div>
+                        <strong><%= marque %></strong>
+                        <p><%= modele %></p>
+                        <p class="catalogue-produit-prix"><%= prix %>€/jour</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    <% } %>
+</div>
 
 <%- include("footer") %>

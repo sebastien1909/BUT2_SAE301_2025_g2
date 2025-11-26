@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 24 nov. 2025 à 07:30
+-- Généré le : mer. 26 nov. 2025 à 08:56
 -- Version du serveur : 9.1.0
 -- Version de PHP : 8.3.14
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `sae301`
 --
+CREATE DATABASE IF NOT EXISTS `sae301` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `sae301`;
 
 -- --------------------------------------------------------
 
@@ -61,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   PRIMARY KEY (`id`),
   KEY `utilisateur_id` (`utilisateur_id`),
   KEY `produit_id` (`produit_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `location`
@@ -80,9 +82,9 @@ INSERT INTO `location` (`id`, `date_debut`, `date_retour_prevue`, `date_retour_e
 (10, '2025-06-02', '2025-06-06', '2025-06-06', 364.95, 1, 33),
 (11, '2025-06-18', '2025-06-21', '2025-06-21', 5.97, 4, 7),
 (12, '2025-07-10', '2025-07-14', '2025-07-14', 27.96, 8, 43),
-(13, '2025-08-05', '2025-08-10', NULL, 174.95, 9, 47),
-(14, '2025-09-03', '2025-09-07', NULL, 27.96, 5, 37),
-(15, '2025-10-12', '2025-10-16', NULL, 299.96, 6, 34);
+(13, '2025-08-05', '2025-08-10', '2025-08-10', 174.95, 9, 47),
+(14, '2025-09-03', '2025-09-07', '2025-09-07', 27.96, 5, 37),
+(15, '2025-10-12', '2025-10-16', '2025-10-16', 299.96, 6, 34);
 
 -- --------------------------------------------------------
 
@@ -125,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `image` varchar(255) DEFAULT NULL,
   `note` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `produit`
@@ -177,7 +179,8 @@ INSERT INTO `produit` (`id`, `type`, `description`, `marque`, `modele`, `prix_lo
 (44, 'équipement', 'Raquette de padel avec grip ergonomique', 'Head', 'Graphene 360 Alpha', 10.99, 'bon état', '/img/produits/Prdt44.png', 4),
 (45, 'équipement', 'Planche de surf en mousse pour débutants', 'Olaian', '500 Softboard', 29.99, 'état moyen', '/img/produits/Prdt45.png', 5),
 (46, 'équipement', 'Skateboard complet en érable', 'Oxelo', 'Mid 500', 12.99, 'bon état', '/img/produits/Prdt46.png', 3),
-(47, 'équipement', 'Stand up paddle gonflable avec pompe', 'Itwit', 'SUP 11', 34.99, 'bon état', '/img/produits/Prdt47.png', 4);
+(47, 'équipement', 'Stand up paddle gonflable avec pompe', 'Itwit', 'SUP 11', 34.99, 'bon état', '/img/produits/Prdt47.png', 4),
+(48, 'équipement', 'Bodyboard avec leash inclus', 'Tribord', '500 Dynamique', 8.99, 'bon état', '/img/produits/Prdt48.png', 3);
 
 -- --------------------------------------------------------
 
@@ -201,14 +204,14 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`id`, `login`, `password`, `nom`, `prenom`, `ddn`, `email`, `type_utilisateur`, `age`, `téléphone`, `newsletter`) VALUES
-(1, 'jdupont', '81dc9bdb52d04dc20036dbd8313ed055', 'Dupont', 'Jean', '1990-05-12', 'jdupont@example.com', 'client', NULL, NULL, NULL),
+(1, 'jdupont', '81dc9bdb52d04dc20036dbd8313ed055', 'Dupont', 'Jean', '2000-12-08', 'jhsvkdvnskuvhsi@gmail.com', 'client', NULL, NULL, NULL),
 (2, 'sleclerc', '81dc9bdb52d04dc20036dbd8313ed055', 'Leclerc', 'Sophie', '1985-09-21', 'sleclerc@example.com', 'client', NULL, NULL, NULL),
 (3, 'plefebvre', '81dc9bdb52d04dc20036dbd8313ed055', 'Lefebvre', 'Pierre', '1988-12-05', 'plefebvre@example.com', 'client', NULL, NULL, NULL),
 (4, 'mleroy', '81dc9bdb52d04dc20036dbd8313ed055', 'Leroy', 'Marie', '1995-07-18', 'mleroy@example.com', 'client', NULL, NULL, NULL),
@@ -216,8 +219,7 @@ INSERT INTO `utilisateur` (`id`, `login`, `password`, `nom`, `prenom`, `ddn`, `e
 (6, 'lpetit', '81dc9bdb52d04dc20036dbd8313ed055', 'Petit', 'Laura', '1989-11-15', 'lpetit@example.com', 'agent', NULL, NULL, NULL),
 (7, 'adufrene', '81dc9bdb52d04dc20036dbd8313ed055', 'Dufrène', 'Alice', '1975-01-01', 'adufrene@example.com', 'admin', NULL, NULL, NULL),
 (8, 'test', '81dc9bdb52d04dc20036dbd8313ed055', 'Confrere', 'Sébastien', '0000-00-00', 'sconfrere@gmail.com', 'client', NULL, NULL, NULL),
-(9, 'sconfrere', '81dc9bdb52d04dc20036dbd8313ed055', 'Sebabou', 'Troubadour', '0000-00-00', 'sconfrere6@gmail.com', 'client', 56, 2147483647, 0),
-(10, 'AgentTest', '81dc9bdb52d04dc20036dbd8313ed055', 'Agent', 'Test', '2652-09-18', 'agenttest@gmail.com', 'agent', NULL, NULL, NULL);
+(9, 'sconfrere', '81dc9bdb52d04dc20036dbd8313ed055', 'Sebabou', 'Troubadour', '0000-00-00', 'sconfrere6@gmail.com', 'client', 56, 2147483647, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
