@@ -125,8 +125,9 @@ app.get("/co", async function (req, res) {
     }
 });
 
-app.get("/nouveaute", function (req, res) {
-    res.render("nouveaute", { variable: "aled" });
+app.get("/nouveaute", async function (req, res) {
+    const produits_aleatoires = await pool.query("SELECT * FROM produit ORDER BY RAND() LIMIT 12");
+    res.render("nouveaute", { produits_aleatoires: produits_aleatoires[0] });
 });
 
 app.get("/panier", function (req, res) {
@@ -233,8 +234,23 @@ app.get("/inscription", function (req, res) {
     res.render("inscription", { variable: "aled" });
 });
 
-app.get("/catalogue_categorie", function (req, res) {
-    res.render("catalogue_categorie", { variable: "aled" });
+app.get("/catalogue_categorie", async function (req, res) {
+    // Récupérer les catégories uniques
+    const typesResult = await pool.query("SELECT DISTINCT type FROM produit");
+    const types = typesResult[0].map(row => row.type);
+    
+    // Pour chaque catégorie, récupérer les produits
+    const categories = [];
+    for (let type of types) {
+        const produitsResult = await pool.query("SELECT * FROM produit WHERE type = ?", [type]);
+        categories.push({
+            type: type,
+            count: produitsResult[0].length,
+            produits: produitsResult[0]
+        });
+    }
+    
+    res.render("catalogue_categorie", { categories: categories });
 });
 
 
