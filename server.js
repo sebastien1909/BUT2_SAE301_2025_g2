@@ -445,7 +445,7 @@ app.post("/ajouter-agent", async function (req, res){
         await pool.query("INSERT INTO utilisateur (login, password, nom, prenom, ddn, email, type_utilisateur) VALUES (?, ?, ?, ?, ?, ?, 'agent')", [username, mdp_hash, nom, prenom, ddn, mail]);
         
         console.log("Agent ajouté avec succès");
-        res.redirect('/ajout_gerant');
+        res.redirect('/admin/ajout_agent');
         
     } catch(err){
         console.error("Erreur complète:", err);
