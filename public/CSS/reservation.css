@@ -147,3 +147,175 @@ body {
 .in-range {
     background: rgba(243,177,61,0.35);
 }
+
+
+
+.page_produit {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.btn_retour {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.btn_retour:hover {
+  color: #C89F5D;
+}
+
+.card_reservation {
+  background: #3a3a3a;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.card_produit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.image_zone {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.image_zone img {
+  width: 100%;
+  height: auto;
+  background: #e8e8e8;
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.btn_panier {
+  background: #C89F5D;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn_panier:hover {
+  background: #B38F4D;
+}
+
+.info_zone {
+  color: white;
+}
+
+.info_zone h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: #ccc;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.prix_unitaire {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.quantite {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.quantite button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #555;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.quantite button:hover {
+  background: #666;
+}
+
+#quantite {
+  font-size: 1.5rem;
+  min-width: 40px;
+  text-align: center;
+}
+
+.prix_total {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 1.5rem 0;
+}
+
+.info_zone h4 {
+  font-size: 1.3rem;
+  margin: 2rem 0 1rem;
+}
+
+.dates-selection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.date-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.date-input label {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.date-input input {
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #2a2a2a;
+  color: white;
+  font-size: 1rem;
+}
+
+.date-input input:focus {
+  outline: none;
+  border-color: #C89F5D;
+}
+
+.duree-info {
+  color: #C89F5D;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .card_produit {
+    grid-template-columns: 1fr;
+  }
+  
+  .dates-selection {
+    grid-template-columns: 1fr;
+  }
+}

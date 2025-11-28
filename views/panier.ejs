@@ -1,32 +1,61 @@
 <%- include("header") %>
+<link rel="stylesheet" href="/CSS/panier.css">
 
-<h1>Mon panier</h1>
-<div class="panier">
-    <div class="card_panier">
-        <img src="#">
-        <div class="info_panier">
-            <h3>Produit 1</h3>
-            <p>prix</p>
-            <p>description</p>
-            <div class="quantite">
-                <button>-</button>
-                <span>1</span>
-                <button>+</button>
+<div class="page_panier">
+  <h1>Mon Panier</h1>
+
+  <% if (panier && panier.length > 0) { %>
+    <div class="container_panier">
+      <div class="liste_produits">
+        <% panier.forEach(function(item) { %>
+          <div class="item_panier">
+            <img src="<%= item.image %>" alt="<%= item.marque %> <%= item.modele %>">
+            
+            <div class="info_item">
+              <h3><%= item.marque %> <%= item.modele %></h3>
+              <p class="description"><%= item.description %></p>
+              
+              <% if (item.date_debut && item.date_fin) { %>
+                <p class="dates">
+                  Du <%= new Date(item.date_debut).toLocaleDateString('fr-FR') %> 
+                  au <%= new Date(item.date_fin).toLocaleDateString('fr-FR') %>
+                </p>
+                <p class="duree"><%= item.jours %> jour<%= item.jours > 1 ? 's' : '' %></p>
+              <% } %>
+              
+              <% if (item.quantite > 1) { %>
+                <p class="quantite">Quantité : <%= item.quantite %></p>
+              <% } %>
+              
+              <p class="prix"><%= item.prix_location.toFixed(2) %>€ / jour</p>
+              <p class="prix_total"><strong>Total : <%= item.prix_total.toFixed(2) %>€</strong></p>
             </div>
+
+            <form action="/panier/supprimer/<%= item.id %>" method="post" class="form_supprimer">
+              <button type="submit" class="btn_supprimer">✕</button>
+            </form>
+          </div>
+        <% }); %>
+      </div>
+
+      <div class="recap_panier">
+        <h2>Récapitulatif</h2>
+        
+        <div class="details_recap">
+          <p>Nombre d'articles : <strong><%= panier.length %></strong></p>
+          <p class="total">Total : <strong><%= total %>€</strong></p>
         </div>
-        <i class="fa-regular fa-heart fa-xl"></i>
-        <i class="fa-solid fa-xmark fa-2xl"></i>
+
+        <a href="/paiement" class="btn_payer">Procéder au paiement</a>
+        <a href="/catalogue_produit" class="btn_continuer">Continuer mes achats</a>
+      </div>
     </div>
-    <div class="recap_panier">
-        <h2>Récapitulatif produit</h2>
-        <p>Sous-total</p>
-        <p>Livraison</p>
-        <p>Code promo</p>
-        <p class="total">Total :</p>
-        <div class="valide_panier">
-            <button>Valider mon panier</button>
-        </div>
+  <% } else { %>
+    <div class="panier_vide">
+      <p>Votre panier est vide</p>
+      <a href="/catalogue_produit" class="btn_catalogue">Découvrir nos produits</a>
     </div>
+  <% } %>
 </div>
 
 <%- include("footer") %>
