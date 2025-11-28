@@ -1,7 +1,7 @@
 <%- include("header") %>
 
 <div class="paiement">
-    <form class="card-paiement">
+    <form method="POST" action="/paiement" class="card-paiement">
         <h2>Moyens de paiement</h2>
         <div class="moyensdepaiement">
             <label for="cardname">Nom sur la carte</label>
@@ -35,7 +35,7 @@
             <input type="text" id="adr2" name="address2" placeholder=" ">
         </div>
         <br>
-        <a href="#" class="payer_button">Payer</a>
+        <button class="payer_button" type="submit">Payer</button>
     </form>
     <div class="recap">
         <h2>Récapitulatif de l'achat</h2>

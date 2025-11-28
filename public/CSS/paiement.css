@@ -1,0 +1,182 @@
+.paiement {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.card-paiement {
+  background: #3a3a3a;
+  border-radius: 12px;
+  padding: 2rem;
+  color: white;
+}
+
+.card-paiement h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.moyensdepaiement,
+.infofacturation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.moyensdepaiement label:first-child,
+.moyensdepaiement select {
+  grid-column: 1 / -1;
+}
+
+.moyensdepaiement label[for="ccnum"],
+.moyensdepaiement input[name="cardnumber"] {
+  grid-column: 1 / -1;
+}
+
+.infofacturation label[for="adr"],
+.infofacturation input[name="address"],
+.infofacturation label[for="adr2"],
+.infofacturation input[name="address2"],
+.infofacturation label[for="pays"],
+.infofacturation select[name="pays"] {
+  grid-column: 1 / -1;
+}
+
+.card-paiement label {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.card-paiement input,
+.card-paiement select {
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #2a2a2a;
+  color: white;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.card-paiement input:focus,
+.card-paiement select:focus {
+  outline: none;
+  border-color: #C89F5D;
+}
+
+.payer_button {
+  width: 100%;
+  padding: 1rem;
+  background: #C89F5D;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.payer_button:hover {
+  background: #B38F4D;
+}
+
+.recap {
+  background: #3a3a3a;
+  border-radius: 12px;
+  padding: 2rem;
+  color: white;
+  height: fit-content;
+}
+
+.recap h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.card_recap {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: #2a2a2a;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.card_recap img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  background: white;
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+.info_recap {
+  flex: 1;
+}
+
+.info_recap h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.description_recap {
+  font-size: 0.85rem;
+  color: #999;
+  margin-bottom: 0.5rem;
+}
+
+.dates_recap {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin: 0.3rem 0;
+}
+
+.quantite_recap {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin: 0.3rem 0;
+}
+
+.prix_recap {
+  font-size: 1.1rem;
+  color: #C89F5D;
+  margin-top: 0.5rem;
+}
+
+.total_recap {
+  border-top: 2px solid #555;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.total_recap h3 {
+  font-size: 1.5rem;
+  color: #C89F5D;
+  text-align: right;
+}
+
+@media (max-width: 968px) {
+  .paiement {
+    grid-template-columns: 1fr;
+  }
+  
+  .moyensdepaiement,
+  .infofacturation {
+    grid-template-columns: 1fr;
+  }
+  
+  .moyensdepaiement input[name="cardnumber"] {
+    grid-column: 1;
+  }
+}

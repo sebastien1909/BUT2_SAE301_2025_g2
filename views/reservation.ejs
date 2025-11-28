@@ -1,50 +1,120 @@
 <%- include("header") %>
-  <link rel="stylesheet" href="/CSS/reservation.css">
-  <div class="page_produit">
-    <button class="btn_retour" onclick="history.back()">← Revenir à la liste des produits</button>
+<link rel="stylesheet" href="/CSS/reservation.css">
 
-    <form class="card_reservation" action="/reservation" method="post">
-      <div class="card_produit">
-        <div class="image_zone">
-          <img src="<%=produit.image%>" alt="<%=produit.marque%> <%=produit.modele%>">
-          <button type="submit" class="btn_panier">Ajouter au panier</button>
-        </div>
+<div class="page_produit">
+  <button class="btn_retour" onclick="history.back()">← Revenir à la liste des produits</button>
 
-        <div class="info_zone">
-          <h3>
-            
-            <%= produit.marque %>
-              <%= produit.modele %>
-          </h3>
-
-          <p class="prix_unitaire">
-            <%= produit.prix_location %> / u
-          </p>
-
-          <div class="quantite">
-            <button type="button" id="moins">-</button>
-            <span id="quantite">1</span>
-            <button type="button" id="plus">+</button>
-          </div>
-
-          <p class="prix_total">Prix total : <span id="total">
-              <%=produit.prix_location%>
-            </span>€</p>
-
-          <input type="hidden" name="quantite" id="quantite_input" value="1">
-
-          <h4>Dates de réservation</h4>
-          <div class="calendar">
-            <div class="calendar_header">
-              <span class="month">OCTOBER</span>
-            </div>
-            <div class="calendar_body">
-              <div class="date_selected">10</div>
-            </div>
-          </div>
-        </div>
+  <form class="card_reservation" action="/reservation" method="post">
+    <input type="hidden" name="produit_id" value="<%= produit.id %>">
+    
+    <div class="card_produit">
+      <div class="image_zone">
+        <img src="<%= produit.image %>" alt="<%= produit.marque %> <%= produit.modele %>">
+        <button type="submit" class="btn_panier">Ajouter au panier</button>
       </div>
-    </form>
-  </div>
+      <% let Produit = produit.prix_location %>
 
-  <%- include("footer") %>
+      <div class="info_zone">
+        <h3><%= produit.marque %> <%= produit.modele %></h3>
+        
+        <p class="description"><%= produit.description %></p>
+
+        <p class="prix_unitaire"><%= produit.prix_location.toFixed(2) %>€ / jour</p>
+
+        <div class="quantite">
+          <button type="button" id="moins">-</button>
+          <span id="quantite">1</span>
+          <button type="button" id="plus">+</button>
+        </div>
+
+        <input type="hidden" name="quantite" id="quantite_input" value="1">
+
+        <p class="prix_total">Prix total : <span id="total"><%= produit.prix_location.toFixed(2) %></span>€</p>
+
+        <h4>Dates de réservation</h4>
+        
+        <div class="dates-selection">
+          <div class="date-input">
+            <label for="date_debut">Date de début :</label>
+            <input type="date" id="date_debut" name="date_debut" required 
+                   min="<%= new Date().toISOString().split('T')[0] %>">
+          </div>
+          
+          <div class="date-input">
+            <label for="date_fin">Date de fin :</label>
+            <input type="date" id="date_fin" name="date_fin" required 
+                   min="<%= new Date().toISOString().split('T')[0] %>">
+          </div>
+        </div>
+
+        <p class="duree-info">Durée : <span id="duree">1</span> jour(s)</p>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  
+  const prixUnitaire = <%= produit.prix_location %>;
+  const quantiteSpan = document.getElementById('quantite');
+  const quantiteInput = document.getElementById('quantite_input');
+  const totalSpan = document.getElementById('total');
+  const btnMoins = document.getElementById('moins');
+  const btnPlus = document.getElementById('plus');
+  const dateDebut = document.getElementById('date_debut');
+  const dateFin = document.getElementById('date_fin');
+  const dureeSpan = document.getElementById('duree');
+
+  function calculerTotal() {
+    const quantite = parseInt(quantiteSpan.textContent);
+    let jours = 1;
+
+    if (dateDebut.value && dateFin.value) {
+      const debut = new Date(dateDebut.value);
+      const fin = new Date(dateFin.value);
+      jours = Math.ceil((fin - debut) / (1000 * 60 * 60 * 24)) || 1;
+      
+      if (jours < 1) {
+        jours = 1;
+        alert('La date de fin doit être après la date de début');
+        dateFin.value = '';
+      }
+    }
+
+    dureeSpan.textContent = jours;
+    const total = (prixUnitaire * quantite * jours).toFixed(2);
+    totalSpan.textContent = total;
+  }
+
+  btnMoins.addEventListener('click', function(e) {
+    e.preventDefault();
+    let quantite = parseInt(quantiteSpan.textContent);
+    if (quantite > 1) {
+      quantite--;
+      quantiteSpan.textContent = quantite;
+      quantiteInput.value = quantite;
+      calculerTotal();
+    }
+  });
+
+  btnPlus.addEventListener('click', function(e) {
+    e.preventDefault();
+    let quantite = parseInt(quantiteSpan.textContent);
+    quantite++;
+    quantiteSpan.textContent = quantite;
+    quantiteInput.value = quantite;
+    calculerTotal();
+  });
+
+  dateDebut.addEventListener('change', function() {
+    if (dateFin.value && dateFin.value < dateDebut.value) {
+      dateFin.value = '';
+    }
+    dateFin.min = dateDebut.value;
+    calculerTotal();
+  });
+
+  dateFin.addEventListener('change', calculerTotal);
+</script>
+
+<%- include("footer") %>
