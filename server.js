@@ -131,6 +131,7 @@ app.get("/nouveaute", async function (req, res) {
 });
 
 
+
 app.get("/paiement", function (req, res) {
     res.render("paiement", { variable: "aled" });
 });
@@ -493,8 +494,12 @@ app.post('/supprimer-produit', async function (req, res) {
 app.post('/supp-compte', async function (req, res) {
     try {
         const userId = req.session.userID;
-        const result = await pool.query("DELETE FROM utilisateur WHERE id = ? AND type_utilisateur = 'client' AND NOT EXISTS (SELECT * FROM location WHERE utilisateur_id = ? );", [userId, userId]);
-        if (result[0].length > 0) { //regarde si il y a un compte -- result[0] c'est ce qu'il y a dans la table
+        const result = await pool.query(
+            "DELETE FROM utilisateur WHERE id = ? AND type_utilisateur = 'client' AND NOT EXISTS (SELECT * FROM location WHERE utilisateur_id = ?);", 
+            [userId, userId]
+        );
+        
+        if (result[0].affectedRows > 0) { // Vérifie si une ligne a été supprimée
             req.session.destroy();
             res.redirect('/connexion');
         } else {
