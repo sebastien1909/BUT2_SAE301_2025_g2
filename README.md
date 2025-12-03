@@ -6,6 +6,28 @@ Groupes : 2A1
 
 Pour rappel, notre persona est Charles Guyon, une personne très ciblée sur le luxe avec l’envie de bien s’habiller. Il veut également pouvoir louer des produits de bonne qualité. Pour répondre à ses besoins, nous avons réalisé des wireframes et des mock-up dans lesquels nous avons choisi une typographie évoquant un site web de luxe et de qualité. Les couleurs principales du site sont le jaune, le noir et le blanc.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Nous avons les pages basiques : accueil, catalogue, produit, panier, inscription et connexion.
 
 En plus, nous avons les pages : abonnement (l’utilisateur peut choisir son abonnement, c’est factice), la page des favoris, le catalogue des nouveautés et une page profil (l’utilisateur peut changer ses informations personnelles).

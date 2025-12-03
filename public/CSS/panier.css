@@ -22,9 +22,8 @@
 }
 .recap_panier {
     background-color: #454545;
-    width: 30%;
+    width: 70%;
     padding: 1%;
-    margin-right: 2%;
     border-radius: 15px;
 }
 .info_panier {
@@ -234,7 +233,7 @@
 .btn_payer,
 .btn_continuer {
   display: block;
-  width: 100%;
+  width: 90%;
   padding: 1rem;
   border-radius: 8px;
   text-align: center;
